@@ -5,4 +5,4 @@
 * Samuel Flores
 * Lisangely Goncalves
 * Sofía Marcano
-* Javier Barder
+* Javier Darder
