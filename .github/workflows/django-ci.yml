@@ -10,24 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_DB: proyecto_ati_db
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password123
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    env:
-      DATABASE_URL: postgres://postgres:password123@localhost:5432/proyecto_ati_db
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,13 +25,6 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until pg_isready -h localhost -p 5432 -U postgres; do
-            echo "Esperando a que PostgreSQL esté disponible..."
-            sleep 2
-          done
-
       - name: Run migrations
         run: |
           source venv/bin/activate
@@ -58,4 +33,4 @@ jobs:
       - name: Run tests
         run: |
           source venv/bin/activate
-          python manage.py test
+          python manage.py
