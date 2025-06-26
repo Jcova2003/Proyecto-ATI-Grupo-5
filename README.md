@@ -31,12 +31,9 @@ http://localhost:8000
 
 ## Integración Continua
 
-Este proyecto utiliza GitHub Actions para CI/CD:
+Este proyecto utiliza GitHub Actions para CI:
 
-### Workflow automático
-- **Tests**: Se ejecutan automáticamente en cada push/PR
-- **Build**: Construcción de imagen Docker en rama main
-- **Deploy**: Despliegue automático a staging (rama main)
+- **Tests**: Se ejecutan automáticamente en cada push o pull request a la rama main.
 
 ### Comandos Docker para desarrollo
 
