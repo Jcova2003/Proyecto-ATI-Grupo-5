@@ -11,7 +11,7 @@
 
 ## 🚀 Guía rápida para ejecutar el proyecto con Docker
 
-Sigue estos pasos si quieres ejecutar el proyecto rápidamente en tu máquina local usando Docker y **SQLite** (no necesitas PostgreSQL):
+Sigue estos pasos si quieres ejecutar el proyecto rápidamente en tu máquina local usando Docker y **SQLite**:
 
 ```bash
 # 1. Clona este repositorio
