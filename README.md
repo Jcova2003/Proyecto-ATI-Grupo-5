@@ -8,6 +8,27 @@
 * Javier Darder
 
 
+
+## 🚀 Guía rápida para ejecutar el proyecto con Docker
+
+Sigue estos pasos si quieres ejecutar el proyecto rápidamente en tu máquina local usando Docker:
+
+```bash
+# 1. Clona este repositorio
+git clone https://github.com/Jcova2003/Proyecto-ATI-Grupo-5.git
+cd Proyecto-ATI-Grupo-5
+
+# 2. Copia el archivo de entorno
+cp .env.example .env
+
+# 3. Levanta los servicios con Docker
+docker-compose up --build
+
+# 4. Abre el navegador en
+http://localhost:8000
+
+#########
+
 ## Integración Continua
 
 Este proyecto utiliza GitHub Actions para CI/CD:
