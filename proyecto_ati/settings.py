@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import dj_database_url 
 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_app',  # Tu app
+    'main_app',
 ]
 
 # Middleware
@@ -57,17 +56,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'proyecto_ati.wsgi.application'
 
 # Base de datos
-if os.environ.get('DATABASE_URL'):
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 # Validadores de contraseñas
 AUTH_PASSWORD_VALIDATORS = [
