@@ -28,7 +28,8 @@ jobs:
     env:
       DEBUG: True
       SECRET_KEY: django-insecure-test-key-for-ci-only-123456
-      DATABASE_URL: postgresql://postgres:password123@localhost:5432/proyecto_ati_db
+      DATABASE_URL: postgres://postgres:password123@localhost:5432/proyecto_ati_db
+
 
     steps:
     - name: Checkout code
