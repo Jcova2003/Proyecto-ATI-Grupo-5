@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contacto - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="display-4 text-center mb-4">Contáctanos</h1>
+    <p class="lead text-center text-muted">Estamos aquí para ayudarte con tu próximo proyecto</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-primary mb-4">Envíanos un mensaje</h4>
+                <form id="contactForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">Nombre *</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Apellido *</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="company" class="form-label">Empresa</label>
+                        <input type="text" class="form-control" id="company">
+                    </div>
+                    <div class="mb-3">
+                        <label for="service" class="form-label">Servicio de interés</label>
+                        <select class="form-select" id="service">
+                            <option value="">Selecciona un servicio</option>
+                            <option value="web">Desarrollo Web</option>
+                            <option value="mobile">Apps Móviles</option>
+                            <option value="cloud">Cloud & DevOps</option>
+                            <option value="design">Diseño UX/UI</option>
+                            <option value="security">Ciberseguridad</option>
+                            <option value="analytics">Analytics & BI</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="budget" class="form-label">Presupuesto estimado</label>
+                        <select class="form-select" id="budget">
+                            <option value="">Selecciona un rango</option>
+                            <option value="under-1k">Menos de $1,000</option>
+                            <option value="1k-5k">$1,000 - $5,000</option>
+                            <option value="5k-10k">$5,000 - $10,000</option>
+                            <option value="10k-25k">$10,000 - $25,000</option>
+                            <option value="over-25k">Más de $25,000</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Mensaje *</label>
+                        <textarea class="form-control" id="message" rows="5" required placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="newsletter">
+                        <label class="form-check-label" for="newsletter">
+                            Suscribirse a nuestro newsletter
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Información de Contacto</h5>
+                <div class="contact-info">
+                    <div class="contact-item mb-3">
+                        <strong>📧 Email:</strong><br>
+                        <a href="mailto:info@proyectoati.com">info@proyectoati.com</a>
+                    </div>
+                    <div class="contact-item mb-3">
+                        <strong>📱 Teléfono:</strong><br>
+                        <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    </div>
+                    <div class="contact-item mb-3">
+                        <strong>📍 Dirección:</strong><br>
+                        123 Tech Street<br>
+                        Innovation City, IC 12345
+                    </div>
+                    <div class="contact-item mb-3">
+                        <strong>⏰ Horario:</strong><br>
+                        Lun - Vie: 9:00 AM - 6:00 PM<br>
+                        Sáb: 10:00 AM - 2:00 PM
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h6 class="text-primary">Síguenos</h6>
+                <div class="social-links">
+                    <a href="#" class="btn btn-outline-primary btn-sm me-2">Facebook</a>
+                    <a href="#" class="btn btn-outline-info btn-sm me-2">Twitter</a>
+                    <a href="#" class="btn btn-outline-primary btn-sm">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h6 class="card-title text-primary">¿Tienes prisa?</h6>
+                <p class="card-text">Para consultas urgentes, llámanos directamente o envíanos un WhatsApp.</p>
+                <a href="tel:+1234567890" class="btn btn-success btn-sm">📞 Llamar Ahora</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Simulación de envío
+    const button = this.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
+    
+    button.textContent = 'Enviando...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+        alert('¡Mensaje enviado correctamente! (Esta es una simulación)');
+        button.textContent = originalText;
+        button.disabled = false;
+        this.reset();
+    }, 2000);
+});
+</script>
+{% endblock %}

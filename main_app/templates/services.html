@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Servicios - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="display-4 text-center mb-4">Nuestros Servicios</h1>
+    <p class="lead text-center text-muted">Descubre todo lo que podemos hacer por ti</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-lg-4 mb-4">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon mb-3">🚀</div>
+                <h4 class="card-title text-primary">Desarrollo Web</h4>
+                <p class="card-text">Creamos sitios web modernos, responsivos y optimizados para todos los dispositivos.</p>
+                <ul class="list-unstyled">
+                    <li>• Frontend con React/Vue</li>
+                    <li>• Backend con Django/Node.js</li>
+                    <li>• Diseño responsive</li>
+                    <li>• Optimización SEO</li>
+                </ul>
+                <div class="mt-auto">
+                    <span class="badge bg-primary">Desde $500</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon mb-3">📱</div>
+                <h4 class="card-title text-primary">Apps Móviles</h4>
+                <p class="card-text">Desarrollamos aplicaciones nativas e híbridas para iOS y Android.</p>
+                <ul class="list-unstyled">
+                    <li>• React Native</li>
+                    <li>• Flutter</li>
+                    <li>• Desarrollo nativo</li>
+                    <li>• Integración con APIs</li>
+                </ul>
+                <div class="mt-auto">
+                    <span class="badge bg-success">Desde $800</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon mb-3">☁️</div>
+                <h4 class="card-title text-primary">Cloud & DevOps</h4>
+                <p class="card-text">Servicios de infraestructura en la nube y automatización de procesos.</p>
+                <ul class="list-unstyled">
+                    <li>• AWS/Azure/GCP</li>
+                    <li>• Docker & Kubernetes</li>
+                    <li>• CI/CD Pipelines</li>
+                    <li>• Monitoreo y logs</li>
+                </ul>
+                <div class="mt-auto">
+                    <span class="badge bg-warning">Desde $300</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-lg-4 mb-4">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon mb-3">🎨</div>
+                <h4 class="card-title text-primary">Diseño UX/UI</h4>
+                <p class="card-text">Creamos interfaces atractivas y experiencias de usuario excepcionales.</p>
+                <ul class="list-unstyled">
+                    <li>• Wireframes y prototipos</li>
+                    <li>• Diseño visual</li>
+                    <li>• Testing de usabilidad</li>
+                    <li>• Design Systems</li>
+                </ul>
+                <div class="mt-auto">
+                    <span class="badge bg-info">Desde $400</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon mb-3">🔐</div>
+                <h4 class="card-title text-primary">Ciberseguridad</h4>
+                <p class="card-text">Protegemos tu información con las mejores prácticas de seguridad.</p>
+                <ul class="list-unstyled">
+                    <li>• Auditorías de seguridad</li>
+                    <li>• Penetration testing</li>
+                    <li>• Implementación SSL</li>
+                    <li>• Backup y recovery</li>
+                </ul>
+                <div class="mt-auto">
+                    <span class="badge bg-danger">Desde $600</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card service-card h-100">
+            <div class="card-body">
+                <div class="service-icon mb-3">📊</div>
+                <h4 class="card-title text-primary">Analytics & BI</h4>
+                <p class="card-text">Convertimos tus datos en insights valiosos para tu negocio.</p>
+                <ul class="list-unstyled">
+                    <li>• Dashboards interactivos</li>
+                    <li>• Data mining</li>
+                    <li>• Machine Learning</li>
+                    <li>• Reportería automática</li>
+                </ul>
+                <div class="mt-auto">
+                    <span class="badge bg-secondary">Desde $700</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <h3 class="text-primary mb-4">¿Necesitas algo personalizado?</h3>
+        <p class="lead">Contáctanos y charlemos sobre tu proyecto específico</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Solicitar Cotización</a>
+    </div>
+</div>
+{% endblock %}

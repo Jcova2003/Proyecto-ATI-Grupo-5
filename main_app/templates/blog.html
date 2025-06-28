@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="display-4 text-primary mb-4">Blog</h1>
+        <p class="lead">Lee nuestros últimos artículos y noticias.</p>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Primer artículo del blog</h5>
+                <p class="card-text">Este es un resumen del primer artículo de nuestro blog.</p>
+                <small class="text-muted">Publicado el 28 de junio, 2025</small>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Segundo artículo del blog</h5>
+                <p class="card-text">Este es un resumen del segundo artículo de nuestro blog.</p>
+                <small class="text-muted">Publicado el 27 de junio, 2025</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

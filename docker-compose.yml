@@ -3,11 +3,21 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
+      # Volumen específico para archivos estáticos si necesitas persistencia
+      - static_volume:/app/staticfiles
     ports:
       - "8000:8000"
     environment:
       - DEBUG=1
+      - SECRET_KEY=django-insecure-docker-dev-key
     restart: unless-stopped
+    # Comando para desarrollo que recarga automáticamente
+    # Descomenta si quieres modo desarrollo con auto-reload
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             apache2ctl -D FOREGROUND"
+
+volumes:
+  static_volume:
