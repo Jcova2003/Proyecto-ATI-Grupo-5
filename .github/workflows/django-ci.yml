@@ -19,6 +19,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Apache dev dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apache2-dev
+
       - name: Install dependencies
         run: |
           python -m venv venv
@@ -33,4 +38,4 @@ jobs:
       - name: Run tests
         run: |
           source venv/bin/activate
-          python manage.py
+          python manage.py test
