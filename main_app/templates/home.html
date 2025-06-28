@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 text-primary">¡Bienvenido a Proyecto ATI!</h1>
+            <p class="lead">Esta es tu página de inicio con Apache y Django.</p>
+            <a href="#" class="btn btn-primary btn-lg">Comenzar</a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card feature-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Característica 1</h5>
+                <p class="card-text">Descripción de la primera característica.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card feature-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Característica 2</h5>
+                <p class="card-text">Descripción de la segunda característica.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card feature-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Característica 3</h5>
+                <p class="card-text">Descripción de la tercera característica.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

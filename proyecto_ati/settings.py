@@ -89,5 +89,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Configuración adicional para Apache
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ] if (BASE_DIR / "static").exists() else []
+
+# Directorio donde Django buscará archivos estáticos durante desarrollo
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'main_app', 'static'),
+]
+
 # Clave primaria por defecto
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuración de seguridad para producción (opcional)
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True

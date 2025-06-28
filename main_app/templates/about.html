@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Acerca de - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="display-4 text-center mb-4">Acerca de Nosotros</h1>
+    <p class="lead text-center text-muted">Conoce más sobre nuestro proyecto y equipo</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-lg-6">
+        <h3 class="text-primary">Nuestra Historia</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="col-lg-6">
+        <h3 class="text-primary">Nuestra Misión</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+        <ul class="list-unstyled">
+            <li class="mb-2">✓ Innovación constante</li>
+            <li class="mb-2">✓ Calidad excepcional</li>
+            <li class="mb-2">✓ Compromiso con el cliente</li>
+            <li class="mb-2">✓ Responsabilidad social</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h3 class="text-center text-primary mb-4">Nuestro Equipo</h3>
+    </div>
+    <div class="col-md-4">
+        <div class="card team-card">
+            <div class="card-body text-center">
+                <div class="team-avatar mx-auto mb-3"></div>
+                <h5 class="card-title">Juan Pérez</h5>
+                <p class="text-muted">Director Técnico</p>
+                <p class="card-text">Experto en desarrollo web con más de 10 años de experiencia.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card team-card">
+            <div class="card-body text-center">
+                <div class="team-avatar mx-auto mb-3"></div>
+                <h5 class="card-title">María García</h5>
+                <p class="text-muted">Diseñadora UX/UI</p>
+                <p class="card-text">Especialista en crear experiencias de usuario excepcionales.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card team-card">
+            <div class="card-body text-center">
+                <div class="team-avatar mx-auto mb-3"></div>
+                <h5 class="card-title">Carlos López</h5>
+                <p class="text-muted">Desarrollador Full Stack</p>
+                <p class="card-text">Passionate about creating robust and scalable applications.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
