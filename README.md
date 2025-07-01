@@ -66,3 +66,17 @@ docker-compose down -v
 
 > **Nota:**  
 > Este proyecto usa SQLite como base de datos por defecto, por lo que no necesitas instalar ni configurar PostgreSQL ni usar el archivo `docker-compose.prod.yml`.
+
+
+---
+
+## Modelo de dominio
+![Diagrama de modelo de dominio](/doc/ModeloDominio.png)
+
+---
+## Diagrama de casos de uso
+![Diagrama de casos de uso](/doc/DiagramaCasoUso.png)
+
+---
+## Mapa de navegación
+![Mapa de navegación](/doc/NavigationMap.png)
