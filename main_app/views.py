@@ -2,6 +2,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+def feed(request):
+    try:
+        return render(request, 'feed.html')
+    except Exception as e:
+        return HttpResponse(f"Error en feed: {str(e)}")
+
 def home(request):
     try:
         return render(request, 'home.html')

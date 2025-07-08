@@ -8,7 +8,10 @@
   --warning-color: #ffc107;
   --danger-color: #dc3545;
   --light-color: #CBFCF0;
-  --dark-color: #343a40;
+  --background-color: #F0FDF9;
+  --light-gray: #AFAFAF;
+  --dark-gray: #8b8b8b;
+  --dark-color: #333333;
 }
 
 /* Estilos globales */
@@ -16,6 +19,60 @@ body {
   font-family: "Roboto", sans-serif;
   line-height: 1.6;
   color: #333;
+  background-color: var(--background-color);
+}
+
+.home-content{
+  display: flex;
+}
+
+/* Profile card section*/
+.atigram-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.profile-card, .my-friends {
+  width: 25%;
+}
+
+.profile-picture {
+  border-radius: 100px;
+  width: 80%;
+}
+
+.number-friends {
+  color: var(--light-gray);
+}
+
+.btn-edit-profile {
+  border-radius: 20px;
+  background-color: var(--light-gray);
+  color: white;
+  border: none;
+  margin-bottom: 1em;
+}
+
+.center {
+  width: 50%;
+  background-color: transparent;
+  margin: 0 1rem;
+  padding: 0;
+}
+
+.post {
+  flex-direction: row;
+  background-color: var(--light-color);
+  height: 25%;
+  margin-bottom: 1rem;
+}
+
+.post img {
+  width: auto;
+  margin: 3px 15px 3px 10px;
 }
 
 /* Hero section */
