@@ -1,21 +1,24 @@
 {% extends 'home.html' %}
 {% load static %}
 
-{% block title %}Feed - {{ block.super }}{% endblock %}
-
 {% block feed %}
-<div class="profile-card">
-    <img class="profile-picture" src="C:\Users\Sofía\Pictures\Untitled.png">
-    <label>Jesús Cova</label>
-    <a class="number-friends">901 amigos</a>
-    <p class="profile-desc">A short description about some guy</p>
-    <button class="btn-edit-profile">Editar perfil</button>
+<div class="feed atigram-card">
+    <div class="user-info">
+        <img class="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s">
+        <div class="post-tag">
+            <span class="tiny-info">Publicado hace 11hrs</span>
+            <label class="larger-name">Valeria Ciccolella</label>
+        </div>
+    </div>
+    <div class="post-content">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais... Ver más
+        </p>
+    </div>
+    <div class="reaction-bar">
+        <button>10mil</button>
+        <button>24</button>
+    </div>
 </div>
-<div class="feed">
 
-</div>
-<div class="my-friends"> 
-    <label>Mis amigos</label>
-
-</div>
 {% endblock %}
