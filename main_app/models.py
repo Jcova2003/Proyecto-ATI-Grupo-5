@@ -1,3 +1,107 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 
-# Create your models here.
+# Vi este consejo: para que usuarios puedan autenticarse con email, considere usar AbstractBaseUser.
+
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=100, blank=True)
+    foto = models.TextField(blank=True)
+    email = models.EmailField(unique=True)
+    ci = models.CharField(max_length=20, unique=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
+    genero = models.CharField(max_length=20, blank=True)
+    descripcion = models.TextField(blank=True)
+    color_favorito = models.CharField(max_length=20, blank=True)
+    libro_favorito = models.CharField(max_length=100, blank=True)
+    musica_favorita = models.TextField(blank=True)
+    videojuegos_favoritos = models.TextField(blank=True)
+    password_hash = models.TextField()
+    configuracion = models.JSONField(null=True, blank=True)
+    fecha_registro = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.nombre or self.email
+
+
+class LenguajeProgramacion(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.nombre
+
+
+class Publicacion(models.Model):
+    PRIVACIDAD_CHOICES = [
+        ('publico', 'Público'),
+        ('privado', 'Privado'),
+    ]
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    contenido = models.TextField(blank=True)
+    multimedia = models.TextField(blank=True)  # se puede usar JSONField 
+    privacidad = models.CharField(max_length=10, choices=PRIVACIDAD_CHOICES, default='publico')
+    fecha_creacion = models.DateTimeField(default=timezone.now)
+
+
+class Comentario(models.Model):
+    publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    comentario = models.TextField()
+    respuesta_a = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    fecha = models.DateTimeField(default=timezone.now)
+
+
+class SolicitudAmistad(models.Model):
+    ESTADO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('aceptada', 'Aceptada'),
+        ('rechazada', 'Rechazada'),
+    ]
+    de_usuario = models.ForeignKey(Usuario, related_name='enviadas', on_delete=models.CASCADE)
+    para_usuario = models.ForeignKey(Usuario, related_name='recibidas', on_delete=models.CASCADE)
+    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
+    fecha = models.DateTimeField(default=timezone.now)
+
+
+class Chat(models.Model):
+    usuario1 = models.ForeignKey(Usuario, related_name='chats_usuario1', on_delete=models.CASCADE)
+    usuario2 = models.ForeignKey(Usuario, related_name='chats_usuario2', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('usuario1', 'usuario2')
+
+
+class Mensaje(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    de_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    contenido = models.TextField()
+    leido = models.BooleanField(default=False)
+    fecha = models.DateTimeField(default=timezone.now)
+
+
+class Notificacion(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=50)
+    contenido = models.TextField()
+    leida = models.BooleanField(default=False)
+    enviada_por_correo = models.BooleanField(default=False)
+    fecha = models.DateTimeField(default=timezone.now)
+
+
+class Sesion(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    token = models.TextField()
+    fecha_inicio = models.DateTimeField(default=timezone.now)
+    activo = models.BooleanField(default=True)
+
+
+# Relación muchos a muchos entre usuarios y lenguajes
+Usuario.lenguajes = models.ManyToManyField(LenguajeProgramacion, through='UsuarioLenguaje')
+
+
+class UsuarioLenguaje(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    lenguaje = models.ForeignKey(LenguajeProgramacion, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('usuario', 'lenguaje')
