@@ -1,0 +1,37 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+
+node "Cliente" {
+  [Navegador Web] as navegador
+}
+node "Server" {
+  [Apache web server] as router
+  [wsgi] as wsgi
+  rectangle "Django" {
+    [Vista] as vista
+    [Modelo] as modelo
+    [Plantilla] as plantilla
+    [ORM] as orm
+  }
+  database "SQLite" as sqlite
+}
+
+node "Servidor SMTP" {
+  [smtp.gmail.com] as smtp
+}
+
+navegador --> router : HTTP Request
+vista --> modelo : Consultar/Guardar
+modelo --> orm : ORM Call
+orm --> sqlite : SQL Query
+sqlite --> orm
+vista --> plantilla
+vista --> navegador : HTTP Response
+wsgi --> vista 
+
+vista --> smtp : Enviar correo (SMTP)
+
+router --> wsgi 
+
+@enduml

@@ -1,0 +1,68 @@
+@startuml django_project_structure_mtv
+skinparam style strictuml
+allow_mixing
+
+' Colores:
+' - Model: #d8f9ff (azul claro)
+' - Template: #cab0df (lila)
+' - View: #c8facc (verde)
+
+package "proyecto_ati" <<django:project>> {
+    class __init__ <<python>>
+    class asgi <<python>>
+    class settings <<python>>
+    class urls <<python>> 
+    class wsgi <<python>>
+}
+
+package "main_app" <<django:app>> {
+    package "migrations" #ececec {
+        class __init__ <<python>>
+        class 0001_initial <<python>>
+    }
+
+    ' Static assets are supporting template rendering
+    package "static" {
+        package "main_app" {
+            package "css" #cab0df {}
+            package "js" #cab0df {}
+        }
+    }
+
+    package "templates" #cab0df {}
+
+    class __init__ <<python>>
+    class admin <<python>>
+    class apps <<python>>
+
+    class models <<python>> #d8f9ff
+    class tests <<python>>
+
+    class urls <<python>> #c8facc
+    class views <<python>> #c8facc
+}
+
+package "staticfiles" #dddddd {}
+
+
+' Archivos raíz
+class manage_py as "manage.py"
+
+' Relaciones
+manage_py --> settings
+settings ..> wsgi
+settings ..> urls
+settings ..> staticfiles
+settings ..> asgi
+
+urls ..> views
+views ..> models
+admin ..> models
+
+wsgi ..> django
+asgi ..> django
+models ..> django
+views ..> django
+urls ..> django
+
+@enduml
