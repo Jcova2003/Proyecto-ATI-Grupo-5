@@ -80,3 +80,24 @@ docker-compose down -v
 ---
 ## Mapa de navegación
 ![Mapa de navegación](/doc/NavigationMap.png)
+
+---
+## Diagrama de Arquitectura de Sistema
+![Diagrama de Arquitectura de Sistema](/doc/diagramaArquitecturaSistema.png)
+
+---
+## Diagrama de paquetes
+![Diagrama de paquetes](/doc/PackageDiagram.png)
+
+---
+## Diagrama de Clase de Analisis 1: Agregar amigo
+![Agregar amigo](/doc/diagramaClaseAnalisisAgregarAmigo.png)
+
+---
+## Diagrama de Clase de Analisis 2: Chatear
+![Chatear](/doc/DiagramaClaseAnalisisChatear.png)
+
+---
+## Diagrama de Clase de Analisis 3: Publicar
+![Publicar](/doc/DiagramaClaseAnalisisPublicar.png)
+

@@ -1,0 +1,19 @@
+@startuml UC addFriend analysisClassDiagram
+
+actor "Student" as registeredUser 
+boundary "UserProfileTemplate" as start
+boundary "FriendRequestTemplate" as friendRequestTemplate
+entity "FriendRequest"  as friendRequest
+control "AddFriendView" as addFriendView
+entity "User" as user
+entity "Notification" as notification
+
+registeredUser - start
+registeredUser - friendRequestTemplate
+start -- friendRequestTemplate
+friendRequestTemplate -down- addFriendView
+addFriendView - friendRequest
+addFriendView -down- user
+notification - addFriendView
+
+@enduml

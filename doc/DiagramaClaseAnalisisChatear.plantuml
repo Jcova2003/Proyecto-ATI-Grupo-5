@@ -1,0 +1,22 @@
+@startuml UC chatSimplifiedMVT analysisClassDiagram
+
+actor "Student" as student
+
+boundary "ChatTemplate" as chatTemplate 
+
+control "ChatView" as chatView 
+
+entity "Conversation" as conversation 
+entity "Message" as message 
+entity "Friend" as friend 
+entity "Notification" as notification 
+
+student - chatTemplate
+chatTemplate --> chatView
+
+chatView --> conversation
+chatView --> message
+chatView --> notification
+chatView --> friend
+
+@enduml

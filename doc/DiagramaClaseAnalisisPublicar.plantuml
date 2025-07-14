@@ -1,0 +1,24 @@
+@startuml UC publishPost analysisClassDiagram
+
+actor "Student" as student
+
+boundary "feedTemplate" as feedTemplate 
+boundary "PostFormTemplate" as formTemplate 
+
+control "PostView" as postView 
+
+entity "Post" as post 
+entity "Text" as text 
+entity "Multimedia" as multimedia 
+entity "Draft" as draft 
+
+student - feedTemplate
+student - formTemplate
+feedTemplate -- formTemplate
+formTemplate --> postView
+postView --> post
+postView --> text
+postView --> multimedia
+postView --> draft
+
+@enduml
