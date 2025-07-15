@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATIgram</title>
+    
+    <!-- CSS Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- Roboto Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
+            <div class="search-friends">
+                <button class="search-person">
+                    <img class="nav-bar-icon" src="static/img/icons/person_search.svg">  
+                </button>
+                <input class="search-bar" type="text" placeholder="Buscar amigos">
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
+                            <img class="nav-bar-icon" src="static/img/icons/home.svg">  
+                            Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
+                            <img class="nav-bar-icon" src="static/img/icons/person_outline.svg">
+                            Mi perfil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}" href="HOME.html">
+                            <img class="nav-bar-icon" src="static/img/icons/notifications_active.svg">
+                            Notificaciones
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="HOME.html">
+                <img class="nav-bar-icon" src="static/img/icons/mark_chat_unread.svg">
+            </a>
+        </div>
+    </nav>
+
+    <!-- JavaScript Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

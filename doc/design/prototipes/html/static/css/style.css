@@ -1,0 +1,103 @@
+/* Estilos personalizados para Proyecto ATI */
+
+/* Variables CSS */
+:root {
+  --primary-color: #00C8C0;
+
+  --green-950: #03302D;
+  --green-800: #0F6058;
+  --green-700: #0D786B;
+  --green-600: #0A9785;
+  --green-500: #10BCA2;
+  --green-400: #25CBAF;
+  --green-300: #5BEDD0;
+  --green-200: #97F8E1;
+  --green-100: #CBFCF0;
+  --green-50: #F0FDF9;
+
+  --grey-100: #d9d9d9;
+  --grey-200: #AFAFAF;
+  --grey-400: #8b8b8b;
+  --grey-800: #333333;
+  --grey-950: #1e1e1e;
+
+  --error: #f95050;
+}
+
+/* Estilos globales */
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  color: #000000;
+  background-color: var(--green-50);
+}
+
+.home-content{
+  display: flex;
+  gap: 1rem;
+}
+
+/* Navbar personalizada */
+.navbar {
+  background-color: var(--primary-color);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.search-friends {
+  display: flex;
+}
+
+.search-person {
+  background-color: transparent;
+  border: none;
+}
+
+.search-bar {
+  border-radius: 20px;
+  background-color: var(--green-100);
+  color: var(--green-600);
+  border: 1px solid var(--green-600);
+  align-self: center;
+  padding: 0em 1em;
+  height: 70%;
+  width: 100%;
+  resize: none;
+}
+
+textarea.search-bar {
+  padding: 0.4em 1em;
+}
+
+.nav-bar-icon {
+  height: auto;
+  width: 25px;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link {
+  align-self: center;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff !important;
+}
+
+
+/* Responsive design */
+@media (max-width: 992px) {
+  input.search-bar, .profile-card, .my-friends {
+    display: none;
+  }
+
+  .search-friends {
+    margin-left: auto;
+  }
+}
