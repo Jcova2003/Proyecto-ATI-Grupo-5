@@ -23,7 +23,23 @@
 
   --error: #f95050;
 
- 
+  /* Font-size desktop */
+  --H1-deskop: 48px;
+  --H2-deskop: 40px;
+  --H3-deskop: 34px;
+  --H4-deskop: 28px;
+  --H5-deskop: 24px;
+  --H6-deskop: 20px;
+  --p-desktop: 16px;
+
+  /* Font-size mobile */
+  --H1-mobile: 34px;
+  --H2-mobile: 28px;
+  --H3-mobile: 24px;
+  --H4-mobile: 20px;
+  --H5-mobile: 18px;
+  --H6-mobile: 16px;
+  --p-mobile: 14px;
 }
 
 /* Estilos globales */
@@ -49,7 +65,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: .5rem 6.5%;
-  font-size: clamp(14px, 16px, 16px);
+  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
 }
 
 .navbar-brand {
