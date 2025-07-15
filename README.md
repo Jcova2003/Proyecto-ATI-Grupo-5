@@ -71,33 +71,33 @@ docker-compose down -v
 ---
 
 ## Modelo de dominio
-![Diagrama de modelo de dominio](/doc/ModeloDominio.png)
+![Diagrama de modelo de dominio](/doc/inception/ModeloDominio.png)
 
 ---
 ## Diagrama de casos de uso
-![Diagrama de casos de uso](/doc/DiagramaCasoUso.png)
+![Diagrama de casos de uso](/doc/inception/DiagramaCasoUso.png)
 
 ---
 ## Mapa de navegación
-![Mapa de navegación](/doc/NavigationMap.png)
+![Mapa de navegación](/doc/design/NavigationMap.png)
 
 ---
 ## Diagrama de Arquitectura de Sistema
-![Diagrama de Arquitectura de Sistema](/doc/diagramaArquitecturaSistema.png)
+![Diagrama de Arquitectura de Sistema](/doc/design/diagramaArquitecturaSistema.png)
 
 ---
 ## Diagrama de paquetes
-![Diagrama de paquetes](/doc/PackageDiagram.png)
+![Diagrama de paquetes](/doc/design/PackageDiagram.png)
 
 ---
 ## Diagrama de Clase de Analisis 1: Agregar amigo
-![Agregar amigo](/doc/diagramaClaseAnalisisAgregarAmigo.png)
+![Agregar amigo](/doc/design/analysisClassDiagram/diagramaClaseAnalisisAgregarAmigo.png)
 
 ---
 ## Diagrama de Clase de Analisis 2: Chatear
-![Chatear](/doc/DiagramaClaseAnalisisChatear.png)
+![Chatear](/doc/design/analysisClassDiagram/DiagramaClaseAnalisisChatear.png)
 
 ---
 ## Diagrama de Clase de Analisis 3: Publicar
-![Publicar](/doc/DiagramaClaseAnalisisPublicar.png)
+![Publicar](/doc/design/analysisClassDiagram/DiagramaClaseAnalisisPublicar.png)
 
