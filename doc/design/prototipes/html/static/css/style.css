@@ -22,6 +22,8 @@
   --grey-950: #1e1e1e;
 
   --error: #f95050;
+
+ 
 }
 
 /* Estilos globales */
@@ -30,6 +32,7 @@ body {
   line-height: 1.6;
   color: #000000;
   background-color: var(--green-50);
+  margin: 0;
 }
 
 .home-content{
@@ -40,15 +43,29 @@ body {
 /* Navbar personalizada */
 .navbar {
   background-color: var(--primary-color);
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  padding: .5rem 6.5%;
+  font-size: clamp(14px, 16px, 16px);
 }
 
 .navbar-brand {
   font-weight: 700;
   font-size: 1.5rem;
+  color:white;
+  margin-right: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
 }
 
 .search-friends {
   display: flex;
+  align-items: center;
 }
 
 .search-person {
@@ -61,10 +78,7 @@ body {
   background-color: var(--green-100);
   color: var(--green-600);
   border: 1px solid var(--green-600);
-  align-self: center;
-  padding: 0em 1em;
-  height: 70%;
-  width: 100%;
+  padding: .4rem 1em;
   resize: none;
 }
 
@@ -72,18 +86,46 @@ textarea.search-bar {
   padding: 0.4em 1em;
 }
 
-.nav-bar-icon {
+.navbar-icon {
   height: auto;
-  width: 25px;
+  width: 30px;
+  vertical-align: middle;
 }
 
-.navbar-nav .nav-link {
+#navbar-menu {
+  display: flex;
+  flex-basis: auto;
+}
+
+.navbar-nav {
+  display: flex;
+  margin: 0;
+  margin-left: auto;
+}
+
+.nav-item {
+  list-style: none;
+  box-sizing: border-box;
+  display: flex;
+  align-content: center;
+}
+
+.nav-link, .nav-chat {
+  align-self: center;
+  display: block;
+  padding: .5rem .7rem;
+  text-decoration: none;
+  color: var(--grey-100);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.nav-link {
-  align-self: center;
+.nav-link .navbar-icon {
+  width: 25px;
+}
+
+.nav-chat {
+  margin-left: 1rem;
 }
 
 .navbar-nav .nav-link:hover {
@@ -93,7 +135,7 @@ textarea.search-bar {
 
 /* Responsive design */
 @media (max-width: 992px) {
-  input.search-bar, .profile-card, .my-friends {
+  input.search-bar, .profile-card, .my-friends, .navbar-nav {
     display: none;
   }
 
