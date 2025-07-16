@@ -19,37 +19,36 @@
         <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
             <button class="search-person">
-                <img class="navbar-icon" src="static/img/icons/person_search.svg">  
+                <img class="icon" src="static/img/icons/person_search.svg">  
             </button>
             <input class="search-bar" type="text" placeholder="Buscar amigos">
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
-                        <img class="navbar-icon" src="static/img/icons/home.svg">  
+                        <img class="icon" src="static/img/icons/home.svg">  
                         Inicio
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
-                        <img class="navbar-icon" src="static/img/icons/person_outline.svg">
+                        <img class="icon" src="static/img/icons/person_outline.svg">
                         Mi perfil
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}" href="HOME.html">
-                        <img class="navbar-icon" src="static/img/icons/notifications_active.svg">
+                        <img class="icon" src="static/img/icons/notifications_active.svg">
                         Notificaciones
                     </a>
                 </li>
             </ul>
         <a class="nav-chat {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="HOME.html">
-            <img class="navbar-icon" src="static/img/icons/mark_chat_unread.svg">
+            <img class="icon" src="static/img/icons/mark_chat_unread.svg">
         </a>
     </nav>
 
-    <!-- JavaScript Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  
     
 </body>
 </html>

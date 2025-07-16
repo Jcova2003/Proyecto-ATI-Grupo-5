@@ -24,12 +24,12 @@
   --error: #f95050;
 
   /* Font-size desktop */
-  --H1-deskop: 48px;
-  --H2-deskop: 40px;
-  --H3-deskop: 34px;
-  --H4-deskop: 28px;
-  --H5-deskop: 24px;
-  --H6-deskop: 20px;
+  --H1-desktop: 48px;
+  --H2-desktop: 40px;
+  --H3-desktop: 34px;
+  --H4-desktop: 28px;
+  --H5-desktop: 24px;
+  --H6-desktop: 20px;
   --p-desktop: 16px;
 
   /* Font-size mobile */
@@ -40,15 +40,25 @@
   --H5-mobile: 18px;
   --H6-mobile: 16px;
   --p-mobile: 14px;
+
+  /* Font-family */
+  --font-family: "Roboto", sans-serif;
 }
 
 /* Estilos globales */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family);
   line-height: 1.6;
   color: #000000;
   background-color: var(--green-50);
   margin: 0;
+  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
+}
+
+.icon {
+  height: auto;
+  width: 30px;
+  vertical-align: middle;
 }
 
 .home-content{
@@ -64,8 +74,8 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
-  padding: .5rem 6.5%;
-  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
+  padding: 1rem 6.5%;
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
 }
 
 .navbar-brand {
@@ -93,6 +103,8 @@ body {
   border-radius: 20px;
   background-color: var(--green-100);
   color: var(--green-600);
+  font-family: var(--font-family);
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
   border: 1px solid var(--green-600);
   padding: .4rem 1em;
   resize: none;
@@ -100,12 +112,6 @@ body {
 
 textarea.search-bar {
   padding: 0.4em 1em;
-}
-
-.navbar-icon {
-  height: auto;
-  width: 30px;
-  vertical-align: middle;
 }
 
 #navbar-menu {
