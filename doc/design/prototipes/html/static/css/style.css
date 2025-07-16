@@ -62,8 +62,12 @@ body {
 }
 
 .home-content{
+  margin-top: 1rem;
   display: flex;
   gap: 1rem;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Navbar personalizada */
@@ -154,9 +158,121 @@ textarea.search-bar {
   color: #fff !important;
 }
 
+/* contenido de la pagina*/
+.atigram-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 16px;
+  padding: 1rem;
+  height: fit-content;
+}
+
+.larger-name {
+  color: var(--grey-800);
+  font-size: clamp(var(--H5-mobile), 2.5vw, var(--H5-desktop));
+  font-weight: bold;
+}
+
+.tiny-info {
+  color: var(--grey-200);
+  font-size: clamp(var(--p-mobile), 2.5vw, var(--p-desktop));
+}
+
+.profile-picture {
+  border-radius: 100px; 
+  margin: 5px 15px 5px 5px;
+  align-self: center;
+}
+
+.profile-card, .my-friends {
+  width: 20%;
+}
+
+/* Seccion de carta de perfil */
+.profile-card .profile-picture {
+  margin: 0;
+  height: auto;
+  width: 174px;
+  align-self: auto;
+}
+
+.profile-card-name {
+  color: var(--grey-800);
+  font-size: clamp(var(--H4-mobile), 2vw, var(--H4-desktop));
+  font-weight: bold;
+}
+
+.profile-card .tiny-info {
+  text-decoration: underline;
+}
+
+.profile-desc {
+  margin: 0;
+}
+
+.btn-edit-profile {
+  border-radius: 20px;
+  background-color: var(--grey-200);
+  color: white;
+  border: none;
+  margin: 1em 0;
+  font-size: var(--H6-mobile);
+  font-weight: bold;
+  font-family: var(--font-family);
+  padding: 0.3rem 0;
+}
+
+/* Seccion de feed */
+.center {
+  width: 50%;
+  /* background-color: transparent; */
+  padding: 0;
+  row-gap: 1rem;
+  overflow-y: auto;
+}
+
+
+.user-info {
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+}
+
+
+
+/* Seccion de amigos */
+.mrk-border {
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.my-friends .user-info .profile-picture {
+  width: 42px;
+}
+
+.friend-tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.friend-tag .tiny-info {
+  font-size: var(--p-mobile);
+  text-decoration: underline;
+}
+
+.tiny-name {
+  font-size: var(--H5-mobile);
+  font-weight: bold;
+}
 
 /* Responsive design */
 @media (max-width: 992px) {
+  .home-content {
+    max-width: 720px;
+  }
+
   input.search-bar, .profile-card, .my-friends, .navbar-nav {
     display: none;
   }
