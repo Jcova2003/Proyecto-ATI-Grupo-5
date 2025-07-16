@@ -47,7 +47,7 @@ class Comentario(models.Model):
     publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
     comentario = models.TextField()
-    respuesta_a = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    respuesta_a = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='respuestas')
     fecha = models.DateTimeField(default=timezone.now)
 
 
