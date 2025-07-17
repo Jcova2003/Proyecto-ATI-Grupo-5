@@ -56,8 +56,6 @@ body {
 }
 
 .icon {
-  height: auto;
-  width: 30px;
   vertical-align: middle;
 }
 
@@ -101,6 +99,11 @@ body {
 .search-person {
   background-color: transparent;
   border: none;
+  color: white;
+}
+
+.search-person .icon, .nav-chat .icon {
+  font-size: 30px;
 }
 
 .search-bar {
@@ -153,6 +156,7 @@ textarea.search-bar {
 
 .nav-chat {
   margin-left: 1rem;
+  color: white;
 }
 
 .navbar-nav .nav-link:hover {
@@ -223,6 +227,10 @@ textarea.search-bar {
   font-weight: bold;
   font-family: var(--font-family);
   padding: 0.3rem 0;
+}
+
+.btn-edit-profile .icon {
+  font-size: 20px;
 }
 
 /* Seccion de feed */
