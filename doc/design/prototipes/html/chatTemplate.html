@@ -11,133 +11,77 @@
     <!-- JavaScript para popup notificaciones -->
     <script src="static/js/notificacion.js" defer></script>
 
-    <!-- JavaScript para publicaciones-->
-    <script src="static/js/post.js"></script>
-
     <!-- Roboto Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    
 </head>
 <body>
     <nav class="navbar">
         <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
             <button class="search-person">
-                <span class="material-icons-outlined icon">person_search</span>
+                <img class="icon" src="static/img/icons/person_search.svg">  
             </button>
             <input class="search-bar" type="text" placeholder="Buscar amigos">
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
-                        <span class="material-icons-outlined icon">home</span>
+                        <img class="icon" src="static/img/icons/home.svg">  
                         Inicio
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
-                        <span class="material-icons-outlined icon">person_outline</span>
+                        <img class="icon" src="static/img/icons/person_outline.svg">
                         Mi perfil
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link notifications-link" href="#">
-                        <span class="material-icons-outlined icon">notifications_active</span>
+                        <img class="icon" src="static/img/icons/notifications_active.svg">
                         Notificaciones
                     </a>
                 </li>
             </ul>
-        <a class="nav-chat" href="chatTemplate.html">
-            <span class="material-icons-outlined icon">mark_chat_unread</span>
-        </a>
-    </nav>
-
-    <nav class="mobile-navbar">
-        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
-            <span class="material-icons-outlined icon">home</span>
-            <label>Inicio</label>
-        </a>
-        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
-            <span class="material-icons-outlined icon">person_outline</span>
-            <label>Mi perfil</label>
-        </a>
-        <a class="nav-link notifications-link" href="#">
-            <span class="material-icons-outlined icon">notifications_active</span>
-            <label>Menciones</label>
+        <a class="nav-chat {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="HOME.html">
+            <img class="icon" src="static/img/icons/mark_chat_unread.svg">
         </a>
     </nav>
 
     <main class="home-content">
-        <div class="profile-card atigram-card">
-            <img class="profile-picture" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
-            <label class="profile-card-name">Valeria Torres</label>
-            <a class="tiny-info">3 amigos</a>
-            <p class="profile-desc">Una descripcion corta sobre el usuario que ha iniciado sesion</p>
-            <button class="btn-edit-profile">
-                <span class="material-icons icon">edit</span>
-                Editar perfil
-            </button>
-        </div>
-        <div class="center atigram-card">
-            <div class="atigram-card" id="post">
-                <div id="post-user-info">
-                    <img class="profile-picture" id="post-pfp" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
-                    <label id="post-user-name">Valeria Torres</label>
-                </div>
-                <div id="post-write-bar">
-                    <textarea class="search-bar" id="post-bar" type="text" placeholder="¿Qué estas pensando?"></textarea>
-                </div>
-                <div id="createPost-options"> 
-                    <div id="add-multimedia">
-                        <label for="multimedia-upload" id="multimedia-upload-btn">
-                            <span class="material-icons icon">image</span>
-                            Añadir Multimedia
-                        </label>
-                        <input id="multimedia-upload" type="file"> 
-                    </div>
-                    <div class="createPost-btns-bar">
-                        <button class="btn-edit-profile" id="save-draft-btn">Guardar Borrador</button>
-                        <button class="btn-edit-profile" id="post-btn">Publicar</button>
-                    </div>
-                </div>
+        <div class="chat-container">
+          <div class="chat-header">
+            <a href="home.html" class="back-link">&larr; Volver</a>
+            <div class="user-info">
+              <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="user-avatar" />
+              <div class="user-details">
+                <strong>Belén Cruz</strong>
+                <span class="user-status">Activo hace 10mins</span>
+              </div>
             </div>
-            <div class="feed atigram-card">
-                <div class="post-info">
-                    <a class="user-info" href="#">
-                        <img class="profile-picture" src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png">
-                        <div class="post-tag">
-                            <span class="tiny-info">Publicado hace 11hrs</span>
-                            <label class="larger-name">Emmanuel Delgado</label>
-                        </div>
-                    </a>
-                    <button class="post-conf">
-                        ⋮
-                    </button>
-                </div>
-                
-                <div class="post-content">
-                    <p class="post-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais
-                        <span id="dots">...</span>
-                        <span id="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada.<br></span>
-                        <button id="readMore" href="#">Ver más</button>
-                    </p>
-                </div>
-                <div class="reaction-bar">
-                    <button class="like-btn">
-                        <span class="material-icons-outlined icon">favorite_border</span>
-                        10mil
-                    </button>
-                    <button class="comments-btn">
-                        <span class="material-icons-outlined icon">chat_bubble</span>
-                        24
-                    </button>
-                </div>
+          </div>
+          <div class="chat-messages">
+            <div class="message received">
+              <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+              <div class="message-text">Hola!!</div>
             </div>
+            <div class="message sent">Hola Belén, ¿Cómo estás?</div>
+            <div class="message received">Quería preguntarte cómo vas con las pantallas</div>
+            <div class="message received">Recuerda que tenemos que mandarlas hoy apurateeeeeeeeeee</div>
+            <div class="message sent">Ya las estoy mandando!</div>
+            <div class="message received">TEST MENSAJE MUY LARGO</div>
+            <div class="message received">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais...
+            </div>
+          </div>
+          <form class="chat-input-form">
+            <input type="text" placeholder="Mensaje" class="chat-input" autocomplete="off" />
+          </form>
         </div>
+
         <div class="my-friends atigram-card"> 
             <label class="larger-name">Mis amigos</label>
             <div class="user-info mrk-border">
@@ -273,3 +217,102 @@
     </div>
 </body>
 </html>
+
+
+
+<style>
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width:80%;
+}
+.chat-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--grey-100);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.back-link {
+  color: var(--green-700);
+  text-decoration: none;
+  font-size: 18px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-details strong {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--grey-800);
+}
+.user-status {
+  font-size: 14px;
+  color: var(--grey-400);
+  text-decoration: underline;
+}
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.message {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+.message.received {
+  background-color: var(--green-100);
+  align-self: flex-start;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.message.sent {
+  background-color: var(--green-600);
+  color: white;
+  align-self: flex-end;
+}
+.message-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 4px;
+}
+.chat-input-form {
+  padding: 10px 15px;
+}
+.chat-input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--green-600);
+  color: var(--green-600);
+  outline: none;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: var(--green-100);
+}
+
+@media (max-width: 992px) {
+  .chat-container {
+    width: 100%;
+  }
+}
+</style>

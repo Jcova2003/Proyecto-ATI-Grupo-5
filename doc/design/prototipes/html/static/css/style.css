@@ -56,6 +56,8 @@ body {
 }
 
 .icon {
+  height: auto;
+  width: 30px;
   vertical-align: middle;
 }
 
@@ -676,7 +678,7 @@ input[type="file"] {
 .welcome-icon {
   position: absolute;
   bottom: -8vh;
-  height: clamp(12rem, 20vw, 15rem);
+  height: clamp(10rem, 20vw, 13rem);
 }
 
 .login-body {
@@ -686,7 +688,6 @@ input[type="file"] {
   justify-content: center;
   height: 100dvh;
   overflow-x: hidden;
-
 }
 
 .login-h3 {
@@ -714,7 +715,7 @@ input[type="file"] {
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--grey-800);
-  font-size: clamp(var(--H6-mobile), 1vw, var(--H6-desktop));
+  font-size: clamp(var(--H6-mobile), 2vw, var(--H6-desktop));
   padding: 1rem;
 }
 
@@ -749,6 +750,51 @@ input[type="file"] {
   background-color: var(--green-700);
 }
 
-.text-action.register {
-  text-align: center;;
+.text-action.register,
+.text-action.login {
+  text-align: center;
+}
+
+/*Estilos Register*/
+.fingerprint {
+  position: absolute;
+  bottom: 2rem;
+  height: clamp(5rem, 20vw, 8rem);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: clamp(10rem, 95%, 45rem);
+}
+
+.register-form .input-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .register-form .input-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  
+  .input-group input {
+    padding: 0.75rem;
+    grid-column: span 2;
+  }
+  
+  .input-group input:nth-child(2),
+  .input-group input:nth-child(1) {
+    grid-column: span 1;
+  }
+
+ .register.gradient-background {
+    top: -30%;
+  }
+    
 }

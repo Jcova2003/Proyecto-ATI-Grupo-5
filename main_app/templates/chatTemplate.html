@@ -1,0 +1,125 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Chat con {{ friend_name }} - {{ block.super }}{% endblock %} {% block content %}
+
+<div class="chat-container">
+  <div class="chat-header">
+    <a href="#" class="back-link">&larr; Volver</a>
+    <div class="user-info">
+      <img src="/static/main_app/images/user-avatar.png" alt="Avatar" class="user-avatar" />
+      <div class="user-details">
+        <strong>{{ friend_name }}</strong>
+        <span class="user-status">Activo hace 10mins</span>
+      </div>
+    </div>
+  </div>
+  <div class="chat-messages">
+    <div class="message received">
+      <img src="/static/main_app/images/user-avatar.png" alt="Avatar" class="message-avatar" />
+      <div class="message-text">Hola!!</div>
+    </div>
+    <div class="message sent">Hola {{ friend_name }}, ¿Cómo estás?</div>
+    <div class="message received">Quería preguntarte cómo vas con las pantallas</div>
+    <div class="message received">Recuerda que tenemos que mandarlas hoy apurateeeeeeeeeee</div>
+    <div class="message sent">Ya las estoy mandando!</div>
+    <div class="message received">TEST MENSAJE MUY LARGO</div>
+    <div class="message received">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais...
+    </div>
+  </div>
+  <form class="chat-input-form">
+    <input type="text" placeholder="Mensaje" class="chat-input" autocomplete="off" />
+  </form>
+</div>
+
+<style>
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #e0f2f1;
+    font-family: "Arial", sans-serif;
+  }
+  .chat-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #e0f2f1;
+  }
+  .back-link {
+    color: #00796b;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .user-details strong {
+    font-weight: 700;
+    font-size: 18px;
+    color: #212121;
+  }
+  .user-status {
+    font-size: 14px;
+    color: #757575;
+    text-decoration: underline;
+  }
+  .chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  .message.received {
+    background-color: #b2dfdb;
+    align-self: flex-start;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .message.sent {
+    background-color: #00796b;
+    color: white;
+    align-self: flex-end;
+  }
+  .message-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 4px;
+  }
+  .chat-input-form {
+    padding: 10px 15px;
+    border-top: 1px solid #ccc;
+    background-color: #e0f2f1;
+  }
+  .chat-input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #00796b;
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+</style>
+{% endblock %}
