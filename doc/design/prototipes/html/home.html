@@ -18,39 +18,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
             <button class="search-person">
-                <img class="icon" src="static/img/icons/person_search.svg">  
+                <span class="material-icons-outlined icon">person_search</span>
             </button>
             <input class="search-bar" type="text" placeholder="Buscar amigos">
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
-                        <img class="icon" src="static/img/icons/home.svg">  
+                        <span class="material-icons-outlined icon">home</span>
                         Inicio
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
-                        <img class="icon" src="static/img/icons/person_outline.svg">
+                        <span class="material-icons-outlined icon">person_outline</span>
                         Mi perfil
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link notifications-link" href="#">
-                        <img class="icon" src="static/img/icons/notifications_active.svg">
+                        <span class="material-icons-outlined icon">notifications_active</span>
                         Notificaciones
                     </a>
                 </li>
             </ul>
         <a class="nav-chat {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="HOME.html">
-            <img class="icon" src="static/img/icons/mark_chat_unread.svg">
+            <span class="material-icons-outlined icon">mark_chat_unread</span>
         </a>
     </nav>
 
@@ -60,7 +61,10 @@
             <label class="profile-card-name">Valeria Torres</label>
             <a class="tiny-info">3 amigos</a>
             <p class="profile-desc">Una descripcion corta sobre el usuario que ha iniciado sesion</p>
-            <button class="btn-edit-profile">Editar perfil</button>
+            <button class="btn-edit-profile">
+                <span class="material-icons icon">edit</span>
+                Editar perfil
+            </button>
         </div>
         <div class="center atigram-card">
             <div class="atigram-card" id="post">
