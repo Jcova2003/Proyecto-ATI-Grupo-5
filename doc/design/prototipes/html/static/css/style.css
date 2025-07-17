@@ -2,21 +2,21 @@
 
 /* Variables CSS */
 :root {
-  --primary-color: #00C8C0;
+  --primary-color: #00c8c0;
 
-  --green-950: #03302D;
-  --green-800: #0F6058;
-  --green-700: #0D786B;
-  --green-600: #0A9785;
-  --green-500: #10BCA2;
-  --green-400: #25CBAF;
-  --green-300: #5BEDD0;
-  --green-200: #97F8E1;
-  --green-100: #CBFCF0;
-  --green-50: #F0FDF9;
+  --green-950: #03302d;
+  --green-800: #0f6058;
+  --green-700: #0d786b;
+  --green-600: #0a9785;
+  --green-500: #10bca2;
+  --green-400: #25cbaf;
+  --green-300: #5bedd0;
+  --green-200: #97f8e1;
+  --green-100: #cbfcf0;
+  --green-50: #f0fdf9;
 
   --grey-100: #d9d9d9;
-  --grey-200: #AFAFAF;
+  --grey-200: #afafaf;
   --grey-400: #8b8b8b;
   --grey-800: #333333;
   --grey-950: #1e1e1e;
@@ -61,7 +61,7 @@ body {
   vertical-align: middle;
 }
 
-.home-content{
+.home-content {
   margin-top: 1rem;
   display: flex;
   gap: 1rem;
@@ -85,12 +85,12 @@ body {
 .navbar-brand {
   font-weight: 700;
   font-size: 1.5rem;
-  color:white;
+  color: white;
   margin-right: 1rem;
   text-decoration: none;
   white-space: nowrap;
-  padding-top: .3125rem;
-  padding-bottom: .3125rem;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
 }
 
 .search-friends {
@@ -101,6 +101,11 @@ body {
 .search-person {
   background-color: transparent;
   border: none;
+  color: white;
+}
+
+.search-person .icon, .nav-chat .icon {
+  font-size: 30px;
 }
 
 .search-bar {
@@ -110,7 +115,7 @@ body {
   font-family: var(--font-family);
   font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
   border: 1px solid var(--green-600);
-  padding: .4rem 1em;
+  padding: 0.4rem 1em;
   resize: none;
 }
 
@@ -136,10 +141,11 @@ textarea.search-bar {
   align-content: center;
 }
 
-.nav-link, .nav-chat {
+.nav-link,
+.nav-chat {
   align-self: center;
   display: block;
-  padding: .5rem .7rem;
+  padding: 0.5rem 0.7rem;
   text-decoration: none;
   color: var(--grey-100);
   font-weight: 500;
@@ -152,10 +158,39 @@ textarea.search-bar {
 
 .nav-chat {
   margin-left: 1rem;
+  color: white;
 }
 
 .navbar-nav .nav-link:hover {
   color: #fff !important;
+}
+
+/* Mobile navbar */
+.mobile-navbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  /* mask: linear-gradient(transparent, black, black); */
+  backdrop-filter: blur(3px);
+  height: 65px;
+}
+
+.mobile-navbar .nav-link {
+  border: 1px solid var(--grey-200);
+  border-radius: 25px;
+  color: var(--grey-200);
+  font-weight: 500;
+  font-size: var(--p-mobile);
+  background-color: var(--green-50);
+}
+
+.mobile-navbar .nav-link:hover {
+  border: 1px solid var(--green-800);
+  color: var(--green-800);
+  font-weight: bold;
+  background-color: var(--green-100);
 }
 
 /* contenido de la pagina*/
@@ -180,12 +215,13 @@ textarea.search-bar {
 }
 
 .profile-picture {
-  border-radius: 100px; 
+  border-radius: 100px;
   margin: 5px 15px 5px 5px;
   align-self: center;
 }
 
-.profile-card, .my-friends {
+.profile-card,
+.my-friends {
   width: 20%;
 }
 
@@ -223,15 +259,98 @@ textarea.search-bar {
   padding: 0.3rem 0;
 }
 
+.btn-edit-profile .icon {
+  font-size: 20px;
+}
+
 /* Seccion de feed */
 .center {
   width: 50%;
-  /* background-color: transparent; */
+  background-color: transparent;
   padding: 0;
   row-gap: 1rem;
   overflow-y: auto;
 }
 
+/* crear publicación */
+#post {
+  flex-direction: row;
+  background-color: var(--green-100);
+  height:90px;
+  padding: 0 1rem;
+  row-gap: 1rem;
+}
+
+#post-user-info {
+  display: flex;
+}
+
+#post-pfp {
+  margin: 0px 10px 0px 0px;
+  width: 72px;
+}
+
+#post-user-name {
+  display: none;
+  font-weight: bold;
+  color: var(--grey-800);
+  font-size: var(--H5-mobile);
+  align-self: center;
+}
+
+#post-write-bar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#post-bar {
+  padding: 0.5rem 1em;
+  width: 100%;
+  height: 25px;
+  align-self: center;
+}
+
+#createPost-options {
+  display: none;
+}
+
+#multimedia-upload-btn {
+  background-color: var(--green-200);
+  border: 1px solid var(--green-600);
+  border-radius: 16px;
+  box-sizing: border-box;
+  padding: 0.7rem 1rem;
+  width: 100%;
+  height: 53px;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--green-800);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.createPost-btns-bar {
+  display: flex;
+  column-gap: 1rem;
+}
+
+#save-draft-btn, #post-btn {
+  width: 50%;
+  padding: 0.7rem 0;
+}
+
+#post-btn {
+  background-color: var(--green-500);
+}
+
+/* publicacion */
+.post-info {
+  display: flex;
+  justify-content: space-between;
+}
 
 .user-info {
   display: flex;
@@ -239,11 +358,64 @@ textarea.search-bar {
   text-decoration: none;
 }
 
+.feed .user-info .profile-picture {
+  height: auto;
+  width: 52px;
+}
 
+.post-tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-conf {
+  background-color: transparent;
+  border: none;
+  align-self: baseline;
+  color: var(--grey-400);
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: var(--H5-desktop);
+}
+
+#more {
+  display: none;
+}
+
+#readMore {
+  background-color: transparent;
+  text-decoration: underline;
+  border: none;
+  font-family: var(--font-family);
+  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
+  color: var(--grey-200);
+}
+
+#readMore:hover {
+  color: var(--green-700);
+}
+
+.reaction-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.like-btn, .comments-btn {
+  color: var(--green-600);
+  background-color: transparent;
+  border: none;
+  transition: transform .2s;
+}
+
+.like-btn:hover, .comments-btn:hover {
+  color: var(--green-700);
+  transform: scale(1.1);
+}
 
 /* Seccion de amigos */
 .mrk-border {
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .my-friends .user-info .profile-picture {
@@ -460,11 +632,169 @@ textarea.search-bar {
     max-width: 720px;
   }
 
-  input.search-bar, .profile-card, .my-friends, .navbar-nav {
+  input.search-bar,
+  .profile-card,
+  .my-friends,
+  .navbar-nav {
     display: none;
+  }
+
+  .mobile-navbar {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .center {
+    width: 100%;
   }
 
   .search-friends {
     margin-left: auto;
   }
+}
+
+@media (max-width: 320px) {
+  .nav-link label {
+    display: none;
+  }
+}
+
+/*Estilos de Login*/
+
+.gradient-background {
+  position: absolute;
+  top: -25%;
+  margin: 0 auto;
+  width: 125%;
+  height: 50%;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #004D9B 0%, #00F0CC 100%);
+  z-index: -1;
+  display: flex;
+  justify-content: center;  
+  align-items: flex-end;
+}
+
+.welcome-icon {
+  position: absolute;
+  bottom: -8vh;
+  height: clamp(10rem, 20vw, 13rem);
+}
+
+.login-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  overflow-x: hidden;
+}
+
+.login-h3 {
+  font-size: clamp(var(--H3-mobile), 2vw, var(--H3-desktop));
+  color: var(--green-600);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap:1rem;
+  width: clamp(15rem, 95%, 22rem);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--grey-400);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--grey-800);
+  font-size: clamp(var(--H6-mobile), 2vw, var(--H6-desktop));
+  padding: 1rem;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--green-950);
+}
+
+.text-action  {
+  text-align: right;
+  font-size: clamp(var(--p-mobile), 0.5vw, var(--p-desktop));
+}
+
+.text-action  a {
+  color: var(--green-950);
+  text-decoration: underline;
+}
+.primary-btn {
+  background-color: var(--green-500);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: clamp(var(--H6-mobile), 1vw, var(--H6-desktop));
+  transition: background-color 0.25s ease-in-out;
+}
+
+.primary-btn:hover {
+  background-color: var(--green-700);
+}
+
+.text-action.register,
+.text-action.login {
+  text-align: center;
+}
+
+/*Estilos Register*/
+.fingerprint {
+  position: absolute;
+  bottom: 2rem;
+  height: clamp(5rem, 20vw, 8rem);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: clamp(10rem, 95%, 45rem);
+}
+
+.register-form .input-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .register-form .input-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  
+  .input-group input {
+    padding: 0.75rem;
+    grid-column: span 2;
+  }
+  
+  .input-group input:nth-child(2),
+  .input-group input:nth-child(1) {
+    grid-column: span 1;
+  }
+
+ .register.gradient-background {
+    top: -30%;
+  }
+    
 }

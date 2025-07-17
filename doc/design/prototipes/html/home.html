@@ -11,43 +11,62 @@
     <!-- JavaScript para popup notificaciones -->
     <script src="static/js/notificacion.js" defer></script>
 
+    <!-- JavaScript para publicaciones-->
+    <script src="static/js/post.js"></script>
+
     <!-- Roboto Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
             <button class="search-person">
-                <img class="icon" src="static/img/icons/person_search.svg">  
+                <span class="material-icons-outlined icon">person_search</span>
             </button>
             <input class="search-bar" type="text" placeholder="Buscar amigos">
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
-                        <img class="icon" src="static/img/icons/home.svg">  
+                        <span class="material-icons-outlined icon">home</span>
                         Inicio
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
-                        <img class="icon" src="static/img/icons/person_outline.svg">
+                        <span class="material-icons-outlined icon">person_outline</span>
                         Mi perfil
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link notifications-link" href="#">
-                        <img class="icon" src="static/img/icons/notifications_active.svg">
+                        <span class="material-icons-outlined icon">notifications_active</span>
                         Notificaciones
                     </a>
                 </li>
             </ul>
         <a class="nav-chat {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="HOME.html">
-            <img class="icon" src="static/img/icons/mark_chat_unread.svg">
+            <span class="material-icons-outlined icon">mark_chat_unread</span>
+        </a>
+    </nav>
+
+    <nav class="mobile-navbar">
+        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
+            <span class="material-icons-outlined icon">home</span>
+            <label>Inicio</label>
+        </a>
+        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
+            <span class="material-icons-outlined icon">person_outline</span>
+            <label>Mi perfil</label>
+        </a>
+        <a class="nav-link notifications-link" href="#">
+            <span class="material-icons-outlined icon">notifications_active</span>
+            <label>Menciones</label>
         </a>
     </nav>
 
@@ -57,11 +76,67 @@
             <label class="profile-card-name">Valeria Torres</label>
             <a class="tiny-info">3 amigos</a>
             <p class="profile-desc">Una descripcion corta sobre el usuario que ha iniciado sesion</p>
-            <button class="btn-edit-profile">Editar perfil</button>
+            <button class="btn-edit-profile">
+                <span class="material-icons icon">edit</span>
+                Editar perfil
+            </button>
         </div>
         <div class="center atigram-card">
-            
-
+            <div class="atigram-card" id="post">
+                <div id="post-user-info">
+                    <img class="profile-picture" id="post-pfp" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
+                    <label id="post-user-name">Valeria Torres</label>
+                </div>
+                <div id="post-write-bar">
+                    <textarea class="search-bar" id="post-bar" type="text" placeholder="¿Qué estas pensando?"></textarea>
+                </div>
+                <div id="createPost-options"> 
+                    <div id="add-multimedia">
+                        <label for="multimedia-upload" id="multimedia-upload-btn">
+                            <span class="material-icons icon">image</span>
+                            Añadir Multimedia
+                        </label>
+                        <input id="multimedia-upload" type="file"> 
+                    </div>
+                    <div class="createPost-btns-bar">
+                        <button class="btn-edit-profile" id="save-draft-btn">Guardar Borrador</button>
+                        <button class="btn-edit-profile" id="post-btn">Publicar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="feed atigram-card">
+                <div class="post-info">
+                    <a class="user-info" href="#">
+                        <img class="profile-picture" src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png">
+                        <div class="post-tag">
+                            <span class="tiny-info">Publicado hace 11hrs</span>
+                            <label class="larger-name">Emmanuel Delgado</label>
+                        </div>
+                    </a>
+                    <button class="post-conf">
+                        ⋮
+                    </button>
+                </div>
+                
+                <div class="post-content">
+                    <p class="post-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais
+                        <span id="dots">...</span>
+                        <span id="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada.<br></span>
+                        <button id="readMore" href="#">Ver más</button>
+                    </p>
+                </div>
+                <div class="reaction-bar">
+                    <button class="like-btn">
+                        <span class="material-icons-outlined icon">favorite_border</span>
+                        10mil
+                    </button>
+                    <button class="comments-btn">
+                        <span class="material-icons-outlined icon">chat_bubble</span>
+                        24
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="my-friends atigram-card"> 
             <label class="larger-name">Mis amigos</label>
