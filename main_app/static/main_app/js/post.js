@@ -4,20 +4,23 @@ document.addEventListener("DOMContentLoaded", function () {
     var post = document.getElementById("post");
     var mltmedia_upload = document.getElementById('multimedia-upload');
     
-    btnText.addEventListener('click', function() {
-        var dots = document.getElementById("dots");
-        var moreText = document.getElementById("more");
 
-        if (dots.style.display === "none") {
-            dots.style.display = "inline";
-            btnText.innerHTML = "Ver más";
-            moreText.style.display = "none";
-        } else {
-            dots.style.display = "none";
-            btnText.innerHTML = "Ver menos";
-            moreText.style.display = "inline";
+    if(btnText) {
+        btnText.addEventListener('click', function() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Ver más";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Ver menos";
+                moreText.style.display = "inline";
+            }
+        });
         }
-    });
 
     post_bar.addEventListener('focus', function() {
         console.log('yup');

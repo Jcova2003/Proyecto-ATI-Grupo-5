@@ -4,20 +4,22 @@ document.addEventListener("DOMContentLoaded", function () {
     var post = document.getElementById("post");
     var mltmedia_upload = document.getElementById('multimedia-upload');
     
-    btnText.addEventListener('click', function() {
-        var dots = document.getElementById("dots");
-        var moreText = document.getElementById("more");
+    if(btnText) {
+        btnText.addEventListener('click', function() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
 
-        if (dots.style.display === "none") {
-            dots.style.display = "inline";
-            btnText.innerHTML = "Ver más";
-            moreText.style.display = "none";
-        } else {
-            dots.style.display = "none";
-            btnText.innerHTML = "Ver menos";
-            moreText.style.display = "inline";
-        }
-    });
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Ver más";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Ver menos";
+                moreText.style.display = "inline";
+            }
+        });
+    }
 
     post_bar.addEventListener('focus', function() {
         console.log('yup');
@@ -55,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mltmedia_upload.addEventListener('change', function() {
         var filename = mltmedia_upload.files[0].name;
         var label = document.getElementById('multimedia-upload-btn');
-        
+
         label.innerHTML = filename;
     });
 
