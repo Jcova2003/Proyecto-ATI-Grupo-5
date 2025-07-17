@@ -12,6 +12,8 @@
     <!-- Tu CSS personalizado -->
     <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
 
+    
+
     <!-- Roboto Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +21,9 @@
     
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body data-like-icon="{% static 'img/icons/like.svg' %}" 
+  data-comment-icon="{% static 'img/icons/comment.svg' %}"
+  data-notifications='{{ notificaciones|escapejs }}'>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
@@ -39,7 +43,7 @@
                         <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="{% url 'services' %}">Mi perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}" href="{% url 'blog' %}">Notificaciones</a>
+                        <a class="nav-link notifications-link" href="#">Notificaciones</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Chat</a>
@@ -65,7 +69,16 @@
     
     <!-- Tu JavaScript personalizado -->
     <script src="{% static 'main_app/js/script.js' %}"></script>
-    
+
     {% block extra_js %}{% endblock %}
+    
+    {% block notifications_popup %}{% endblock %}
+
+
+    <!-- JavaScript para Notificaciones -->
+    <script src="{% static 'main_app/js/notificacion.js' %}"></script>
+    
+    
+
 </body>
 </html>
