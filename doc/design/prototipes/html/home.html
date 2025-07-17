@@ -8,6 +8,9 @@
     <!-- Tu CSS personalizado -->
     <link rel="stylesheet" href="static/css/style.css">
 
+    <!-- JavaScript para popup notificaciones -->
+    <script src="static/js/notificacion.js" defer></script>
+
     <!-- Roboto Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
@@ -37,7 +40,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}" href="HOME.html">
+                    <a class="nav-link notifications-link" href="#">
                         <img class="icon" src="static/img/icons/notifications_active.svg">
                         Notificaciones
                     </a>
@@ -86,5 +89,112 @@
         </div>
     </main>
     
+    <div class="notifications-popup" id="notificationsPopup">
+        <div class="popup-header">
+            <h5>Mis Notificaciones</h5>
+            <button class="close-popup">&times;</button>
+        </div>
+        <div class="popup-content">
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Sofía Marcano</strong> le ha dado like a tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Lisangely Goncalves</strong> ha comentado en tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Lisangely Goncalves </strong>ha comentado en tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Lisangely Goncalves</strong> le ha dado like a tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Valeria Ciccolella</strong> le ha dado like a tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Lisangely Goncalves</strong> le ha dado like a tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Valeria Ciccolella</strong> le ha dado like a tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-item">
+                <div class="user-avatar-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s" 
+                        alt="Usuario" 
+                        class="user-avatar">
+                    <div class="notification-icon"></div>
+                </div>
+                <div class="notification-text">
+                    <p><strong>Lisangely Goncalves </strong>le ha dado like a tu publicación.</p>
+                </div>
+                <div class="notification-menu">⋮</div>
+            </div>
+            <div class="notification-footer">
+                <a href="#">Ver más...</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
