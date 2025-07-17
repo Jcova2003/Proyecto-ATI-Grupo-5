@@ -56,6 +56,8 @@ body {
 }
 
 .icon {
+  height: auto;
+  width: 30px;
   vertical-align: middle;
 }
 
@@ -99,11 +101,6 @@ body {
 .search-person {
   background-color: transparent;
   border: none;
-  color: white;
-}
-
-.search-person .icon, .nav-chat .icon {
-  font-size: 30px;
 }
 
 .search-bar {
@@ -156,7 +153,6 @@ textarea.search-bar {
 
 .nav-chat {
   margin-left: 1rem;
-  color: white;
 }
 
 .navbar-nav .nav-link:hover {
@@ -229,158 +225,19 @@ textarea.search-bar {
   padding: 0.3rem 0;
 }
 
-.btn-edit-profile .icon {
-  font-size: 20px;
-}
-
 /* Seccion de feed */
 .center {
   width: 50%;
-  background-color: transparent;
+  /* background-color: transparent; */
   padding: 0;
   row-gap: 1rem;
   overflow-y: auto;
-}
-
-/* crear publicación */
-#post {
-  flex-direction: row;
-  background-color: var(--green-100);
-  height:90px;
-  padding: 0 1rem;
-  row-gap: 1rem;
-}
-
-#post-user-info {
-  display: flex;
-}
-
-#post-pfp {
-  margin: 0px 10px 0px 0px;
-  width: 72px;
-}
-
-#post-user-name {
-  display: none;
-  font-weight: bold;
-  color: var(--grey-800);
-  font-size: var(--H5-mobile);
-  align-self: center;
-}
-
-#post-write-bar {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-#post-bar {
-  padding: 0.5rem 1em;
-  width: 100%;
-  height: 25px;
-  align-self: center;
-}
-
-#createPost-options {
-  display: none;
-}
-
-#multimedia-upload-btn {
-  background-color: var(--green-200);
-  border: 1px solid var(--green-600);
-  border-radius: 16px;
-  box-sizing: border-box;
-  padding: 0.7rem 1rem;
-  width: 100%;
-  height: 53px;
-  display: inline-block;
-  cursor: pointer;
-  color: var(--green-800);
-}
-
-input[type="file"] {
-  display: none;
-}
-
-.createPost-btns-bar {
-  display: flex;
-  column-gap: 1rem;
-}
-
-#save-draft-btn, #post-btn {
-  width: 50%;
-  padding: 0.7rem 0;
-}
-
-#post-btn {
-  background-color: var(--green-500);
-}
-
-/* publicacion */
-.post-info {
-  display: flex;
-  justify-content: space-between;
 }
 
 .user-info {
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
-}
-
-.feed .user-info .profile-picture {
-  height: auto;
-  width: 52px;
-}
-
-.post-tag {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.post-conf {
-  background-color: transparent;
-  border: none;
-  align-self: baseline;
-  color: var(--grey-400);
-  font-family: var(--font-family);
-  font-weight: bold;
-  font-size: var(--H5-desktop);
-}
-
-#more {
-  display: none;
-}
-
-#readMore {
-  background-color: transparent;
-  text-decoration: underline;
-  border: none;
-  font-family: var(--font-family);
-  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
-  color: var(--grey-200);
-}
-
-#readMore:hover {
-  color: var(--green-700);
-}
-
-.reaction-bar {
-  display: flex;
-  justify-content: space-between;
-}
-
-.like-btn, .comments-btn {
-  color: var(--green-600);
-  background-color: transparent;
-  border: none;
-  transition: transform .2s;
-}
-
-.like-btn:hover, .comments-btn:hover {
-  color: var(--green-700);
-  transform: scale(1.1);
 }
 
 /* Seccion de amigos */
@@ -609,10 +466,6 @@ input[type="file"] {
     display: none;
   }
 
-  .center {
-    width: 100%;
-  }
-
   .search-friends {
     margin-left: auto;
   }
@@ -637,7 +490,7 @@ input[type="file"] {
 .welcome-icon {
   position: absolute;
   bottom: -8vh;
-  height: clamp(12rem, 20vw, 15rem);
+  height: clamp(10rem, 20vw, 13rem);
 }
 
 .login-body {
@@ -647,7 +500,6 @@ input[type="file"] {
   justify-content: center;
   height: 100dvh;
   overflow-x: hidden;
-
 }
 
 .login-h3 {
@@ -675,7 +527,7 @@ input[type="file"] {
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--grey-800);
-  font-size: clamp(var(--H6-mobile), 1vw, var(--H6-desktop));
+  font-size: clamp(var(--H6-mobile), 2vw, var(--H6-desktop));
   padding: 1rem;
 }
 
@@ -710,6 +562,51 @@ input[type="file"] {
   background-color: var(--green-700);
 }
 
-.text-action.register {
-  text-align: center;;
+.text-action.register,
+.text-action.login {
+  text-align: center;
+}
+
+/*Estilos Register*/
+.fingerprint {
+  position: absolute;
+  bottom: 2rem;
+  height: clamp(5rem, 20vw, 8rem);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: clamp(10rem, 95%, 45rem);
+}
+
+.register-form .input-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .register-form .input-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  
+  .input-group input {
+    padding: 0.75rem;
+    grid-column: span 2;
+  }
+  
+  .input-group input:nth-child(2),
+  .input-group input:nth-child(1) {
+    grid-column: span 1;
+  }
+
+ .register.gradient-background {
+    top: -30%;
+  }
+    
 }
