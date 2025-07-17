@@ -275,7 +275,7 @@ textarea.search-bar {
   display: none;
 }
 
-.multimedia-upload-btn {
+#multimedia-upload-btn {
   background-color: var(--green-200);
   border: 1px solid var(--green-600);
   border-radius: 16px;
