@@ -11,6 +11,9 @@
     <!-- JavaScript para popup notificaciones -->
     <script src="static/js/notificacion.js" defer></script>
 
+    <!-- JavaScript para publicaciones-->
+    <script src="static/js/post.js"></script>
+
     <!-- Roboto Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
@@ -60,8 +63,61 @@
             <button class="btn-edit-profile">Editar perfil</button>
         </div>
         <div class="center atigram-card">
-            
-
+            <div class="atigram-card" id="post">
+                <div id="post-user-info">
+                    <img class="profile-picture" id="post-pfp" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
+                    <label id="post-user-name">Valeria Torres</label>
+                </div>
+                <div id="post-write-bar">
+                    <textarea class="search-bar" id="post-bar" type="text" placeholder="¿Qué estas pensando?"></textarea>
+                </div>
+                <div id="createPost-options"> 
+                    <div id="add-multimedia">
+                        <label for="multimedia-upload" class="multimedia-upload-btn">
+                            <img src="static/img/icons/image.svg" class="icon">
+                            Añadir Multimedia
+                        </label>
+                        <input id="multimedia-upload" type="file"> 
+                    </div>
+                    <div class="createPost-btns-bar">
+                        <button class="btn-edit-profile" id="save-draft-btn">Guardar Borrador</button>
+                        <button class="btn-edit-profile" id="post-btn">Publicar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="feed atigram-card">
+                <div class="post-info">
+                    <a class="user-info" href="#">
+                        <img class="profile-picture" src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png">
+                        <div class="post-tag">
+                            <span class="tiny-info">Publicado hace 11hrs</span>
+                            <label class="larger-name">Emmanuel Delgado</label>
+                        </div>
+                    </a>
+                    <button class="post-conf">
+                        ⋮
+                    </button>
+                </div>
+                
+                <div class="post-content">
+                    <p class="post-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais
+                        <span id="dots">...</span>
+                        <span id="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada.<br></span>
+                        <button id="readMore" href="#">Ver más</button>
+                    </p>
+                </div>
+                <div class="reaction-bar">
+                    <button class="like-btn">
+                        <img class="icon" src="static/img/icons/no_liked.svg">
+                        10mil
+                    </button>
+                    <button class="comments-btn">
+                        <img class="icon" src="static/img/icons/chat_bubble.svg">
+                        24
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="my-friends atigram-card"> 
             <label class="larger-name">Mis amigos</label>
