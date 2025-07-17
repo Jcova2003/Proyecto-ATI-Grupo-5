@@ -55,6 +55,21 @@
         </a>
     </nav>
 
+    <nav class="mobile-navbar">
+        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="HOME.html">
+            <span class="material-icons-outlined icon">home</span>
+            <label>Inicio</label>
+        </a>
+        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="HOME.html">
+            <span class="material-icons-outlined icon">person_outline</span>
+            <label>Mi perfil</label>
+        </a>
+        <a class="nav-link notifications-link" href="#">
+            <span class="material-icons-outlined icon">notifications_active</span>
+            <label>Menciones</label>
+        </a>
+    </nav>
+
     <main class="home-content">
         <div class="profile-card atigram-card">
             <img class="profile-picture" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">

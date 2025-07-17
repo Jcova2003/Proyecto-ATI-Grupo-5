@@ -159,6 +159,34 @@ textarea.search-bar {
   color: #fff !important;
 }
 
+/* Mobile navbar */
+.mobile-navbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  /* mask: linear-gradient(transparent, black, black); */
+  backdrop-filter: blur(3px);
+  height: 65px;
+}
+
+.mobile-navbar .nav-link {
+  border: 1px solid var(--grey-200);
+  border-radius: 25px;
+  color: var(--grey-200);
+  font-weight: 500;
+  font-size: var(--p-mobile);
+  background-color: var(--green-50);
+}
+
+.mobile-navbar .nav-link:hover {
+  border: 1px solid var(--green-800);
+  color: var(--green-800);
+  font-weight: bold;
+  background-color: var(--green-100);
+}
+
 /* contenido de la pagina*/
 .atigram-card {
   display: flex;
@@ -466,8 +494,23 @@ textarea.search-bar {
     display: none;
   }
 
+  .mobile-navbar {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .center {
+    width: 100%;
+  }
+
   .search-friends {
     margin-left: auto;
+  }
+}
+
+@media (max-width: 320px) {
+  .nav-link label {
+    display: none;
   }
 }
 
