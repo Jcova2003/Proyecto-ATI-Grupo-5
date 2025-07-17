@@ -7,8 +7,14 @@
         {% if notificaciones %}
             {% for noti in notificaciones %}
                 <div class="notification-item">
-                    <img src="{{ noti.avatar_url }}" alt="Avatar" class="user-avatar">
-                    <p><strong>{{ noti.usuario }}</strong> {{ noti.mensaje }}</p>
+                    <div class="user-avatar-container">
+                        <img src="{{ noti.avatar_url }}" alt="Usuario" class="user-avatar">
+                        <div class="notification-icon"></div>
+                    </div>
+                    <div class="notification-text">
+                        <p><strong>{{ noti.usuario }}</strong> {{ noti.mensaje }}</p>
+                    </div>
+                    <div class="notification-menu">⋮</div>
                 </div>
             {% endfor %}
         {% else %}

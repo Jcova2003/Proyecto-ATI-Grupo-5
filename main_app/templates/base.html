@@ -21,9 +21,7 @@
     
     {% block extra_css %}{% endblock %}
 </head>
-<body data-like-icon="{% static 'img/icons/like.svg' %}" 
-  data-comment-icon="{% static 'img/icons/comment.svg' %}"
-  data-notifications='{{ notificaciones|escapejs }}'>
+<body data-like-icon="{% static 'img/icons/like.svg' %}" data-comment-icon="{% static 'img/icons/comment.svg' %}">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>

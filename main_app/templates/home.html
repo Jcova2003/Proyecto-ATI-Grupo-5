@@ -46,10 +46,13 @@
     </div>
 </div>
 
+
+    {% include 'notification_popup.html' with notificaciones=notificaciones %}
+
+
+
 {% endblock %}
 
-{% block notifications_popup %}
-    {% include 'notification_popup.html' %}
-{% endblock %}
+
 
 

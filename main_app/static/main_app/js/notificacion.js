@@ -2,11 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const notificationsLink = document.querySelector('.notifications-link');
     const popup = document.getElementById('notificationsPopup');
 
+    if (!notificationsLink || !popup) return;
+
     const closeBtn = popup.querySelector('.close-popup');
-    closeBtn.addEventListener('click', function () {
-        popup.style.display = 'none';
-        notificationsLink.classList.remove('active');
-    });
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            popup.style.display = 'none';
+            notificationsLink.classList.remove('active');
+        });
+    }
 
     notificationsLink.addEventListener('click', function (e) {
         e.preventDefault();
@@ -26,16 +30,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     window.addEventListener('click', function (e) {
-        if (!popup.contains(e.target) && e.target !== notificationsLink && !notificationsLink.contains(e.target)) {
+        if (!popup.contains(e.target) &&
+            e.target !== notificationsLink &&
+            !notificationsLink.contains(e.target)
+        ) {
             popup.style.display = 'none';
             notificationsLink.classList.remove('active');
         }
     });
 
-    // Opcional: Asignar íconos a las notificaciones ya renderizadas en el HTML
+    // ❌ Elimina esta sección si tu HTML no contiene estos elementos:
+    /*
     document.querySelectorAll('.notification-item').forEach(item => {
-        const text = item.querySelector('.notification-text').textContent.toLowerCase();
+        const textEl = item.querySelector('.notification-text');
         const iconContainer = item.querySelector('.notification-icon');
+
+        if (!textEl || !iconContainer) return;
+
+        const text = textEl.textContent.toLowerCase();
         iconContainer.innerHTML = '';
 
         const iconImg = document.createElement('img');
@@ -49,12 +61,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
         iconContainer.appendChild(iconImg);
     });
+    */
 
-    // Manejar menú clickeable de cada notificación
+    // ✅ Menú opcional dentro de la notificación
     document.querySelectorAll('.notification-menu').forEach(menu => {
         menu.addEventListener('click', function (e) {
             e.stopPropagation();
             console.log('Menú de notificación clickeado');
         });
     });
+    document.querySelectorAll('.notification-item').forEach(item => {
+    const text = item.querySelector('.notification-text').textContent.toLowerCase();
+    const iconContainer = item.querySelector('.notification-icon');
+    if (!iconContainer) return;
+    iconContainer.innerHTML = '';
+
+    const iconImg = document.createElement('img');
+    iconImg.alt = 'Tipo de notificación';
+
+    if (text.includes('like') || text.includes('gusta')) {
+        iconImg.src = document.body.dataset.likeIcon;
+    } else if (text.includes('coment') || text.includes('comment')) {
+        iconImg.src = document.body.dataset.commentIcon;
+    } else {
+        return; // No icon to add
+    }
+
+    iconContainer.appendChild(iconImg);
+});
 });
