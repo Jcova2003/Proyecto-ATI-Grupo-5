@@ -2,22 +2,37 @@
 {% load static %}
 
 {% block feed %}
-<div class="feed atigram-card">
-    <div class="user-info">
-        <img class="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s">
-        <div class="post-tag">
-            <span class="tiny-info">Publicado hace 11hrs</span>
-            <label class="larger-name">Valeria Ciccolella</label>
-        </div>
+ <div class="feed atigram-card">
+    <div class="post-info">
+        <a class="user-info" href="#">
+            <img class="profile-picture" src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png">
+            <div class="post-tag">
+                <span class="tiny-info">Publicado hace 11hrs</span>
+                <label class="larger-name">Emmanuel Delgado</label>
+            </div>
+        </a>
+        <button class="post-conf">
+            ⋮
+        </button>
     </div>
+    
     <div class="post-content">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais... Ver más
+        <p class="post-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais
+            <span id="dots">...</span>
+            <span id="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada.<br></span>
+            <button id="readMore" href="#">Ver más</button>
         </p>
     </div>
     <div class="reaction-bar">
-        <button>10mil</button>
-        <button>24</button>
+        <button class="like-btn">
+            <span class="material-icons-outlined icon">favorite_border</span>
+            10mil
+        </button>
+        <button class="comments-btn">
+            <span class="material-icons-outlined icon">chat_bubble</span>
+            24
+        </button>
     </div>
 </div>
 
