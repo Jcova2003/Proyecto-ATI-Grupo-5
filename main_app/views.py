@@ -1,12 +1,7 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
-import logging
 
-logger = logging.getLogger(__name__)
-
-@login_required
 def home(request):
     try:
         notificaciones = [
@@ -122,14 +117,12 @@ def notifications(request):
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
 
-@login_required
 def chat_with_friend(request):
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
     context = {
         "friend_name": 'Belén Cruz',
         # Puedes agregar más datos que necesites pasar a la plantilla
     }
-    logger.info(f"{request.user.username} accedió al chat con Belén Cruz.")
     return render(request, "chatTemplate.html", context)
 
 
