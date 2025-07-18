@@ -148,10 +148,10 @@ def notifications(request):
         return HttpResponse(f"Error en notifications: {str(e)}")
 
 
-def chat_with_friend(request, friend_name):
+def chat_with_friend(request):
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
     context = {
-        "friend_name": friend_name,
+        "friend_name": 'Belén Cruz',
         # Puedes agregar más datos que necesites pasar a la plantilla
     }
     return render(request, "chatTemplate.html", context)
