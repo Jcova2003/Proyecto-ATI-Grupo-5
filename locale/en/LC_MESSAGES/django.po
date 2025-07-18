@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-17 20:04-0500\n"
+"POT-Creation-Date: 2025-07-18 03:06+0000\n"
 "PO-Revision-Date: 2025-07-18 15:00-0500\n"
 "Last-Translator: You <your@email.com>\n"
 "Language-Team: Spanish <es@translate.org>\n"
@@ -37,49 +37,73 @@ msgstr "Notifications"
 msgid "Menciones"
 msgstr "Mentions"
 
-#: main_app/templates/chatTemplate.html:9
-msgid "Volver"
-msgstr "Back"
-
-#: main_app/templates/chatTemplate.html:14 main_app/templates/home.html:67
-msgid "Activo hace 10mins"
-msgstr "Active 10 minutes ago"
-
-#: main_app/templates/chatTemplate.html:33
-msgid "Mensaje"
-msgstr "Message"
-
-#: main_app/templates/home.html:15
-msgid "amigos"
-msgstr "friends"
-
-#: main_app/templates/home.html:19
-msgid "Editar perfil"
-msgstr "Edit profile"
-
-#: main_app/templates/home.html:29
-msgid "¿Qué estas pensando?"
-msgstr "What's on your mind?"
-
-#: main_app/templates/home.html:35
-msgid "Añadir Multimedia"
-msgstr "Add Media"
-
-#: main_app/templates/home.html:40
-msgid "Guardar Borrador"
-msgstr "Save Draft"
-
-#: main_app/templates/home.html:41
-msgid "Publicar"
-msgstr "Publish"
-
-#: main_app/templates/home.html:48
+#: main_app/templates/base.html:77
 msgid "Mis amigos"
 msgstr "My friends"
 
-#: main_app/templates/home.html:53 main_app/templates/home.html:60
+#: main_app/templates/base.html:82 main_app/templates/base.html:89
 msgid "Activo ahora"
 msgstr "Active now"
+
+#: main_app/templates/base.html:96 main_app/templates/chatTemplate.html:17
+msgid "Activo hace 10mins"
+msgstr "Active 10 minutes ago"
+
+#: main_app/templates/chatTemplate.html:11
+msgid "Volver"
+msgstr "Back"
+
+#: main_app/templates/chatTemplate.html:46
+msgid "Mensaje"
+msgstr "Message"
+
+#: main_app/templates/home.html:16
+msgid "amigos"
+msgstr "friends"
+
+#: main_app/templates/home.html:20
+msgid "Editar perfil"
+msgstr "Edit profile"
+
+#: main_app/templates/home.html:30
+msgid "¿Qué estas pensando?"
+msgstr "What's on your mind?"
+
+#: main_app/templates/home.html:36
+msgid "Añadir Multimedia"
+msgstr "Add Media"
+
+#: main_app/templates/home.html:41
+msgid "Guardar Borrador"
+msgstr "Save Draft"
+
+#: main_app/templates/home.html:42
+msgid "Publicar"
+msgstr "Publish"
+
+#: main_app/templates/login.html:27
+msgid "Inicia Sesión"
+msgstr "Log In"
+
+#: main_app/templates/login.html:30 main_app/templates/register.html:32
+msgid "Usuario"
+msgstr "User"
+
+#: main_app/templates/login.html:31 main_app/templates/register.html:34
+msgid "Contraseña"
+msgstr "Password"
+
+#: main_app/templates/login.html:35
+msgid "¿Olvidaste tu contraseña?"
+msgstr "Forgot your password?"
+
+#: main_app/templates/login.html:38
+msgid "Iniciar sesión"
+msgstr "Log In"
+
+#: main_app/templates/login.html:41
+msgid "¿No tienes cuenta? Regístrate aquí."
+msgstr "Don't have an account? Register here."
 
 #: main_app/templates/notification_popup.html:4
 #: main_app/templates/notificationsTemplate.html:6
@@ -98,3 +122,31 @@ msgstr "See more..."
 #: main_app/templates/notificationsTemplate.html:24
 msgid "No tienes notificaciones."
 msgstr "You have no notifications."
+
+#: main_app/templates/register.html:28
+msgid "Registrate"
+msgstr "Register"
+
+#: main_app/templates/register.html:33
+msgid "Apellido"
+msgstr "Last Name"
+
+#: main_app/templates/register.html:35
+msgid "Confirmar Contraseña"
+msgstr "Confirm Password"
+
+#: main_app/templates/register.html:36
+msgid "Correo"
+msgstr "Email"
+
+#: main_app/templates/register.html:37
+msgid "Teléfono"
+msgstr "Phone"
+
+#: main_app/templates/register.html:40
+msgid "Registrarme"
+msgstr "Register"
+
+#: main_app/templates/register.html:43
+msgid "¿Ya tienes cuenta? Inicia sesión."
+msgstr "Already have an account? Log in."

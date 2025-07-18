@@ -125,6 +125,17 @@ def chat_with_friend(request):
     }
     return render(request, "chatTemplate.html", context)
 
+def login(request):
+    try:
+        return render(request, "login.html")
+    except Exception as e:
+        return HttpResponse(f"Error en login: {str(e)}")
+
+def register(request):
+    try:
+        return render(request, "register.html")
+    except Exception as e:
+        return HttpResponse(f"Error en register: {str(e)}")
 
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
