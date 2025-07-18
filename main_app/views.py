@@ -2,7 +2,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
 def home(request):
     try:
         notificaciones = [
@@ -27,35 +26,6 @@ def home(request):
         })
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
-
-
-def about(request):
-    try:
-        return render(request, "about.html")
-    except Exception as e:
-        return HttpResponse(f"Error en about: {str(e)}")
-
-
-def services(request):
-    try:
-        return render(request, "services.html")
-    except Exception as e:
-        return HttpResponse(f"Error en services: {str(e)}")
-
-
-def blog(request):
-    try:
-        return render(request, "blog.html")
-    except Exception as e:
-        return HttpResponse(f"Error en blog: {str(e)}")
-
-
-def contact(request):
-    try:
-        return render(request, "contact.html")
-    except Exception as e:
-        return HttpResponse(f"Error en contact: {str(e)}")
-
 
 def notifications(request):
     try:
@@ -146,7 +116,6 @@ def notifications(request):
         )
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
-
 
 def chat_with_friend(request):
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
