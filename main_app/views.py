@@ -1,8 +1,12 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+import logging
 
+logger = logging.getLogger(__name__)
 
+@login_required
 def home(request):
     try:
         notificaciones = [
@@ -27,47 +31,6 @@ def home(request):
         })
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
-
-
-def about(request):
-    try:
-        return render(request, "about.html")
-    except Exception as e:
-        return HttpResponse(f"Error en about: {str(e)}")
-
-def login(request):
-    try:
-        return render(request, "login.html")
-    except Exception as e:
-        return HttpResponse(f"Error en login: {str(e)}")
-
-def register(request):
-    try:
-        return render(request, "register.html")
-    except Exception as e:
-        return HttpResponse(f"Error en register: {str(e)}")
-
-
-def services(request):
-    try:
-        return render(request, "services.html")
-    except Exception as e:
-        return HttpResponse(f"Error en services: {str(e)}")
-
-
-def blog(request):
-    try:
-        return render(request, "blog.html")
-    except Exception as e:
-        return HttpResponse(f"Error en blog: {str(e)}")
-
-
-def contact(request):
-    try:
-        return render(request, "contact.html")
-    except Exception as e:
-        return HttpResponse(f"Error en contact: {str(e)}")
-
 
 def notifications(request):
     try:
@@ -159,13 +122,14 @@ def notifications(request):
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
 
-
+@login_required
 def chat_with_friend(request):
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
     context = {
         "friend_name": 'Belén Cruz',
         # Puedes agregar más datos que necesites pasar a la plantilla
     }
+    logger.info(f"{request.user.username} accedió al chat con Belén Cruz.")
     return render(request, "chatTemplate.html", context)
 
 

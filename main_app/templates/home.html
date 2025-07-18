@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Inicio - {{ block.super }}{% endblock %}
 
@@ -11,11 +12,11 @@
 <div class="profile-card atigram-card">
             <img class="profile-picture" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
             <label class="profile-card-name">Valeria Torres</label>
-            <a class="tiny-info">3 amigos</a>
+            <a class="tiny-info">3 {% trans "amigos" %}</a>
             <p class="profile-desc">Una descripcion corta sobre el usuario que ha iniciado sesion</p>
             <button class="btn-edit-profile">
                 <span class="material-icons icon">edit</span>
-                Editar perfil
+                {% trans "Editar perfil" %}
             </button>
         </div>
         <div class="center atigram-card">
@@ -25,45 +26,45 @@
                     <label id="post-user-name">Valeria Torres</label>
                 </div>
                 <div id="post-write-bar">
-                    <textarea class="search-bar" id="post-bar" type="text" placeholder="¿Qué estas pensando?"></textarea>
+                    <textarea class="search-bar" id="post-bar" type="text" placeholder="{% trans "¿Qué estas pensando?" %}"></textarea>
                 </div>
                 <div id="createPost-options"> 
                     <div id="add-multimedia">
                         <label for="multimedia-upload" id="multimedia-upload-btn">
                             <span class="material-icons icon">image</span>
-                            Añadir Multimedia
+                            {% trans "Añadir Multimedia" %}
                         </label>
                         <input id="multimedia-upload" type="file"> 
                     </div>
                     <div class="createPost-btns-bar">
-                        <button class="btn-edit-profile" id="save-draft-btn">Guardar Borrador</button>
-                        <button class="btn-edit-profile" id="post-btn">Publicar</button>
+                        <button class="btn-edit-profile" id="save-draft-btn">{% trans "Guardar Borrador" %}</button>
+                        <button class="btn-edit-profile" id="post-btn">{% trans "Publicar" %}</button>
                     </div>
                 </div>
             </div>
             {% include 'feedTemplate.html' %}
         </div>
         <div class="my-friends atigram-card"> 
-            <label class="larger-name">Mis amigos</label>
+            <label class="larger-name">{% trans "Mis amigos" %}</label>
             <div class="user-info mrk-border">
                 <img class="profile-picture" src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png">
                 <div class="friend-tag">
                     <label class="tiny-name">Emmanuel Delgado</label>
-                    <a class="tiny-info">Activo ahora</a>
+                    <a class="tiny-info">{% trans "Activo ahora" %}</a>
                 </div>
             </div>
             <div class="user-info mrk-border">
                 <img class="profile-picture" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D">
                 <div class="friend-tag">
                     <label class="tiny-name">Isabel Cárdenas</label>
-                    <a class="tiny-info">Activo ahora</a>
+                    <a class="tiny-info">{% trans "Activo ahora" %}</a>
                 </div>
             </div>
             <div class="user-info mrk-border">
                 <img class="profile-picture" src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg">
                 <div class="friend-tag">
                     <label class="tiny-name">Belén Cruz</label>
-                    <a class="tiny-info">Activo hace 10mins</a>
+                    <a class="tiny-info">{% trans "Activo hace 10mins" %}</a>
                 </div>
             </div>
         </div>

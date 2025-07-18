@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-17 20:04-0500\n"
+"PO-Revision-Date: 2025-07-18 15:00-0500\n"
+"Last-Translator: You <your@email.com>\n"
+"Language-Team: Spanish <es@translate.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main_app/templates/base.html:31
+msgid "Buscar amigos"
+msgstr "Search friends"
+
+#: main_app/templates/base.html:37 main_app/templates/base.html:61
+msgid "Inicio"
+msgstr "Home"
+
+#: main_app/templates/base.html:43 main_app/templates/base.html:65
+msgid "Mi perfil"
+msgstr "My profile"
+
+#: main_app/templates/base.html:49
+msgid "Notificaciones"
+msgstr "Notifications"
+
+#: main_app/templates/base.html:69
+msgid "Menciones"
+msgstr "Mentions"
+
+#: main_app/templates/chatTemplate.html:9
+msgid "Volver"
+msgstr "Back"
+
+#: main_app/templates/chatTemplate.html:14 main_app/templates/home.html:67
+msgid "Activo hace 10mins"
+msgstr "Active 10 minutes ago"
+
+#: main_app/templates/chatTemplate.html:33
+msgid "Mensaje"
+msgstr "Message"
+
+#: main_app/templates/home.html:15
+msgid "amigos"
+msgstr "friends"
+
+#: main_app/templates/home.html:19
+msgid "Editar perfil"
+msgstr "Edit profile"
+
+#: main_app/templates/home.html:29
+msgid "¿Qué estas pensando?"
+msgstr "What's on your mind?"
+
+#: main_app/templates/home.html:35
+msgid "Añadir Multimedia"
+msgstr "Add Media"
+
+#: main_app/templates/home.html:40
+msgid "Guardar Borrador"
+msgstr "Save Draft"
+
+#: main_app/templates/home.html:41
+msgid "Publicar"
+msgstr "Publish"
+
+#: main_app/templates/home.html:48
+msgid "Mis amigos"
+msgstr "My friends"
+
+#: main_app/templates/home.html:53 main_app/templates/home.html:60
+msgid "Activo ahora"
+msgstr "Active now"
+
+#: main_app/templates/notification_popup.html:4
+#: main_app/templates/notificationsTemplate.html:6
+msgid "Mis Notificaciones"
+msgstr "My Notifications"
+
+#: main_app/templates/notification_popup.html:22
+msgid "No hay notificaciones disponibles."
+msgstr "No notifications available."
+
+#: main_app/templates/notification_popup.html:26
+#: main_app/templates/notificationsTemplate.html:29
+msgid "Ver más..."
+msgstr "See more..."
+
+#: main_app/templates/notificationsTemplate.html:24
+msgid "No tienes notificaciones."
+msgstr "You have no notifications."
