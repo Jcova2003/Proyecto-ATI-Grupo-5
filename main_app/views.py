@@ -35,6 +35,18 @@ def about(request):
     except Exception as e:
         return HttpResponse(f"Error en about: {str(e)}")
 
+def login(request):
+    try:
+        return render(request, "login.html")
+    except Exception as e:
+        return HttpResponse(f"Error en login: {str(e)}")
+
+def register(request):
+    try:
+        return render(request, "register.html")
+    except Exception as e:
+        return HttpResponse(f"Error en register: {str(e)}")
+
 
 def services(request):
     try:
