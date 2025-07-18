@@ -1,17 +1,17 @@
 {% extends 'base.html' %} 
 {% load static %} 
-
+{% load i18n %}
 {% block title %}Chat con {{ friend_name }} - {{ block.super }}{% endblock %} 
 
 {% block content %}
 <div class="chat-container">
   <div class="chat-header">
-    <a href="#" class="back-link">&larr; Volver</a>
+    <a href="#" class="back-link">&larr;{% trans "Volver" %}</a>
     <div class="user-info">
       <img src="/static/main_app/images/user-avatar.png" alt="Avatar" class="user-avatar" />
       <div class="user-details">
         <strong>{{ friend_name }}</strong>
-        <span class="user-status">Activo hace 10mins</span>
+        <span class="user-status">{% trans "Activo hace 10mins" %}</span>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
     </div>
   </div>
   <form class="chat-input-form">
-    <input type="text" placeholder="Mensaje" class="chat-input" autocomplete="off" />
+    <input type="text" placeholder="{% trans "Mensaje" %}" class="chat-input" autocomplete="off" />
   </form>
 </div>
 

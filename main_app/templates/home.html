@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Inicio - {{ block.super }}{% endblock %}
 
@@ -12,11 +13,11 @@
     <div class="profile-card atigram-card">
         <img class="profile-picture" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
         <label class="profile-card-name">Valeria Torres</label>
-        <a class="tiny-info">3 amigos</a>
+        <a class="tiny-info">3 {% trans "amigos" %}</a>
         <p class="profile-desc">Una descripcion corta sobre el usuario que ha iniciado sesion</p>
         <button class="btn-edit-profile">
             <span class="material-icons icon">edit</span>
-            Editar perfil
+            {% trans "Editar perfil" %}
         </button>
     </div>
     <div class="center atigram-card">
@@ -26,19 +27,19 @@
                 <label id="post-user-name">Valeria Torres</label>
             </div>
             <div id="post-write-bar">
-                <textarea class="search-bar" id="post-bar" type="text" placeholder="¿Qué estas pensando?"></textarea>
+                <textarea class="search-bar" id="post-bar" type="text" placeholder="{% trans "¿Qué estas pensando?" %}"></textarea>
             </div>
             <div id="createPost-options"> 
                 <div id="add-multimedia">
                     <label for="multimedia-upload" id="multimedia-upload-btn">
                         <span class="material-icons icon">image</span>
-                        Añadir Multimedia
+                        {% trans "Añadir Multimedia" %}
                     </label>
                     <input id="multimedia-upload" type="file"> 
                 </div>
                 <div class="createPost-btns-bar">
-                    <button class="btn-edit-profile" id="save-draft-btn">Guardar Borrador</button>
-                    <button class="btn-edit-profile" id="post-btn">Publicar</button>
+                    <button class="btn-edit-profile" id="save-draft-btn">{% trans "Guardar Borrador" %}</button>
+                    <button class="btn-edit-profile" id="post-btn">{% trans "Publicar" %}</button>
                 </div>
             </div>
         </div>

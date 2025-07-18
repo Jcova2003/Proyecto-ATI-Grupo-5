@@ -1,8 +1,9 @@
 {% extends 'base.html' %} {% load static %} {% block title %}Notificaciones - {{block.super }}{% endblock %} {% block content %}
+{% load i18n %}
 
 <div class="notifications-container atigram-card">
   <div class="notifications-content">
-    <h2>Mis Notificaciones</h2>
+    <h2>{% trans "Mis Notificaciones" %}</h2>
 
     {% for notification in notifications %}
     <div class="notification-item">
@@ -20,12 +21,12 @@
     </div>
     {% empty %}
     <div class="empty-notifications">
-      <p>No tienes notificaciones.</p>
+      <p>{% trans "No tienes notificaciones." %}</p>
     </div>
     {% endfor %}
 
     <div class="ver-mas">
-        <a href="?count={{ count|add:'5' }}">Ver más...</a>
+        <a href="?count={{ count|add:'5' }}">{% trans "Ver más..." %}</a>
     </div>
   </div>
 </div>
