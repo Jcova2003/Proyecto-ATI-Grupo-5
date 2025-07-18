@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -27,25 +28,25 @@
             <button class="search-person">
                 <span class="material-icons-outlined icon">person_search</span>
             </button>
-            <input class="search-bar" type="text" placeholder="Buscar amigos">
+            <input class="search-bar" type="text" placeholder="{% trans "Buscar amigos" %}">
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="home">
                         <span class="material-icons-outlined icon">home</span>
-                        Inicio
+                        {% trans "Inicio" %}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
                         <span class="material-icons-outlined icon">person_outline</span>
-                        Mi perfil
+                        {% trans "Mi perfil" %}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link notifications-link" href="#">
                         <span class="material-icons-outlined icon">notifications_active</span>
-                        Notificaciones
+                        {% trans "Notificaciones" %}
                     </a>
                 </li>
             </ul>
@@ -57,15 +58,15 @@
     <nav class="mobile-navbar">
         <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="home">
             <span class="material-icons-outlined icon">home</span>
-            <label>Inicio</label>
+            <label>{% trans "Inicio" %}</label>
         </a>
         <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
             <span class="material-icons-outlined icon">person_outline</span>
-            <label>Mi perfil</label>
+            <label>{% trans "Mi perfil" %}</label>
         </a>
         <a class="nav-link notifications-link" href="#">
             <span class="material-icons-outlined icon">notifications_active</span>
-            <label>Menciones</label>
+            <label>{% trans "Menciones" %}</label>
         </a>
     </nav>
 

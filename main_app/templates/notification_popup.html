@@ -1,6 +1,7 @@
+{% load i18n %}
 <div class="notifications-popup" id="notificationsPopup">
     <div class="popup-header">
-        <h5>Mis Notificaciones</h5>
+        <h5>{% trans "Mis Notificaciones" %}</h5>
         <button class="close-popup">&times;</button>
     </div>
     <div class="popup-content">
@@ -18,11 +19,11 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p>No hay notificaciones disponibles.</p>
+            <p>{% trans "No hay notificaciones disponibles." %}</p>
         {% endif %}
     </div>
     <div class="notification-footer">
-        <a href="#">Ver más...</a>
+        <a href="#">{% trans "Ver más..." %}</a>
     </div>
 </div>
 
