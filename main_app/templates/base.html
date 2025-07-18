@@ -56,7 +56,7 @@
     </nav>
 
     <nav class="mobile-navbar">
-        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="home">
+        <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
             <span class="material-icons-outlined icon">home</span>
             <label>{% trans "Inicio" %}</label>
         </a>

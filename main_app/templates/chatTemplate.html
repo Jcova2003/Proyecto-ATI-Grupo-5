@@ -6,9 +6,12 @@
 {% block content %}
 <div class="chat-container">
   <div class="chat-header">
-    <a href="#" class="back-link">&larr;{% trans "Volver" %}</a>
+    <a href="{% url 'home' %}" class="back-link">
+      <span class="material-icons-outlined icon">arrow_back</span>
+      {% trans "Volver" %}
+    </a>
     <div class="user-info">
-      <img src="/static/main_app/images/user-avatar.png" alt="Avatar" class="user-avatar" />
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="user-avatar" />
       <div class="user-details">
         <strong>{{ friend_name }}</strong>
         <span class="user-status">{% trans "Activo hace 10mins" %}</span>
@@ -16,17 +19,27 @@
     </div>
   </div>
   <div class="chat-messages">
-    <div class="message received">
-      <img src="/static/main_app/images/user-avatar.png" alt="Avatar" class="message-avatar" />
-      <div class="message-text">Hola!!</div>
+    <div class="message-cluster">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+      <div class="message received">Hola!!</div>
     </div>
     <div class="message sent">Hola {{ friend_name }}, ¿Cómo estás?</div>
-    <div class="message received">Quería preguntarte cómo vas con las pantallas</div>
-    <div class="message received">Recuerda que tenemos que mandarlas hoy apurateeeeeeeeeee</div>
+    <div class="message-cluster">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+      <div class="messages">
+        <div class="message received">Quería preguntarte cómo vas con las pantallas</div>
+        <div class="message received">Recuerda que tenemos que mandarlas hoy apurateeeeeeeeeee</div>
+      </div>
+    </div>
     <div class="message sent">Ya las estoy mandando!</div>
-    <div class="message received">TEST MENSAJE MUY LARGO</div>
-    <div class="message received">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais...
+    <div class="message-cluster">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+      <div class="messages">
+        <div class="message received">TEST MENSAJE MUY LARGO</div>
+        <div class="message received">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais...
+        </div>
+      </div>
     </div>
   </div>
   <form class="chat-input-form">
@@ -45,7 +58,7 @@
   padding: 10px 15px;
   border-bottom: 1px solid var(--grey-100);
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 15px;
 }
 .back-link {
@@ -58,6 +71,17 @@
   align-items: center;
   gap: 10px;
 }
+.message-cluster {
+  display: flex;
+  gap: 10px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .user-avatar {
   width: 40px;
   height: 40px;
@@ -65,6 +89,8 @@
   object-fit: cover;
 }
 .user-details strong {
+  display: flex;
+  flex-direction: column;
   font-weight: 700;
   font-size: 18px;
   color: var(--grey-800);
@@ -127,6 +153,10 @@
 @media (max-width: 992px) {
   .chat-container {
     width: 100%;
+  }
+
+  .mobile-navbar {
+    display: none;
   }
 }
 </style>
