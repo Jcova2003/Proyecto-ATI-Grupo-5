@@ -17,8 +17,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     {% block extra_css %}{% endblock %}
-</head>
-<body>
+  </head>
+  <body body data-like-icon="{% static 'img/icons/like.svg' %}" 
+  data-comment-icon="{% static 'img/icons/comment.svg' %}"
+  data-notifications='{{ notificaciones|escapejs }}'>
     <nav class="navbar">
         <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
@@ -72,12 +74,18 @@
         {% endblock %}
     </main>
 
-    <!-- JavaScript Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- Tu JavaScript personalizado -->
     <script src="{% static 'main_app/js/script.js' %}"></script>
 
     {% block extra_js %}{% endblock %}
-  </body>
+    
+    {% block notifications_popup %}{% endblock %}
+
+
+    <!-- JavaScript para Notificaciones -->
+    <script src="{% static 'main_app/js/notificacion.js' %}"></script>
+    
+    
+
+</body>
 </html>

@@ -85,6 +85,12 @@ TIME_ZONE = 'America/Bogota'
 USE_I18N = True
 USE_TZ = True
 
+LANGUAGES = [
+    ('es', 'Spanish'),
+    ('en', 'English'),
+    ('pt', 'Portuguese'),
+]
+
 # Archivos estáticos
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
