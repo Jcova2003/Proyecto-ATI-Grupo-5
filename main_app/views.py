@@ -1,7 +1,7 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from main_app.models import Usuario
 def home(request):
     try:
         notificaciones = [
@@ -21,8 +21,55 @@ def home(request):
                 "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
             },
         ]
+        usuario = {
+                "nombre": "Helena Torres",
+                "foto": "/static/img/12345678.png", 
+                "email": "valTorres@gmail.com",
+                "ci": "12345678",
+                "fecha_nacimiento": "23/9/2002",
+                "genero": "femenino",
+                "descripcion": "Pensamientos ruidosos, ideas claras y playlists que rompen rutinas. 🖤🔥",
+                "color_favorito": "magenta",
+                "libro_favorito": "- \"Eleanor & Park\" de Rainbow Rowell",
+                "musica_favorita": "Punk-Rock",
+                "videojuegos_favoritos": "Disco Elysium",
+                "password_hash": "123456",
+                "configuracion": "",
+                "fecha_registro": "22/7/2025",
+            }
+        
+        posts = [
+            {
+                "usuario": "Emanuel Delgado",
+                "foto": "/static/img/12345679.png",
+                "contenido": "La verdad es que últimamente me he clavado duro en el desarrollo web. Hay algo increíblemente satisfactorio en ver cómo una idea se convierte en una app funcional, justo ahí, en el navegador. 😎💻\nMe encanta jugar con React y ver cómo los componentes toman vida con solo unas líneas bien pensadas. También estoy metiéndome cada vez más en el backend—Django y Node me tienen intrigado. Me gusta entender cómo se conectan todas las piezas: base de datos, API, frontend… como un rompecabezas que sólo cobra sentido cuando todo fluye.\nY sí, me emociono con cosas como la optimización de carga, diseño responsive y esas pequeñas animaciones que hacen que la experiencia sea más suave. 🎨⚙️✨\nSi alguien quiere intercambiar ideas o hablar sobre sus proyectos locos de apps web, aquí estoy.",
+                "reacciones": "70 mil",  
+                "comentarios": "500",
+                "fecha_creacion": "11 hrs"
+            },
+            {
+                "usuario": "Isabel Cárdenas",
+                "foto": "/static/img/12345680.png",
+                "contenido": "Docker y yo tenemos una relación complicada. 😅 Cada vez que creo que entendí los contenedores, aparece una red que no conecta, un volumen que no se monta, o un error que me hace cuestionar mi existencia como dev.\nHoy pasé 3 horas peleando con un bind mount... spoiler: era un typo. 🤦‍♀️\nSi alguien tiene tips, rituales mágicos o paciencia infinita para lidiar con estas bestias virtuales, se aceptan abrazos y sugerencias.",
+                "reacciones": "2 mil",  
+                "comentarios": "350",
+                "fecha_creacion": "6 hrs"
+            },
+            {
+                "usuario": "Belén Cruz",
+                "foto": "/static/img/12345681.png",
+                "contenido": "Los templates de Django son como la mezcla perfecta entre orden y magia ✨. Literalmente te permiten separar el HTML del caos lógico y mantener todo bonito, limpio y funcional. 🙌\nDjango lo tiene bien pensado. 🎯",
+                "reacciones": "14",  
+                "comentarios": "3",
+                "fecha_creacion": "5 min"
+            },
+        ]
+
+        
         return render(request, 'home.html', {
-            'notificaciones': notificaciones
+            'notificaciones': notificaciones,
+            'user' : usuario,
+            'posts': posts
         })
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")

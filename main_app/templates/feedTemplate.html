@@ -1,33 +1,40 @@
-<div class="feed atigram-card">
-    <div class="post-info">
-        <a class="user-info" href="#">
-            <img class="profile-picture" src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png">
-            <div class="post-tag">
-                <span class="tiny-info">Publicado hace 11hrs</span>
-                <label class="larger-name">Emmanuel Delgado</label>
+{% load i18n %}
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="feed atigram-card">
+            <div class="post-info">
+                <a class="user-info" href="#">
+                    <img class="profile-picture" src="{{ post.foto }}">
+                    <div class="post-tag">
+                        <span class="tiny-info">{% trans "Publicado hace" %} {{ post.fecha_creacion }}</span>
+                        <label class="larger-name">{{post.usuario}}</label>
+                    </div>
+                </a>
+                <button class="post-conf">
+                    ⋮
+                </button>
             </div>
-        </a>
-        <button class="post-conf">
-            ⋮
-        </button>
-    </div>
-    
-    <div class="post-content">
-        <p class="post-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais
-            <span id="dots">...</span>
-            <span id="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada.<br></span>
-            <button id="readMore" href="#">Ver más</button>
-        </p>
-    </div>
-    <div class="reaction-bar">
-        <button class="like-btn">
-            <span class="material-icons-outlined icon">favorite_border</span>
-            10mil
-        </button>
-        <button class="comments-btn">
-            <span class="material-icons-outlined icon">chat_bubble</span>
-            24
-        </button>
-    </div>
-</div>
+
+            <div class="post-content">
+                <span id="post-text">{{post.contenido|linebreaksbr}} </span>
+                <span id="dots">...</span>
+                <span id="more"></span>
+                <button class="readMore" href="#">{% trans "Ver más" %}</button>
+            </div>
+            <div class="reaction-bar">
+                <button class="like-btn">
+                    <span class="material-icons-outlined icon">favorite_border</span>
+                    {{ post.reacciones }}
+                </button>
+                <button class="comments-btn">
+                    <span class="material-icons-outlined icon">chat_bubble</span>
+                    {{ post.comentarios }}
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "No hay publicaciones disponibles." %}</p>
+{% endif %}
+
