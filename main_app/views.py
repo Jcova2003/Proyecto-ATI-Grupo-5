@@ -1,7 +1,8 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
-from main_app.models import Usuario
+from django.views.generic.edit import CreateView
+
 def home(request):
     try:
         notificaciones = [
@@ -64,12 +65,32 @@ def home(request):
                 "fecha_creacion": "5 min"
             },
         ]
+        friendList = [
+            {
+                "user": "Emanuel Delgado",
+                "pfp": "/static/img/12345679.png",
+                "active": True,
+                "lastActive": ""
+            },
+            {
+                "user": "Isabel Cárdenas",
+                "pfp": "/static/img/12345680.png",
+                "active": True,
+                "lastActive": ""
+            },
+            {
+                "user": "Belén Cruz",
+                "pfp": "/static/img/12345681.png",
+                "active": False,
+                "lastActive": "10 mins"
+            },
+        ]
 
-        
         return render(request, 'home.html', {
             'notificaciones': notificaciones,
             'user' : usuario,
-            'posts': posts
+            'posts': posts,
+            'friendList': friendList
         })
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
