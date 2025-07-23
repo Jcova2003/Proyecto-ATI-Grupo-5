@@ -56,6 +56,7 @@ function previewText(post_content) {
     if (text.length > 250) {
         var more = post_content.querySelector('#more');
         show.innerHTML = text.slice(0, 251);
+        text = text+" ";
         more.innerHTML = text.slice(251, -1)+"<br>";
     } else {
         post_content.querySelector('#dots').style.display = "none";
