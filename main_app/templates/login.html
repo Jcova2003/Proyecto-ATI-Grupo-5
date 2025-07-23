@@ -25,7 +25,8 @@
     <img class="welcome-icon" src="{% static '/img/icons/login-welcome.svg' %}" alt="welcome icon">
   </div>
   <h3 class="login-h3">{% trans "Inicia Sesión" %}</h3>
-    <form class="login-form" action="/" method="">
+    <form class="login-form" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
     <div class="input-group">
       <input type="text" placeholder="{% trans 'Usuario' %}" name="username" required>
       <input type="password" placeholder="{% trans 'Contraseña' %}" name="password" required>
