@@ -6,9 +6,9 @@
     {% if friendList %}
         {% for friend in friendList %}
         <div class="user-info mrk-border">
-            <img class="profile-picture" src="{{friend.pfp}}">
+            <img class="profile-picture" src="{{friend.usuario.foto}}">
             <div class="friend-tag">
-                <label class="tiny-name">{{friend.user}}</label>
+                <label class="tiny-name">{{friend.usuario.nombre}}</label>
                 <a class="tiny-info">
                     {% if friend.active %}
                         {% trans "Activo ahora" %}
