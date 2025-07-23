@@ -1,0 +1,48 @@
+{% load static %}
+{% load i18n %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATIgram - Login</title>
+
+  <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}" />
+
+  <!-- Roboto Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body class="login-body">
+  <div class="gradient-background">
+    <img class="welcome-icon" src="{% static '/img/icons/login-welcome.svg' %}" alt="welcome icon">
+  </div>
+  <h3 class="login-h3">{% trans "Inicia Sesión" %}</h3>
+    <form class="login-form" action="/" method="">
+    <div class="input-group">
+      <input type="text" placeholder="{% trans 'Usuario' %}" name="username" required>
+      <input type="password" placeholder="{% trans 'Contraseña' %}" name="password" required>
+    </div>
+
+    <div class="text-action forgot">
+      <a href="#">{% trans "¿Olvidaste tu contraseña?" %}</a>
+    </div>
+
+    <button type="submit" class="primary-btn">{% trans "Iniciar sesión" %}</button>
+
+    <div class="text-action register">
+      <a href="/register">{% trans "¿No tienes cuenta? Regístrate aquí." %}</a>
+    </div>
+  </form>
+</body>
+
+</html>
+
+{% endblock %}
