@@ -137,5 +137,11 @@ def register(request):
     except Exception as e:
         return HttpResponse(f"Error en register: {str(e)}")
 
+def profile(request):
+    try:
+        return render(request, "profile.html")
+    except Exception as e:
+        return HttpResponse(f"Error en profile: {str(e)}")
+
 def custom_404(request, exception):
     return render(request, "404.html", status=404)

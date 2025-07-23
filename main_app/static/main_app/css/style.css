@@ -996,3 +996,34 @@ input[type="file"] {
   }
 }
 
+/* Estilos para el perfil */
+
+.profile-content {
+    width: 85%;
+}
+
+.user-profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+}
+
+.profile-content .profile-picture {
+  width: 200px;
+}
+
+.profile-content .profile-feed-title {
+  font-size: clamp(var(--H4-mobile), 2vw, var(--H4-desktop));
+  margin:0.5rem 0;
+}
+
+.profile-content .btn-edit-profile{
+  width: 50%;
+}
