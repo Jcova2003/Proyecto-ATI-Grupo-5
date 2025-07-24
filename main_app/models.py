@@ -31,7 +31,7 @@ class UsuarioManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre = models.CharField(max_length=100, blank=True)
-    foto = models.TextField(blank=True)
+    foto = models.ImageField(upload_to='static/img', null=True, blank=True)
     email = models.EmailField(unique=True)
     # Make ci optional and nullable
     ci = models.CharField(max_length=20, unique=True, null=True, blank=True)
