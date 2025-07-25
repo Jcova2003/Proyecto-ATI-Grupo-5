@@ -5,6 +5,8 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 class UsuarioManager(BaseUserManager):
@@ -31,7 +33,7 @@ class UsuarioManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre = models.CharField(max_length=100, blank=True)
-    foto = models.ImageField(upload_to='static/img', null=True, blank=True)
+    foto = models.ImageField(upload_to='img/', null=True, blank=True)
     email = models.EmailField(unique=True)
     # Make ci optional and nullable
     ci = models.CharField(max_length=20, unique=True, null=True, blank=True)
@@ -56,6 +58,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.nombre or self.email
 
+    def pfp_url(self):
+        return f"{settings.MEDIA_URL}{self.foto}"
 
 class LenguajeProgramacion(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
