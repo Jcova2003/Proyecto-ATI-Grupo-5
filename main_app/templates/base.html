@@ -1,71 +1,93 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}ATIgram{% endblock %}</title>
     
-    <!-- CSS Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Tu CSS personalizado -->
-    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}" />
 
     <!-- Roboto Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
     {% block extra_css %}{% endblock %}
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
-            <div class="search-friends">
-                <a class="nav-link">Search</a>
-                <input class="search-bar" type="text" placeholder="Buscar amigos">
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+  </head>
+  <body body data-like-icon="{% static 'img/icons/like.svg' %}" 
+  data-comment-icon="{% static 'img/icons/comment.svg' %}"
+  data-notifications='{{ notificaciones|escapejs }}'>
+    <nav class="navbar">
+        <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
+        <div class="search-friends">
+            <button class="search-person">
+                <span class="material-icons-outlined icon">person_search</span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="{% url 'services' %}">Mi perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}" href="{% url 'blog' %}">Notificaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Chat</a>
-                    </li>
-                </ul>
-            </div>
+            <input class="search-bar" type="text" placeholder="{% trans "Buscar amigos" %}">
         </div>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
+                        <span class="material-icons-outlined icon">home</span>
+                        {% trans "Inicio" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
+                        <span class="material-icons-outlined icon">person_outline</span>
+                        {% trans "Mi perfil" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link notifications-link" href="#">
+                        <span class="material-icons-outlined icon">notifications_active</span>
+                        {% trans "Notificaciones" %}
+                    </a>
+                </li>
+            </ul>
+        <a class="nav-chat {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="chat">
+            <span class="material-icons-outlined icon">mark_chat_unread</span>
+        </a>
     </nav>
 
-    <main class="container mt-4">
+    <nav class="mobile-navbar">
+        <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
+            <span class="material-icons-outlined icon">home</span>
+            <label>{% trans "Inicio" %}</label>
+        </a>
+        <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
+            <span class="material-icons-outlined icon">person_outline</span>
+            <label>{% trans "Mi perfil" %}</label>
+        </a>
+        <a class="nav-link notifications-link" href="#">
+            <span class="material-icons-outlined icon">notifications_active</span>
+            <label>{% trans "Menciones" %}</label>
+        </a>
+    </nav>
+
+    <main class="container">
         {% block content %}
         {% endblock %}
+        {% include 'friendListTemplate.html' with data=friendList %}
     </main>
 
-    <footer class="bg-light text-center text-lg-start mt-5">
-        <div class="text-center p-3">
-            © 2025 Proyecto ATI
-        </div>
-    </footer>
-
-    <!-- JavaScript Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    
     <!-- Tu JavaScript personalizado -->
     <script src="{% static 'main_app/js/script.js' %}"></script>
-    
+
     {% block extra_js %}{% endblock %}
+    
+    {% block notifications_popup %}{% endblock %}
+
+
+    <!-- JavaScript para Notificaciones -->
+    <script src="{% static 'main_app/js/notificacion.js' %}"></script>
+    
+    
+
 </body>
 </html>

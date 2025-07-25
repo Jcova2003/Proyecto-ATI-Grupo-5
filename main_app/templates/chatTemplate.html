@@ -1,0 +1,163 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load i18n %}
+{% block title %}Chat con {{ friend_name }} - {{ block.super }}{% endblock %} 
+
+{% block content %}
+<div class="chat-container">
+  <div class="chat-header">
+    <a href="{% url 'home' %}" class="back-link">
+      <span class="material-icons-outlined icon">arrow_back</span>
+      {% trans "Volver" %}
+    </a>
+    <div class="user-info">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="user-avatar" />
+      <div class="user-details">
+        <strong>{{ friend_name }}</strong>
+        <span class="user-status">{% trans "Activo hace 10mins" %}</span>
+      </div>
+    </div>
+  </div>
+  <div class="chat-messages">
+    <div class="message-cluster">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+      <div class="message received">Hola!!</div>
+    </div>
+    <div class="message sent">Hola {{ friend_name }}, ¿Cómo estás?</div>
+    <div class="message-cluster">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+      <div class="messages">
+        <div class="message received">Quería preguntarte cómo vas con las pantallas</div>
+        <div class="message received">Recuerda que tenemos que mandarlas hoy apurateeeeeeeeeee</div>
+      </div>
+    </div>
+    <div class="message sent">Ya las estoy mandando!</div>
+    <div class="message-cluster">
+      <img src="https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg" alt="Avatar" class="message-avatar" />
+      <div class="messages">
+        <div class="message received">TEST MENSAJE MUY LARGO</div>
+        <div class="message received">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais...
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="chat-input-form">
+    <input type="text" placeholder="{% trans "Mensaje" %}" class="chat-input" autocomplete="off" />
+  </form>
+</div>
+
+<style>
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width:75%;
+}
+.chat-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--grey-100);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.back-link {
+  color: var(--green-700);
+  text-decoration: none;
+  font-size: 18px;
+}
+.chat-container .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.message-cluster {
+  display: flex;
+  gap: 10px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-details strong {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--grey-800);
+}
+.user-status {
+  font-size: 14px;
+  color: var(--grey-400);
+  text-decoration: underline;
+}
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.message {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+.message.received {
+  background-color: var(--green-100);
+  align-self: flex-start;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.message.sent {
+  background-color: var(--green-600);
+  color: white;
+  align-self: flex-end;
+}
+.message-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 4px;
+}
+.chat-input-form {
+  padding: 10px 15px;
+}
+.chat-input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--green-600);
+  color: var(--green-600);
+  outline: none;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: var(--green-100);
+}
+
+@media (max-width: 992px) {
+  .chat-container {
+    width: 100%;
+  }
+
+  .mobile-navbar {
+    display: none;
+  }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATIgram</title>
+
+  <!-- Tu CSS personalizado -->
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <!-- Roboto Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.g/static.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body class="login-body">
+  <div class="gradient-background">
+    <img class="welcome-icon" src="./static/img/icons/login-welcome.svg" alt="welcome icon">
+  </div>
+  <h3 class="login-h3">Inicia Sesión</h3>
+    <form class="login-form" action="home.html" method="get">
+    <div class="input-group">
+      <input type="text" placeholder="Usuario" name="username" required>
+      <input type="password" placeholder="Contraseña" name="password" required>
+    </div>
+
+    <div class="text-action forgot">
+      <a href="#">¿Olvidaste tu contraseña?</a>
+    </div>
+
+    <button type="submit" class="primary-btn">Iniciar sesión</button>
+
+    <div class="text-action register">
+      <a href="register.html">¿No tienes cuenta? Registrate aqui.</a>
+    </div>
+  </form>
+</body>
+
+</html>

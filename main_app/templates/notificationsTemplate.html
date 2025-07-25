@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Notificaciones - {{block.super }}{% endblock %} {% block content %}
+{% load i18n %}
+
+<div class="notifications-container atigram-card">
+  <div class="notifications-content">
+    <h2>{% trans "Mis Notificaciones" %}</h2>
+
+    {% for notification in notifications %}
+    <div class="notification-item">
+      <img
+        class="profile-picture notif"
+        src="{{ notification.user_image }}"
+        alt="{{ notification.user_name }}"
+      />
+      <div class="notification-text">
+        <p>
+          <strong>{{ notification.user_name }}</strong> {{ notification.action }}
+        </p>
+      </div>
+      <div class="notification-options">&#8942;</div>
+    </div>
+    {% empty %}
+    <div class="empty-notifications">
+      <p>{% trans "No tienes notificaciones." %}</p>
+    </div>
+    {% endfor %}
+
+    <div class="ver-mas">
+        <a href="?count={{ count|add:'5' }}">{% trans "Ver más..." %}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .profile-picture.notif {
+    max-width: 50px;
+  }
+  .notifications-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .notifications-content {
+    padding: 15px;
+  }
+
+  .notifications-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .notification-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .notification-text {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+
+  .notification-options {
+    color: #777;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .ver-mas {
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  .ver-mas a {
+    color: #777;
+    text-decoration: none;
+  }
+</style>
+{% endblock %}

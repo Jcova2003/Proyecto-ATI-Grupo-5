@@ -1,0 +1,29 @@
+{% load i18n %}
+<div class="notifications-popup" id="notificationsPopup">
+    <div class="popup-header">
+        <h5>{% trans "Mis Notificaciones" %}</h5>
+        <button class="close-popup">&times;</button>
+    </div>
+    <div class="popup-content">
+        {% if notificaciones %}
+            {% for noti in notificaciones %}
+                <div class="notification-item">
+                    <div class="user-avatar-container">
+                        <img src="{{ noti.avatar_url }}" alt="Usuario" class="user-avatar">
+                        <div class="notification-icon"></div>
+                    </div>
+                    <div class="notification-text">
+                        <p><strong>{{ noti.usuario }}</strong> {{ noti.mensaje }}</p>
+                    </div>
+                    <div class="notification-menu">⋮</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>{% trans "No hay notificaciones disponibles." %}</p>
+        {% endif %}
+    </div>
+    <div class="notification-footer">
+        <a href="#">{% trans "Ver más..." %}</a>
+    </div>
+</div>
+

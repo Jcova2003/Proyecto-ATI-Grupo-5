@@ -1,0 +1,25 @@
+{% load i18n %}
+
+
+<div class="my-friends atigram-card"> 
+    <label class="larger-name">{% trans "Mis amigos" %}</label>
+    {% if friendList %}
+        {% for friend in friendList %}
+        <div class="user-info mrk-border">
+            <img class="profile-picture" src="{{friend.usuario.foto}}">
+            <div class="friend-tag">
+                <label class="tiny-name">{{friend.usuario.nombre}}</label>
+                <a class="tiny-info">
+                    {% if friend.active %}
+                        {% trans "Activo ahora" %}
+                    {% else %}
+                        {% trans "Activo hace" %} {{friend.lastActive}}
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <a class="tiny-info" href="#">{% trans "Conecta con otros usuarios!" %}</a>
+    {% endif %}
+</div>
