@@ -8,5 +8,6 @@ urlpatterns = [
     path('chat/', views.chat_with_friend, name='chat_with_friend'),
     path("login/", views.login, name="login"),
     path("register/", views.register, name="register"),
-    path("profile/", views.profile, name="profile"),
+    path('profile/', views.profile, name='my_profile'),
+    path("profile/<int:id_usuario>", views.profile, name="profile"),
 ]

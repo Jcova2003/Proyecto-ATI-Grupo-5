@@ -5,7 +5,7 @@
 {% block title %}Inicio - {{ block.super }}{% endblock %}
 
 {% block extra_css %}
-<script src="{% static 'main_app/js/post.js' %}"></script>
+    <script src="{% static 'main_app/js/post.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,27 +13,29 @@
     <div class="user-profile-wrapper">
         <div class="user-profile-container">
        
-          <img class="profile-picture" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
+          <img class="profile-picture" src="{{ user.foto }}">
         
         <div class="user-profile-info">
-          <label class="profile-card-name">Valeria Torres</label>
+          <label class="profile-card-name">{{ user.nombre|safe }}</label>
           <a class="tiny-info">3 {% trans "amigos" %}</a>
-          <p class="profile-desc">Una descripcion corta sobre el usuario que ha iniciado sesion</p>
+          <p class="profile-desc">{{ user.descripcion|safe }}</p>
         </div>
       </div>
       
       <div class="button-container">
+        {% if user.id == logged_user %}
         <button class="btn-edit-profile">
           <span class="material-icons icon">edit</span>
           {% trans "Editar perfil" %}
         </button>
+        {% endif %}
       </div>
     </div>
 
     <div class="atigram-card" id="post">
             <div id="post-user-info" style="display: none;">
-                <img class="profile-picture" id="post-pfp" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355896_640.png">
-                <label id="post-user-name">Valeria Torres</label>
+                <img class="profile-picture" id="post-pfp" src="{{ user.foto }}" >
+                <label id="post-user-name">{{ user.nombre|safe }}</label>
             </div>
             <div id="post-write-bar">
                 <textarea class="search-bar" id="post-bar" type="text" placeholder="{% trans "¿Qué estas pensando?" %}"></textarea>

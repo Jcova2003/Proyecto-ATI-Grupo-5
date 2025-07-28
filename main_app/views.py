@@ -1,49 +1,19 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion
-from collections import namedtuple
-from datetime import datetime, timezone
+from .utils import get_notifications, build_post_list, build_friend_list
+
 
 def home(request):
     try:
-        notificaciones = [
-            {
-                "usuario": "Sofía Marcano",
-                "mensaje": "le ha dado like a tu publicación.",
-                "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-            },
-            {
-                "usuario": "Lisangely Goncalves",
-                "mensaje": "ha comentado en tu publicación.",
-                "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-            },
-            {
-                "usuario": "Valeria Ciccolella",
-                "mensaje": "le ha dado like a tu publicación.",
-                "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-            },
-        ]
+        notificaciones = get_notifications()
         usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
         posts = Publicacion.objects.all()
-        postList = []
-        Post = namedtuple("Post", "usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
-
-        for p in posts:
-            time = datetime.now(timezone.utc) - p.fecha_creacion
-            x = Post(p.usuario, p.contenido, p.multimedia, p.privacidad, time, "14k", 10)
-            postList.append(x)
-
-        Friends = namedtuple("Friend", "usuario active lastActive")
-        friends = Usuario.objects.all()
-        friendList = []
-        i = 1
-        for f in friends:
-            if f.nombre != usuario.nombre: 
-                x = Friends(f, i != 3, "10min")
-                friendList.append(x)
-                i=i+1
+        postList =  build_post_list(posts)
+        friendList = build_friend_list(usuario)
 
         return render(request, 'home.html', {
             'notificaciones': notificaciones,
@@ -164,9 +134,29 @@ def register(request):
     except Exception as e:
         return HttpResponse(f"Error en register: {str(e)}")
 
-def profile(request):
+def profile(request, id_usuario = None):
     try:
-        return render(request, "profile.html")
+        notificaciones = get_notifications()
+        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
+       
+        profile_user = (
+            get_object_or_404(Usuario, id=id_usuario)
+            if id_usuario and id_usuario != logged_user.id
+            else logged_user
+        )
+
+        posts = Publicacion.objects.filter(usuario=profile_user).order_by('-fecha_creacion')
+        postList = build_post_list(posts)
+        friendList = build_friend_list(logged_user)
+
+        return render(request, 'profile.html', {
+            'notificaciones': notificaciones,
+            'user' : profile_user,
+            'posts': postList,
+            'friendList': friendList,
+            'logged_user': logged_user
+        })
+
     except Exception as e:
         return HttpResponse(f"Error en profile: {str(e)}")
 

@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="/profile">
                         <span class="material-icons-outlined icon">person_outline</span>
                         {% trans "Mi perfil" %}
                     </a>
@@ -50,7 +50,7 @@
                     </a>
                 </li>
             </ul>
-        <a class="nav-chat {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="chat">
+        <a class="nav-chat {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="/chat">
             <span class="material-icons-outlined icon">mark_chat_unread</span>
         </a>
     </nav>
@@ -60,7 +60,7 @@
             <span class="material-icons-outlined icon">home</span>
             <label>{% trans "Inicio" %}</label>
         </a>
-        <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
+        <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="/profile">
             <span class="material-icons-outlined icon">person_outline</span>
             <label>{% trans "Mi perfil" %}</label>
         </a>
