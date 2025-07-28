@@ -1,6 +1,10 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Usuario
+from .models import Publicacion
+from collections import namedtuple
+from datetime import datetime, timezone
 
 def home(request):
     try:
@@ -21,8 +25,31 @@ def home(request):
                 "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
             },
         ]
+        usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
+        posts = Publicacion.objects.all()
+        postList = []
+        Post = namedtuple("Post", "usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
+
+        for p in posts:
+            time = datetime.now(timezone.utc) - p.fecha_creacion
+            x = Post(p.usuario, p.contenido, p.multimedia, p.privacidad, time, "14k", 10)
+            postList.append(x)
+
+        Friends = namedtuple("Friend", "usuario active lastActive")
+        friends = Usuario.objects.all()
+        friendList = []
+        i = 1
+        for f in friends:
+            if f.nombre != usuario.nombre: 
+                x = Friends(f, i != 3, "10min")
+                friendList.append(x)
+                i=i+1
+
         return render(request, 'home.html', {
-            'notificaciones': notificaciones
+            'notificaciones': notificaciones,
+            'user' : usuario,
+            'posts': postList,
+            'friendList': friendList
         })
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")

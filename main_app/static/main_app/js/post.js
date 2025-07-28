@@ -1,29 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var btnText = document.getElementById("readMore");
     var post_bar = document.getElementById("post-bar");
     var post = document.getElementById("post");
     var mltmedia_upload = document.getElementById('multimedia-upload');
-    
+    var posts_content = document.getElementsByClassName('post-content');
+    var btnText = document.getElementsByClassName("readMore");
 
-    if(btnText) {
-        btnText.addEventListener('click', function() {
-            var dots = document.getElementById("dots");
-            var moreText = document.getElementById("more");
-
-            if (dots.style.display === "none") {
-                dots.style.display = "inline";
-                btnText.innerHTML = "Ver más";
-                moreText.style.display = "none";
-            } else {
-                dots.style.display = "none";
-                btnText.innerHTML = "Ver menos";
-                moreText.style.display = "inline";
-            }
-        });
-        }
+    Array.from(posts_content).forEach(previewText);
+    Array.from(btnText).forEach(readMore);
 
     post_bar.addEventListener('focus', function() {
-        console.log('yup');
         var post_bar = document.getElementById("post-bar");
 
         post.style.flexDirection = "column";
@@ -63,3 +48,39 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+function previewText(post_content) {
+    var show = post_content.querySelector('#post-text');
+    var text = show.getHTML();
+
+    if (text.length > 250) {
+        var more = post_content.querySelector('#more');
+        show.innerHTML = text.slice(0, 251);
+        text = text+" ";
+        more.innerHTML = text.slice(251, -1)+"<br>";
+    } else {
+        post_content.querySelector('#dots').style.display = "none";
+        post_content.querySelector('.readMore').style.display = "none";
+    }
+
+}
+
+function readMore(btnText) {
+    if(btnText) {
+        btnText.addEventListener('click', function(e) {
+            const post_content = e.target.parentElement;
+            var dots = post_content.querySelector("#dots");
+            var moreText = post_content.querySelector("#more");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Ver más";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Ver menos";
+                moreText.style.display = "inline";
+            }
+        });
+    }
+}

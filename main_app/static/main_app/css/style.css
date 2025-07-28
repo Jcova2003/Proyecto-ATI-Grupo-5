@@ -165,6 +165,10 @@ textarea.search-bar {
   color: white;
 }
 
+.active {
+  color: white;
+}
+
 .navbar-nav .nav-link:hover {
   color: #fff !important;
 }
@@ -190,12 +194,12 @@ textarea.search-bar {
   background-color: var(--green-50);
 }
 
-.mobile-navbar .nav-link:hover {
+.mobile-navbar .nav-link:hover, .mobile-navbar .active {
   border: 1px solid var(--green-800);
   color: var(--green-800);
   font-weight: bold;
   background-color: var(--green-100);
-}
+} 
 
 /* contenido de la pagina*/
 .atigram-card {
@@ -390,7 +394,7 @@ input[type="file"] {
   display: none;
 }
 
-#readMore {
+.readMore {
   background-color: transparent;
   text-decoration: underline;
   border: none;
@@ -399,7 +403,7 @@ input[type="file"] {
   color: var(--grey-200);
 }
 
-#readMore:hover {
+.readMore:hover {
   color: var(--green-700);
 }
 
