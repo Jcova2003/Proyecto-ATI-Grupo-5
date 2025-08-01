@@ -9,8 +9,40 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("home")
 
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        if not email or not password:
+            messages.error(request, "Todos los campos son obligatorios.")
+            return render(request, "login.html")
+
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)  
+            return redirect("home")
+        else:
+            messages.error(request, "Correo o contraseña incorrectos.")
+
+    return render(request, "login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
 def home(request):
     try:
         notificaciones = [
@@ -167,14 +199,6 @@ def chat_with_friend(request):
         # Puedes agregar más datos que necesites pasar a la plantilla
     }
     return render(request, "chatTemplate.html", context)
-
-
-def login(request):
-    try:
-        return render(request, "login.html")
-    except Exception as e:
-        return HttpResponse(f"Error en login: {str(e)}")
-
 
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
