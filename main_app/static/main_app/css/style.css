@@ -452,6 +452,7 @@ input[type="file"] {
 }
 
 .tiny-name {
+  color: var(--grey-800);
   font-size: var(--H5-mobile);
   font-weight: bold;
 }
