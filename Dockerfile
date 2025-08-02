@@ -22,6 +22,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el código de la aplicación
 COPY . /app/
 
+# Ejecutar migraciones (para desarrollo académico)
+# Nota: En producción real, esto se haría en un paso separado
+RUN python manage.py migrate --noinput
+
 # Generar archivos estáticos de Django
 RUN python manage.py collectstatic --noinput
 

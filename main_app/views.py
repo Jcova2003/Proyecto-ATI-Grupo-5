@@ -5,6 +5,10 @@ from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion
 from .utils import get_notifications, build_post_list, build_friend_list
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 
 
 def home(request):
@@ -15,14 +19,19 @@ def home(request):
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
 
-        return render(request, 'home.html', {
-            'notificaciones': notificaciones,
-            'user' : usuario,
-            'posts': postList,
-            'friendList': friendList
-        })
+        return render(
+            request,
+            "home.html",
+            {
+                "notificaciones": notificaciones,
+                "user": usuario,
+                "posts": postList,
+                "friendList": friendList,
+            },
+        )
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
+
 
 def notifications(request):
     try:
@@ -114,13 +123,15 @@ def notifications(request):
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
 
+
 def chat_with_friend(request):
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
     context = {
-        "friend_name": 'Belén Cruz',
+        "friend_name": "Belén Cruz",
         # Puedes agregar más datos que necesites pasar a la plantilla
     }
     return render(request, "chatTemplate.html", context)
+
 
 def login(request):
     try:
@@ -128,11 +139,6 @@ def login(request):
     except Exception as e:
         return HttpResponse(f"Error en login: {str(e)}")
 
-def register(request):
-    try:
-        return render(request, "register.html")
-    except Exception as e:
-        return HttpResponse(f"Error en register: {str(e)}")
 
 def profile(request, id_usuario = None):
     try:
@@ -162,3 +168,38 @@ def profile(request, id_usuario = None):
 
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
+
+
+def register(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        email = request.POST.get("email")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        if not nombre or not email or not password1 or not password2:
+            messages.error(request, "Todos los campos son obligatorios.")
+            return render(request, "register.html")
+
+        if password1 != password2:
+            messages.error(request, "Las contraseñas no coinciden.")
+            return render(request, "register.html")
+
+        # Check if email already exists
+        if Usuario.objects.filter(email=email).exists():
+            messages.error(request, "El correo ya está registrado.")
+            return render(request, "register.html")
+
+        try:
+            # Create user - ci field is now nullable so we don't need to provide it
+            user = Usuario.objects.create_user(
+                email=email, password=password1, nombre=nombre
+            )
+            messages.success(request, "Registro exitoso. Ahora puedes iniciar sesión.")
+            return redirect("login")
+
+        except Exception as e:
+            messages.error(request, f"Error al registrar usuario: {str(e)}")
+            return render(request, "register.html")
+
+    return render(request, "register.html")
