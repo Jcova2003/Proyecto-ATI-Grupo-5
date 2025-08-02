@@ -55,6 +55,11 @@ body {
   font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
 }
 
+footer {
+  margin-top: 1rem;
+  height: 65px;
+}
+
 .icon {
   vertical-align: middle;
 }
@@ -367,6 +372,7 @@ input[type="file"] {
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .feed .user-info .profile-picture {
@@ -1003,7 +1009,7 @@ input[type="file"] {
 /* Estilos para el perfil */
 
 .profile-content {
-    width: 85%;
+    width: 75%;
 }
 
 .user-profile-info {
