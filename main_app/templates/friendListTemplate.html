@@ -5,19 +5,19 @@
     <label class="larger-name">{% trans "Mis amigos" %}</label>
     {% if friendList %}
         {% for friend in friendList %}
-        <div class="user-info mrk-border">
+        <a class="user-info mrk-border" href="{% url 'profile' friend.usuario.id %}">
             <img class="profile-picture" src="{{friend.usuario.pfp_url}}">
             <div class="friend-tag">
                 <label class="tiny-name">{{friend.usuario.nombre}}</label>
-                <a class="tiny-info">
+                <div class="tiny-info">
                     {% if friend.active %}
                         {% trans "Activo ahora" %}
                     {% else %}
                         {% trans "Activo hace" %} {{friend.lastActive}}
                     {% endif %}
-                </a>
+                </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
     {% else %}
         <a class="tiny-info" href="#">{% trans "Conecta con otros usuarios!" %}</a>

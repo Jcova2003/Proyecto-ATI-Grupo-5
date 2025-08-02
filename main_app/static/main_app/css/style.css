@@ -55,6 +55,11 @@ body {
   font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
 }
 
+footer {
+  margin-top: 1rem;
+  height: 65px;
+}
+
 .icon {
   vertical-align: middle;
 }
@@ -367,6 +372,7 @@ input[type="file"] {
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .feed .user-info .profile-picture {
@@ -446,6 +452,7 @@ input[type="file"] {
 }
 
 .tiny-name {
+  color: var(--grey-800);
   font-size: var(--H5-mobile);
   font-weight: bold;
 }
@@ -1000,3 +1007,34 @@ input[type="file"] {
   }
 }
 
+/* Estilos para el perfil */
+
+.profile-content {
+    width: 75%;
+}
+
+.user-profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+}
+
+.profile-content .profile-picture {
+  width: 200px;
+}
+
+.profile-content .profile-feed-title {
+  font-size: clamp(var(--H4-mobile), 2vw, var(--H4-desktop));
+  margin:0.5rem 0;
+}
+
+.profile-content .btn-edit-profile{
+  width: 50%;
+}
