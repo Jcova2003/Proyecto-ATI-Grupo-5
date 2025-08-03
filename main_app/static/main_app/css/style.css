@@ -91,7 +91,7 @@ footer {
   font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
 }
 
-.navbar-brand {
+#navbar-brand {
   font-weight: 700;
   font-size: 1.5rem;
   color: white;
@@ -107,7 +107,7 @@ footer {
   align-items: center;
 }
 
-.search-person {
+#search-person {
   background-color: transparent;
   border: none;
   color: white;
@@ -648,6 +648,7 @@ input[type="file"] {
 @media (max-width: 992px) {
   .container {
     max-width: 720px;
+    flex-direction: column;
   }
 
   .home-content {
@@ -659,6 +660,11 @@ input[type="file"] {
   .my-friends,
   .navbar-nav {
     display: none;
+    width: 100%;
+  }
+
+  .my-friends {
+    background-color: transparent;
   }
 
   .mobile-navbar {

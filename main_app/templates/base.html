@@ -23,9 +23,9 @@
   data-comment-icon="{% static 'img/icons/comment.svg' %}"
   data-notifications='{{ notificaciones|escapejs }}'>
     <nav class="navbar">
-        <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
+        <a id="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
-            <button class="search-person">
+            <button id="search-person">
                 <span class="material-icons-outlined icon">person_search</span>
             </button>
             <input class="search-bar" type="text" placeholder="{% trans "Buscar amigos" %}">
