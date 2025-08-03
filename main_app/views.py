@@ -19,6 +19,13 @@ def home(request):
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
 
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
+            new_post.save()
+
         return render(
             request,
             "feedTemplate.html",

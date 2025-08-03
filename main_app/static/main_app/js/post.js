@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var mltmedia_upload = document.getElementById('multimedia-upload');
     var posts_content = document.getElementsByClassName('post-content');
     var btnText = document.getElementsByClassName("readMore");
+    var post_btn = document.getElementById("post-btn");
 
     Array.from(posts_content).forEach(previewText);
     Array.from(btnText).forEach(readMore);
@@ -45,6 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
         var label = document.getElementById('multimedia-upload-btn');
         
         label.innerHTML = filename;
+    });
+
+    post.addEventListener('submit', function() {
+        if (post_bar.value.trim() === '' && mltmedia_upload.files.length === 0) {
+            console.log("empty Post");
+        } else {
+            console.log("Great Post");
+        }
     });
 
 });
