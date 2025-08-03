@@ -1,0 +1,40 @@
+{% load i18n %}
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="feed atigram-card">
+            <div class="post-info">
+                <a class="user-info" href="{% url 'profile' post.usuario.id %}">
+                    <img class="profile-picture" src="{{ post.usuario.pfp_url }}">
+                    <div class="post-tag">
+                        <span class="tiny-info">{% trans "Publicado hace" %} {{ post.fecha_creacion }}</span>
+                        <label class="larger-name">{{post.usuario.nombre}}</label>
+                    </div>
+                </a>
+                <button class="post-conf">
+                    ⋮
+                </button>
+            </div>
+
+            <div class="post-content">
+                <span id="post-text">{{post.contenido|safe|linebreaksbr}}</span>
+                <span id="dots">...</span>
+                <span id="more"></span>
+                <button class="readMore" href="#">{% trans "Ver más" %}</button>
+            </div>
+            <div class="reaction-bar">
+                <button class="like-btn">
+                    <span class="material-icons-outlined icon">favorite_border</span>
+                    {{ post.reacciones }}
+                </button>
+                <button class="comments-btn">
+                    <span class="material-icons-outlined icon">chat_bubble</span>
+                    {{ post.comentarios }}
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "No hay publicaciones disponibles." %}</p>
+{% endif %}
+

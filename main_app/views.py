@@ -21,7 +21,7 @@ def home(request):
 
         return render(
             request,
-            "home.html",
+            "feedTemplate.html",
             {
                 "notificaciones": notificaciones,
                 "user": usuario,
