@@ -1,7 +1,7 @@
 # main_app/utils.py
 from collections import namedtuple
 from datetime import datetime, timezone
-from .models import Usuario, Publicacion
+from .models import Usuario, Publicacion, SolicitudAmistad
 
 def get_notifications():
     return [
@@ -28,7 +28,14 @@ def build_post_list(posts_queryset):
 
 def build_friend_list(usuario_actual):
     Friends = namedtuple("Friend", "usuario active lastActive")
-    amigos = Usuario.objects.exclude(id=usuario_actual.id)
+    amigos = Usuario.objects.filter(
+            recibidas__de_usuario=usuario_actual,
+            recibidas__estado='aceptada'
+        ).distinct()
+    amigos = Usuario.objects.filter(
+            enviadas__para_usuario=usuario_actual,
+            enviadas__estado='aceptada'
+        ).distinct().union(amigos)
     friend_list = []
     i = 1
     for f in amigos:

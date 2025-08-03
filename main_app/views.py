@@ -27,6 +27,7 @@ def home(request):
                 "user": usuario,
                 "posts": postList,
                 "friendList": friendList,
+                "numFriends": len(friendList)
             },
         )
     except Exception as e:
@@ -154,12 +155,14 @@ def profile(request, id_usuario = None):
         posts = Publicacion.objects.filter(usuario=profile_user).order_by('-fecha_creacion')
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
+        numFriends = len(build_friend_list(profile_user))
 
         return render(request, 'profile.html', {
             'notificaciones': notificaciones,
             'user' : profile_user,
             'posts': postList,
             'friendList': friendList,
+            'numFriends': numFriends,
             'logged_user': logged_user
         })
 

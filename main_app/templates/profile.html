@@ -17,7 +17,7 @@
         
         <div class="user-profile-info">
           <label class="profile-card-name">{{ user.nombre|safe }}</label>
-          <a class="tiny-info">3 {% trans "amigos" %}</a>
+          <a class="tiny-info">{{ numFriends }} {% trans "amigos" %}</a>
           <p class="profile-desc">{{ user.descripcion|safe }}</p>
         </div>
       </div>
