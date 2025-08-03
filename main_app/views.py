@@ -27,6 +27,7 @@ def home(request):
                 "user": usuario,
                 "posts": postList,
                 "friendList": friendList,
+                "numFriends": len(friendList)
             },
         )
     except Exception as e:
