@@ -48,12 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
         label.innerHTML = filename;
     });
 
-    post.addEventListener('submit', function() {
-        if (post_bar.value.trim() === '' && mltmedia_upload.files.length === 0) {
-            console.log("empty Post");
-        } else {
-            console.log("Great Post");
-        }
+    post.addEventListener('submit', function(e) {
+        if (post_bar.value.trim() == '' && mltmedia_upload.files.length === 0) {
+            alert("Name must be filled out");
+            e.preventDefault();
+        } 
     });
 
 });
