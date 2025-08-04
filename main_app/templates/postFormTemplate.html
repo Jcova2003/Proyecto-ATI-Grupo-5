@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<form class="atigram-card" id="post" method="POST"> {% csrf_token %}
+    <div id="post-user-info">
+        <img class="profile-picture" id="post-pfp" src="{{ user.pfp_url }}">
+        <label id="post-user-name">{{ user.nombre|safe }}</label>
+    </div>
+    <div id="post-write-bar">
+        <textarea class="search-bar" id="post-bar" type="text" placeholder="{% trans "¿Qué estas pensando?" %}" name="post-text"></textarea>
+    </div>
+    <div id="createPost-options"> 
+        <div id="add-multimedia">
+            <label for="multimedia-upload" id="multimedia-upload-btn">
+                <span class="material-icons icon">image</span>
+                {% trans "Añadir Multimedia" %}
+            </label>
+            <input id="multimedia-upload" type="file" name="post-mlt"> 
+        </div>
+        <div class="createPost-btns-bar">
+            <button class="btn-edit-profile" id="save-draft-btn">{% trans "Guardar Borrador" %}</button>
+            <button type="submit" class="btn-edit-profile" id="post-btn">{% trans "Publicar" %}</button>
+        </div>
+    </div>
+</form>
+
+{% if request.resolver_match.url_name == 'my_profile'%}
+<style>
+    #post-user-info {
+        display: none;
+    }
+</style>
+{% endif %}
