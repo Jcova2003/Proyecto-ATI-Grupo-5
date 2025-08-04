@@ -288,6 +288,12 @@ textarea.search-bar {
   overflow-y: auto;
 }
 
+.back-link {
+  color: var(--green-700);
+  text-decoration: none;
+  font-size: 18px;
+}
+
 /* crear publicación */
 #post {
   flex-direction: row;

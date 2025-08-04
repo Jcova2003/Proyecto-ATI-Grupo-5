@@ -18,11 +18,11 @@ def get_notifications():
     ]
 
 def build_post_list(posts_queryset):
-    Post = namedtuple("Post", "usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
+    Post = namedtuple("Post", "id usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
     post_list = []
     for p in posts_queryset:
         tiempo = time_format(datetime.now(timezone.utc) - p.fecha_creacion)
-        post = Post(p.usuario, p.contenido, p.multimedia, p.privacidad, tiempo, "14k", 10)
+        post = Post(p.id, p.usuario, p.contenido, p.multimedia, p.privacidad, tiempo, "14k", 10)
         post_list.append(post)
     return post_list
 

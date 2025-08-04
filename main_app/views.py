@@ -176,6 +176,30 @@ def profile(request, id_usuario = None):
     except Exception as e:
         return HttpResponse(f"Error en profile: {str(e)}")
 
+def post(request, id_publicacion):
+    try:
+        notificaciones = get_notifications()
+        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
+        post = (
+            get_object_or_404(Publicacion, id = id_publicacion)
+        )
+        # post = Publicacion.objects.get(id = 1)
+        friendList = build_friend_list(logged_user)
+
+        return render(
+            request,
+            "detailedPostTemplate.html",
+            {
+                "notificaciones": notificaciones,
+                "user": logged_user,
+                "post": post,
+                "friendList": friendList,
+                "numFriends": len(friendList)
+            },
+        )
+    except Exception as e:
+        return HttpResponse(f"Error en home: {str(e)}")
+
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
 
