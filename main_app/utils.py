@@ -1,7 +1,7 @@
 # main_app/utils.py
 from collections import namedtuple
 from datetime import datetime, timezone
-from .models import Usuario, Publicacion, SolicitudAmistad
+from .models import Usuario, Comentario
 
 def get_notifications():
     return [
@@ -18,11 +18,12 @@ def get_notifications():
     ]
 
 def build_post_list(posts_queryset):
-    Post = namedtuple("Post", "usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
+    Post = namedtuple("Post", "id usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
     post_list = []
     for p in posts_queryset:
         tiempo = time_format(datetime.now(timezone.utc) - p.fecha_creacion)
-        post = Post(p.usuario, p.contenido, p.multimedia, p.privacidad, tiempo, "14k", 10)
+        comment_count = Comentario.objects.filter(publicacion = p).count
+        post = Post(p.id, p.usuario, p.contenido, p.multimedia, p.privacidad, tiempo, "14k", comment_count)
         post_list.append(post)
     return post_list
 

@@ -27,10 +27,10 @@
                     <span class="material-icons-outlined icon">favorite_border</span>
                     {{ post.reacciones }}
                 </button>
-                <button class="comments-btn">
+                <a class="comments-btn" href="{% url 'post' post.id %}">
                     <span class="material-icons-outlined icon">chat_bubble</span>
                     {{ post.comentarios }}
-                </button>
+                </a>
             </div>
         </div>
     {% endfor %}

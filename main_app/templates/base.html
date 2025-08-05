@@ -32,13 +32,13 @@
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
                         <span class="material-icons-outlined icon">home</span>
                         {% trans "Inicio" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="/profile">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'my_profile' %}active{% endif %}" href="/profile">
                         <span class="material-icons-outlined icon">person_outline</span>
                         {% trans "Mi perfil" %}
                     </a>
@@ -56,11 +56,11 @@
     </nav>
 
     <nav class="mobile-navbar">
-        <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
+        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
             <span class="material-icons-outlined icon">home</span>
             <label>{% trans "Inicio" %}</label>
         </a>
-        <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="/profile">
+        <a class="nav-link {% if request.resolver_match.url_name == 'my_profile' %}active{% endif %}" href="/profile">
             <span class="material-icons-outlined icon">person_outline</span>
             <label>{% trans "Mi perfil" %}</label>
         </a>
