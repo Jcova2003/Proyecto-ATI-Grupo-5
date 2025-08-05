@@ -1,0 +1,38 @@
+{% load i18n %}
+
+{% if comments %}
+    {% for comment in comments %}
+        <div class="comment mrk-border">
+            <a class="user-info" href="{% url 'profile' comment.usuario.id %}">
+                <img class="profile-picture" src="{{ comment.usuario.pfp_url }}">
+            </a>
+            <div class="post-tag">
+                <a class="user-info" href="{% url 'profile' comment.usuario.id %}">
+                    <label class="comment-name">{{comment.usuario.nombre}}</label>
+                </a>
+                <div class="comment-content">
+                    <span id="post-text">{{comment.contenido|safe|linebreaksbr}}</span>
+                    <span id="dots">...</span>
+                    <span id="more"></span>
+                    <button class="readMore" href="#">{% trans "Ver más" %}</button>
+                </div>
+                <div class="comment-reaction-bar">
+                    <button class="like-btn">
+                        <span class="material-icons-outlined icon">favorite_border</span>
+                        {{ post.reacciones }}
+                    </button>
+                    <a class="comments-btn">
+                        <span class="material-icons-outlined icon">chat_bubble</span>
+                        {% trans "Responder" %}
+                    </a>
+                </div>
+            </div>
+            
+            <button class="post-conf">
+                ⋮
+            </button> 
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "¡Sé el primero en dar tu opinión!" %}</p>
+{% endif %}

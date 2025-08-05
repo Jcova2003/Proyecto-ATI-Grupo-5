@@ -23,22 +23,22 @@
   data-comment-icon="{% static 'img/icons/comment.svg' %}"
   data-notifications='{{ notificaciones|escapejs }}'>
     <nav class="navbar">
-        <a class="navbar-brand" href="{% url 'home' %}">ATIgram</a>
+        <a id="navbar-brand" href="{% url 'home' %}">ATIgram</a>
         <div class="search-friends">
-            <button class="search-person">
+            <button id="search-person">
                 <span class="material-icons-outlined icon">person_search</span>
             </button>
             <input class="search-bar" type="text" placeholder="{% trans "Buscar amigos" %}">
         </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
                         <span class="material-icons-outlined icon">home</span>
                         {% trans "Inicio" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'my_profile' %}active{% endif %}" href="/profile">
                         <span class="material-icons-outlined icon">person_outline</span>
                         {% trans "Mi perfil" %}
                     </a>
@@ -50,17 +50,17 @@
                     </a>
                 </li>
             </ul>
-        <a class="nav-chat {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="chat">
+        <a class="nav-chat {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="/chat">
             <span class="material-icons-outlined icon">mark_chat_unread</span>
         </a>
     </nav>
 
     <nav class="mobile-navbar">
-        <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="{% url 'home' %}">
+        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
             <span class="material-icons-outlined icon">home</span>
             <label>{% trans "Inicio" %}</label>
         </a>
-        <a class="nav-link {% if request.resolver_match.url_name == 'myProfile' %}active{% endif %}" href="myProfile">
+        <a class="nav-link {% if request.resolver_match.url_name == 'my_profile' %}active{% endif %}" href="/profile">
             <span class="material-icons-outlined icon">person_outline</span>
             <label>{% trans "Mi perfil" %}</label>
         </a>
@@ -75,6 +75,8 @@
         {% endblock %}
         {% include 'friendListTemplate.html' with data=friendList %}
     </main>
+
+    <footer></footer>
 
     <!-- Tu JavaScript personalizado -->
     <script src="{% static 'main_app/js/script.js' %}"></script>

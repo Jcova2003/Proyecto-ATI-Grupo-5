@@ -55,6 +55,11 @@ body {
   font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
 }
 
+footer {
+  margin-top: 1rem;
+  height: 65px;
+}
+
 .icon {
   vertical-align: middle;
 }
@@ -86,7 +91,7 @@ body {
   font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
 }
 
-.navbar-brand {
+#navbar-brand {
   font-weight: 700;
   font-size: 1.5rem;
   color: white;
@@ -102,7 +107,7 @@ body {
   align-items: center;
 }
 
-.search-person {
+#search-person {
   background-color: transparent;
   border: none;
   color: white;
@@ -283,6 +288,12 @@ textarea.search-bar {
   overflow-y: auto;
 }
 
+.back-link {
+  color: var(--green-700);
+  text-decoration: none;
+  font-size: 18px;
+}
+
 /* crear publicación */
 #post {
   flex-direction: row;
@@ -367,11 +378,33 @@ input[type="file"] {
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.feed {
+  gap: 0.5rem;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
 }
 
 .feed .user-info .profile-picture {
   height: auto;
   width: 52px;
+  align-self: baseline;
+}
+
+.comment .user-info .profile-picture {
+  height: auto;
+  width: 38px;
+}
+
+.comment-name {
+  color: var(--grey-800);
+  font-size: clamp(var(--H6-mobile), 2vw, var(--H6-desktop));
+  font-weight: bold;
 }
 
 .post-tag {
@@ -399,7 +432,7 @@ input[type="file"] {
   text-decoration: underline;
   border: none;
   font-family: var(--font-family);
-  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
   color: var(--grey-200);
 }
 
@@ -412,16 +445,32 @@ input[type="file"] {
   justify-content: space-between;
 }
 
+.comment-reaction-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .like-btn, .comments-btn {
   color: var(--green-600);
   background-color: transparent;
   border: none;
   transition: transform .2s;
+  text-decoration: none;
+}
+
+.comment-reaction-bar .icon {
+  font-size: var(--p-desktop);
 }
 
 .like-btn:hover, .comments-btn:hover {
   color: var(--green-700);
   transform: scale(1.1);
+}
+
+.comment-section {
+  color: var(--grey-800);
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
+  font-weight: bold;
 }
 
 /* Seccion de amigos */
@@ -446,6 +495,7 @@ input[type="file"] {
 }
 
 .tiny-name {
+  color: var(--grey-800);
   font-size: var(--H5-mobile);
   font-weight: bold;
 }
@@ -641,6 +691,7 @@ input[type="file"] {
 @media (max-width: 992px) {
   .container {
     max-width: 720px;
+    flex-direction: column;
   }
 
   .home-content {
@@ -652,6 +703,11 @@ input[type="file"] {
   .my-friends,
   .navbar-nav {
     display: none;
+    width: 100%;
+  }
+
+  .my-friends {
+    background-color: transparent;
   }
 
   .mobile-navbar {
@@ -1000,3 +1056,40 @@ input[type="file"] {
   }
 }
 
+/* Estilos para el perfil */
+
+.profile-content {
+    width: 75%;
+}
+
+.user-profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+}
+
+.profile-content .profile-picture {
+  width: 200px;
+}
+
+.profile-content .profile-feed-title {
+  font-size: clamp(var(--H4-mobile), 2vw, var(--H4-desktop));
+  margin:1rem 0;
+}
+
+.profile-content .btn-edit-profile{
+  width: 50%;
+}
+
+.wall {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

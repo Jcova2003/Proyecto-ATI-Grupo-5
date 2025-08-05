@@ -1,58 +1,46 @@
 # main_app/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion
-from collections import namedtuple
-from datetime import datetime, timezone
+from .models import Publicacion, Comentario
+from .utils import get_notifications, build_post_list, build_friend_list
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+
 
 def home(request):
     try:
-        notificaciones = [
-            {
-                "usuario": "Sofía Marcano",
-                "mensaje": "le ha dado like a tu publicación.",
-                "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-            },
-            {
-                "usuario": "Lisangely Goncalves",
-                "mensaje": "ha comentado en tu publicación.",
-                "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-            },
-            {
-                "usuario": "Valeria Ciccolella",
-                "mensaje": "le ha dado like a tu publicación.",
-                "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-            },
-        ]
         usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
+        
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
+            new_post.save()
+
+        notificaciones = get_notifications()
         posts = Publicacion.objects.all()
-        postList = []
-        Post = namedtuple("Post", "usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
+        postList =  build_post_list(posts)
+        friendList = build_friend_list(usuario)
 
-        for p in posts:
-            time = datetime.now(timezone.utc) - p.fecha_creacion
-            x = Post(p.usuario, p.contenido, p.multimedia, p.privacidad, time, "14k", 10)
-            postList.append(x)
-
-        Friends = namedtuple("Friend", "usuario active lastActive")
-        friends = Usuario.objects.all()
-        friendList = []
-        i = 1
-        for f in friends:
-            if f.nombre != usuario.nombre: 
-                x = Friends(f, i != 3, "10min")
-                friendList.append(x)
-                i=i+1
-
-        return render(request, 'home.html', {
-            'notificaciones': notificaciones,
-            'user' : usuario,
-            'posts': postList,
-            'friendList': friendList
-        })
+        return render(
+            request,
+            "feedTemplate.html",
+            {
+                "notificaciones": notificaciones,
+                "user": usuario,
+                "posts": postList,
+                "friendList": friendList,
+                "numFriends": len(friendList)
+            },
+        )
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
+
 
 def notifications(request):
     try:
@@ -144,13 +132,15 @@ def notifications(request):
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
 
+
 def chat_with_friend(request):
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
     context = {
-        "friend_name": 'Belén Cruz',
+        "friend_name": "Belén Cruz",
         # Puedes agregar más datos que necesites pasar a la plantilla
     }
     return render(request, "chatTemplate.html", context)
+
 
 def login(request):
     try:
@@ -158,11 +148,104 @@ def login(request):
     except Exception as e:
         return HttpResponse(f"Error en login: {str(e)}")
 
-def register(request):
+
+def profile(request, id_usuario = None):
     try:
-        return render(request, "register.html")
+        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
+        
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
+            new_post.save()
+
+        notificaciones = get_notifications()
+       
+        profile_user = (
+            get_object_or_404(Usuario, id=id_usuario)
+            if id_usuario and id_usuario != logged_user.id
+            else logged_user
+        )
+
+        posts = Publicacion.objects.filter(usuario=profile_user).order_by('-fecha_creacion')
+        postList = build_post_list(posts)
+        friendList = build_friend_list(logged_user)
+        numFriends = len(build_friend_list(profile_user))
+
+        return render(request, 'profile.html', {
+            'notificaciones': notificaciones,
+            'user' : profile_user,
+            'posts': postList,
+            'friendList': friendList,
+            'numFriends': numFriends,
+            'logged_user': logged_user
+        })
+
     except Exception as e:
-        return HttpResponse(f"Error en register: {str(e)}")
+        return HttpResponse(f"Error en profile: {str(e)}")
+
+def post(request, id_publicacion):
+    try:
+        notificaciones = get_notifications()
+        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
+        post = (
+            get_object_or_404(Publicacion, id = id_publicacion)
+        )
+        # post = Publicacion.objects.get(id = 1)
+        friendList = build_friend_list(logged_user)
+        comments = Comentario.objects.filter(publicacion = post)
+
+        return render(
+            request,
+            "detailedPostTemplate.html",
+            {
+                "notificaciones": notificaciones,
+                "user": logged_user,
+                "post": post,
+                "friendList": friendList,
+                "numFriends": len(friendList),
+                "comments": comments,
+                "numComments": comments.count()
+            },
+        )
+    except Exception as e:
+        return HttpResponse(f"Error en home: {str(e)}")
 
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
+
+
+def register(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        email = request.POST.get("email")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        if not nombre or not email or not password1 or not password2:
+            messages.error(request, "Todos los campos son obligatorios.")
+            return render(request, "register.html")
+
+        if password1 != password2:
+            messages.error(request, "Las contraseñas no coinciden.")
+            return render(request, "register.html")
+
+        # Check if email already exists
+        if Usuario.objects.filter(email=email).exists():
+            messages.error(request, "El correo ya está registrado.")
+            return render(request, "register.html")
+
+        try:
+            # Create user - ci field is now nullable so we don't need to provide it
+            user = Usuario.objects.create_user(
+                email=email, password=password1, nombre=nombre
+            )
+            messages.success(request, "Registro exitoso. Ahora puedes iniciar sesión.")
+            return redirect("login")
+
+        except Exception as e:
+            messages.error(request, f"Error al registrar usuario: {str(e)}")
+            return render(request, "register.html")
+
+    return render(request, "register.html")

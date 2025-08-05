@@ -3,9 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var post = document.getElementById("post");
     var mltmedia_upload = document.getElementById('multimedia-upload');
     var posts_content = document.getElementsByClassName('post-content');
+    var comment_content = document.getElementsByClassName('comment-content');
     var btnText = document.getElementsByClassName("readMore");
 
-    Array.from(posts_content).forEach(previewText);
+    Array.from(posts_content).forEach(previewTextPost);
+    Array.from(comment_content).forEach(previewTextComment);
     Array.from(btnText).forEach(readMore);
 
     post_bar.addEventListener('focus', function() {
@@ -47,17 +49,34 @@ document.addEventListener("DOMContentLoaded", function () {
         label.innerHTML = filename;
     });
 
+    post.addEventListener('submit', function(e) {
+        if (post_bar.value.trim() == '' && mltmedia_upload.files.length === 0) {
+            alert("Name must be filled out");
+            e.preventDefault();
+        } 
+    });
+
 });
 
-function previewText(post_content) {
+function previewTextPost(post_content) {
+    let limit = 250;
+    previewText(post_content, limit);
+}
+
+function previewTextComment(post_content) {
+    let limit = 60;
+    previewText(post_content, limit);
+}
+
+function previewText(post_content, limit) {
     var show = post_content.querySelector('#post-text');
     var text = show.getHTML();
 
-    if (text.length > 250) {
+    if (text.length > limit) {
         var more = post_content.querySelector('#more');
-        show.innerHTML = text.slice(0, 251);
+        show.innerHTML = text.slice(0, limit+1);
         text = text+" ";
-        more.innerHTML = text.slice(251, -1)+"<br>";
+        more.innerHTML = text.slice(limit+1, -1)+"<br>";
     } else {
         post_content.querySelector('#dots').style.display = "none";
         post_content.querySelector('.readMore').style.display = "none";
