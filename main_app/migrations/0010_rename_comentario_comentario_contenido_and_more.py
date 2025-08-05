@@ -8,15 +8,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main_app', '0008_alter_usuario_foto'),
+        ('main_app', '0009_rename_comentario_comentario_contenido'),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='comentario',
-            old_name='comentario',
-            new_name='contenido',
-        ),
         migrations.AlterField(
             model_name='chat',
             name='usuario1',
