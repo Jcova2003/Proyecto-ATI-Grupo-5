@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion
+from .models import Publicacion, Comentario
 from .utils import get_notifications, build_post_list, build_friend_list
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -185,6 +185,7 @@ def post(request, id_publicacion):
         )
         # post = Publicacion.objects.get(id = 1)
         friendList = build_friend_list(logged_user)
+        comments = Comentario.objects.filter(publicacion = post)
 
         return render(
             request,
@@ -194,7 +195,9 @@ def post(request, id_publicacion):
                 "user": logged_user,
                 "post": post,
                 "friendList": friendList,
-                "numFriends": len(friendList)
+                "numFriends": len(friendList),
+                "comments": comments,
+                "numComments": comments.count()
             },
         )
     except Exception as e:
