@@ -17,13 +17,20 @@
         
         <div class="user-profile-info">
           <label class="profile-card-name">{{ user.nombre|safe }}</label>
-          <a class="tiny-info">{{ numFriends }} {% trans "amigos" %}</a>
+          <a class="tiny-info">
+            {{ numFriends }} 
+            {% if numFriends == 1 %} 
+              {% trans "amigo" %} 
+            {% else %} 
+              {% trans "amigos" %} 
+            {% endif %}
+          </a>
           <p class="profile-desc">{{ user.descripcion|safe }}</p>
         </div>
       </div>
       
       <div class="button-container">
-        {% if user.id == logged_user %}
+        {% if request.resolver_match.url_name == 'my_profile'%}
         <button class="btn-edit-profile">
           <span class="material-icons icon">edit</span>
           {% trans "Editar perfil" %}
@@ -32,9 +39,23 @@
       </div>
     </div>
 
-    {% include 'postFormTemplate.html' %}
-    <h4 class="profile-feed-title">{% trans "Mi muro" %}</h4>
-    {% include 'postTemplate.html' %}
+    {% if request.resolver_match.url_name == 'my_profile'%}
+      {% include 'postFormTemplate.html' %}
+    {% else %}
+      <!-- Bloque de agregar amigo y chatear -->
+    {% endif %}
+
+    <h4 class="profile-feed-title">
+      {% if request.resolver_match.url_name == 'my_profile'%}
+        {% trans "Mi muro" %}
+      {% else %}
+        {% trans "Muro" %}
+      {% endif %}
+      
+    </h4>
+    <div class="wall">
+      {% include 'postTemplate.html' %}
+    </div>
 </div>
 
 <style>
