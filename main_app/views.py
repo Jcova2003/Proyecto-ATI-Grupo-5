@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion
+from .models import Publicacion, Comentario
 from .utils import get_notifications, build_post_list, build_friend_list
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -18,6 +18,13 @@ def home(request):
         posts = Publicacion.objects.all()
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
+
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
+            new_post.save()
 
         return render(
             request,
@@ -157,6 +164,13 @@ def profile(request, id_usuario = None):
         friendList = build_friend_list(logged_user)
         numFriends = len(build_friend_list(profile_user))
 
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
+            new_post.save()
+
         return render(request, 'profile.html', {
             'notificaciones': notificaciones,
             'user' : profile_user,
@@ -168,6 +182,33 @@ def profile(request, id_usuario = None):
 
     except Exception as e:
         return HttpResponse(f"Error en profile: {str(e)}")
+
+def post(request, id_publicacion):
+    try:
+        notificaciones = get_notifications()
+        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
+        post = (
+            get_object_or_404(Publicacion, id = id_publicacion)
+        )
+        # post = Publicacion.objects.get(id = 1)
+        friendList = build_friend_list(logged_user)
+        comments = Comentario.objects.filter(publicacion = post)
+
+        return render(
+            request,
+            "detailedPostTemplate.html",
+            {
+                "notificaciones": notificaciones,
+                "user": logged_user,
+                "post": post,
+                "friendList": friendList,
+                "numFriends": len(friendList),
+                "comments": comments,
+                "numComments": comments.count()
+            },
+        )
+    except Exception as e:
+        return HttpResponse(f"Error en home: {str(e)}")
 
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
