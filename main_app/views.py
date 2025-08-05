@@ -164,6 +164,13 @@ def profile(request, id_usuario = None):
         friendList = build_friend_list(logged_user)
         numFriends = len(build_friend_list(profile_user))
 
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
+            new_post.save()
+
         return render(request, 'profile.html', {
             'notificaciones': notificaciones,
             'user' : profile_user,
