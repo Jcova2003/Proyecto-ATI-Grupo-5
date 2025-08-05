@@ -1081,9 +1081,15 @@ input[type="file"] {
 
 .profile-content .profile-feed-title {
   font-size: clamp(var(--H4-mobile), 2vw, var(--H4-desktop));
-  margin:0.5rem 0;
+  margin:1rem 0;
 }
 
 .profile-content .btn-edit-profile{
   width: 50%;
+}
+
+.wall {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

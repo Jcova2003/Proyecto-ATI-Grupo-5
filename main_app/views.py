@@ -13,18 +13,19 @@ from django.contrib.auth.hashers import make_password
 
 def home(request):
     try:
-        notificaciones = get_notifications()
         usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
-        posts = Publicacion.objects.all()
-        postList =  build_post_list(posts)
-        friendList = build_friend_list(usuario)
-
+        
         if request.method == "POST":
             contenido = request.POST['post-text']
             multimedia = request.POST['post-mlt']
 
             new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
             new_post.save()
+
+        notificaciones = get_notifications()
+        posts = Publicacion.objects.all()
+        postList =  build_post_list(posts)
+        friendList = build_friend_list(usuario)
 
         return render(
             request,
@@ -150,8 +151,16 @@ def login(request):
 
 def profile(request, id_usuario = None):
     try:
-        notificaciones = get_notifications()
         logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
+        
+        if request.method == "POST":
+            contenido = request.POST['post-text']
+            multimedia = request.POST['post-mlt']
+
+            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
+            new_post.save()
+
+        notificaciones = get_notifications()
        
         profile_user = (
             get_object_or_404(Usuario, id=id_usuario)
@@ -163,13 +172,6 @@ def profile(request, id_usuario = None):
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
         numFriends = len(build_friend_list(profile_user))
-
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
-
-            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
-            new_post.save()
 
         return render(request, 'profile.html', {
             'notificaciones': notificaciones,

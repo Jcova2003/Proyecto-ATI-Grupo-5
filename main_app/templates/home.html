@@ -8,7 +8,14 @@
     <div class="profile-card atigram-card">
         <img class="profile-picture" src="{{ user.pfp_url }}">
         <label class="profile-card-name">{{ user.nombre|safe }}</label>
-        <a class="tiny-info">{{ numFriends }} {% trans "amigos" %}</a>
+        <a class="tiny-info">
+            {{ numFriends }} 
+            {% if numFriends == 1 %} 
+              {% trans "amigo" %} 
+            {% else %} 
+              {% trans "amigos" %} 
+            {% endif %}
+        </a>
         <p class="profile-desc">{{ user.descripcion|safe }}</p>
         <button class="btn-edit-profile">
             <span class="material-icons icon">edit</span>
