@@ -39,7 +39,7 @@ def build_feed_queryset(user):
 
 def build_wall_queryset(user, logged_user=None):
     public_posts = Publicacion.objects.filter(usuario=user, privacidad="publico")
-    private_posts = Publicacion.objects.filter(privacidad="privado")
+    private_posts = Publicacion.objects.filter(usuario=user,privacidad="privado")
     friends = get_friends(user).union(
         Usuario.objects.filter(email=user.email)
     )
