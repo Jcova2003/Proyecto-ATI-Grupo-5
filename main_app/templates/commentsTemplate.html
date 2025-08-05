@@ -1,5 +1,32 @@
 {% load i18n %}
 
-<div>
-    Soy un comentario!
+<div class="comment mrk-border">
+    <a class="user-info" href="{% url 'profile' post.usuario.id %}">
+        <img class="profile-picture" src="{{ post.usuario.pfp_url }}">
+    </a>
+    <div class="post-tag">
+        <a class="user-info" href="{% url 'profile' post.usuario.id %}">
+            <label class="comment-name">{{post.usuario.nombre}}</label>
+        </a>
+        <div class="comment-content">
+            <span id="post-text">{{post.contenido|safe|linebreaksbr}}</span>
+            <span id="dots">...</span>
+            <span id="more"></span>
+            <button class="readMore" href="#">{% trans "Ver más" %}</button>
+        </div>
+        <div class="comment-reaction-bar">
+            <button class="like-btn">
+                <span class="material-icons-outlined icon">favorite_border</span>
+                {{ post.reacciones }}
+            </button>
+            <a class="comments-btn" href="{% url 'post' post.id %}">
+                <span class="material-icons-outlined icon">chat_bubble</span>
+                {% trans "Responder" %}
+            </a>
+        </div>
+    </div>
+    
+    <button class="post-conf">
+        ⋮
+    </button> 
 </div>

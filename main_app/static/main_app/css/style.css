@@ -381,9 +381,30 @@ input[type="file"] {
   cursor: pointer;
 }
 
+.feed {
+  gap: 0.5rem;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+}
+
 .feed .user-info .profile-picture {
   height: auto;
   width: 52px;
+  align-self: baseline;
+}
+
+.comment .user-info .profile-picture {
+  height: auto;
+  width: 38px;
+}
+
+.comment-name {
+  color: var(--grey-800);
+  font-size: clamp(var(--H6-mobile), 2vw, var(--H6-desktop));
+  font-weight: bold;
 }
 
 .post-tag {
@@ -411,7 +432,7 @@ input[type="file"] {
   text-decoration: underline;
   border: none;
   font-family: var(--font-family);
-  font-size: clamp(var(--p-mobile), var(--p-desktop), var(--p-desktop));
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
   color: var(--grey-200);
 }
 
@@ -424,16 +445,32 @@ input[type="file"] {
   justify-content: space-between;
 }
 
+.comment-reaction-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .like-btn, .comments-btn {
   color: var(--green-600);
   background-color: transparent;
   border: none;
   transition: transform .2s;
+  text-decoration: none;
+}
+
+.comment-reaction-bar .icon {
+  font-size: var(--p-desktop);
 }
 
 .like-btn:hover, .comments-btn:hover {
   color: var(--green-700);
   transform: scale(1.1);
+}
+
+.comment-section {
+  color: var(--grey-800);
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
+  font-weight: bold;
 }
 
 /* Seccion de amigos */
