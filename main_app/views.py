@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion, Comentario
-from .utils import get_notifications, build_post_list, build_friend_list
+from .utils import get_notifications, build_post_list, build_friend_list, save_post
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -15,12 +15,7 @@ def home(request):
     try:
         usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
         
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
-
-            new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
-            new_post.save()
+        save_post(request, usuario)
 
         notificaciones = get_notifications()
         posts = Publicacion.objects.all()
@@ -153,12 +148,7 @@ def profile(request, id_usuario = None):
     try:
         logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
         
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
-
-            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
-            new_post.save()
+        save_post(request, logged_user)
 
         notificaciones = get_notifications()
        

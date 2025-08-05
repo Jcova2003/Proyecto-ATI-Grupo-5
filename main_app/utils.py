@@ -1,7 +1,7 @@
 # main_app/utils.py
 from collections import namedtuple
 from datetime import datetime, timezone
-from .models import Usuario, Comentario
+from .models import Usuario, Comentario, Publicacion
 
 def get_notifications():
     return [
@@ -64,3 +64,17 @@ def time_format(time):
         return f"{meses}m"
     anios = meses // 12
     return f"{anios}y"
+
+def save_post(request, usuario):
+    if request.method == "POST":
+        contenido = request.POST['post-text']
+        multimedia = request.POST['post-mlt']
+        visibilidad = request.POST['visibility']
+
+        if not contenido and not multimedia:
+            raise ValueError("La publicación no puede estar vacía.")
+        if visibilidad not in ["publico", "privado"]:
+            raise ValueError("Visibilidad no válida. Debe ser 'publico' o 'privado'.")
+
+        new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia, privacidad = visibilidad)
+        new_post.save()
