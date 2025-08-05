@@ -17,10 +17,43 @@ def get_notifications():
         },
     ]
 
-def build_post_list(posts_queryset):
+def get_friends(usuario):
+    return Usuario.objects.filter(
+        recibidas__de_usuario=usuario,
+        recibidas__estado='aceptada'
+    ).distinct().union(
+        Usuario.objects.filter(
+            enviadas__para_usuario=usuario,
+            enviadas__estado='aceptada'
+        ).distinct()
+    )
+
+def build_feed_queryset(user):
+    public_posts = Publicacion.objects.filter(privacidad="publico")
+    friends = get_friends(user).union(
+        Usuario.objects.filter(email=user.email)
+    ).values_list('id', flat=True)
+    private_posts = Publicacion.objects.filter(privacidad="privado", usuario_id__in=friends)
+    posts = (public_posts | private_posts).order_by('-fecha_creacion')
+    return posts
+
+def build_wall_queryset(user, logged_user=None):
+    public_posts = Publicacion.objects.filter(usuario=user, privacidad="publico")
+    private_posts = Publicacion.objects.filter(privacidad="privado")
+    friends = get_friends(user).union(
+        Usuario.objects.filter(email=user.email)
+    )
+    if logged_user in friends:
+        posts = (public_posts | private_posts).order_by('-fecha_creacion')
+    else:
+        posts = public_posts.order_by('-fecha_creacion')
+    
+    return posts
+
+def build_post_list(posts):
     Post = namedtuple("Post", "id usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")
     post_list = []
-    for p in posts_queryset:
+    for p in posts:
         tiempo = time_format(datetime.now(timezone.utc) - p.fecha_creacion)
         comment_count = Comentario.objects.filter(publicacion = p).count
         post = Post(p.id, p.usuario, p.contenido, p.multimedia, p.privacidad, tiempo, "14k", comment_count)
@@ -29,14 +62,7 @@ def build_post_list(posts_queryset):
 
 def build_friend_list(usuario_actual):
     Friends = namedtuple("Friend", "usuario active lastActive")
-    amigos = Usuario.objects.filter(
-            recibidas__de_usuario=usuario_actual,
-            recibidas__estado='aceptada'
-        ).distinct()
-    amigos = Usuario.objects.filter(
-            enviadas__para_usuario=usuario_actual,
-            enviadas__estado='aceptada'
-        ).distinct().union(amigos)
+    amigos = get_friends(usuario_actual)
     friend_list = []
     i = 1
     for f in amigos:

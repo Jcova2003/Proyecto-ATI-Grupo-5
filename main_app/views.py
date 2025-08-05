@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion, Comentario
-from .utils import get_notifications, build_post_list, build_friend_list, save_post
+from .utils import get_notifications, build_post_list, build_friend_list, save_post, build_feed_queryset, build_wall_queryset
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -18,7 +18,7 @@ def home(request):
         save_post(request, usuario)
 
         notificaciones = get_notifications()
-        posts = Publicacion.objects.all()
+        posts = build_feed_queryset(usuario)
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
 
@@ -158,7 +158,7 @@ def profile(request, id_usuario = None):
             else logged_user
         )
 
-        posts = Publicacion.objects.filter(usuario=profile_user).order_by('-fecha_creacion')
+        posts = build_wall_queryset(profile_user, logged_user)
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
         numFriends = len(build_friend_list(profile_user))
