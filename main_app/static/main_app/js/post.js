@@ -50,8 +50,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     post.addEventListener('submit', function(e) {
-        if (post_bar.value.trim() == '' && mltmedia_upload.files.length === 0) {
-            alert("Name must be filled out");
+        let visibilityNotSelected = document.querySelector('.post-visibility-options input:checked') === null;
+        let postEmpty = (post_bar.value.trim() == '' && mltmedia_upload.files.length === 0);
+        if (postEmpty || visibilityNotSelected) {
+            if (postEmpty) {
+                document.getElementById("content-error").style.display = "block";
+            } else {
+                document.getElementById("content-error").style = "";
+            }
+            
+            if (visibilityNotSelected) {
+                document.getElementById("visibility-error").style.display = "block";
+            } else {
+                document.getElementById("visibility-error").style = "";
+            }
             e.preventDefault();
         } 
     });

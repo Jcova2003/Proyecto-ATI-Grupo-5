@@ -79,6 +79,12 @@ footer {
   width: 75%;
 }
 
+.error {
+  color: var(--error);
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
+  display: none;
+}
+
 /* Navbar personalizada */
 .navbar {
   background-color: var(--primary-color);
@@ -438,6 +444,12 @@ input[type="file"] {
 
 .readMore:hover {
   color: var(--green-700);
+}
+
+.post-visibility-options {
+  color: var(--green-600);
+  margin-top: 0.5rem;
+  font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
 }
 
 .reaction-bar {
