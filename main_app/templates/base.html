@@ -6,7 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}ATIgram{% endblock %}</title>
-    
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+
     <!-- Tu CSS personalizado -->
     <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}" />
 
@@ -23,7 +24,9 @@
   data-comment-icon="{% static 'img/icons/comment.svg' %}"
   data-notifications='{{ notificaciones|escapejs }}'>
     <nav class="navbar">
-        <a id="navbar-brand" href="{% url 'home' %}">ATIgram</a>
+        <a id="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Logo Atigram" />
+        </a>
         <div class="search-friends">
             <button id="search-person">
                 <span class="material-icons-outlined icon">person_search</span>

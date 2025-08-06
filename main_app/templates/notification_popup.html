@@ -6,7 +6,7 @@
     </div>
     <div class="popup-content">
         {% if notificaciones %}
-            {% for noti in notificaciones %}
+            {% for noti in notificaciones|slice:":7" %}
                 <div class="notification-item">
                     <div class="user-avatar-container">
                         <img src="{{ noti.avatar_url }}" alt="Usuario" class="user-avatar">
@@ -18,12 +18,32 @@
                     <div class="notification-menu">⋮</div>
                 </div>
             {% endfor %}
+
+            {% if notificaciones|length > 7 %}
+                <div id="moreNotifications" style="display:none;">
+                    {% for noti in notificaciones|slice:"7:" %}
+                        <div class="notification-item">
+                            <div class="user-avatar-container">
+                                <img src="{{ noti.avatar_url }}" alt="Usuario" class="user-avatar">
+                                <div class="notification-icon"></div>
+                            </div>
+                            <div class="notification-text">
+                                <p><strong>{{ noti.usuario }}</strong> {{ noti.mensaje }}</p>
+                            </div>
+                            <div class="notification-menu">⋮</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% else %}
             <p>{% trans "No hay notificaciones disponibles." %}</p>
         {% endif %}
     </div>
+
     <div class="notification-footer">
-        <a href="#">{% trans "Ver más..." %}</a>
+        {% if notificaciones|length > 7 %}
+            <a href="#" id="verMasLink">{% trans "Ver más..." %}</a>
+        {% endif %}
     </div>
 </div>
 

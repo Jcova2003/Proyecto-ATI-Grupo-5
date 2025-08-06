@@ -3,21 +3,53 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion, Comentario
+from .models import Publicacion, Comentario, Notificacion
 from .utils import get_notifications, build_post_list, build_friend_list, save_post, build_feed_queryset, build_wall_queryset
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("home")
 
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        if not email or not password:
+            messages.error(request, "Todos los campos son obligatorios.")
+            return render(request, "login.html")
+
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)  
+            return redirect("home")
+        else:
+            messages.error(request, "Correo o contraseña incorrectos.")
+
+    return render(request, "login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
 def home(request):
     try:
-        usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
+        usuario = request.user
         
         save_post(request, usuario)
 
-        notificaciones = get_notifications()
+        notificaciones = get_notifications(usuario)
         posts = build_feed_queryset(usuario)
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
@@ -39,93 +71,18 @@ def home(request):
 
 def notifications(request):
     try:
-        # This is sample data - in a real app, you would fetch this from a database
-        all_notifications = [
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-        ]
-        count = int(request.GET.get("count", 5))  # Mostrar 5 por defecto
-        notifications = all_notifications[:count]
+        usuario = request.user # O usar request.user si tienes auth
+        count = int(request.GET.get("count", 5))
+        all_notifications = get_notifications(usuario)[:count]
+
         return render(
             request,
             "notificationsTemplate.html",
-            {"notifications": notifications, "count": count},
+            {"notifications": all_notifications, "count": count},
         )
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
+
 
 
 def chat_with_friend(request):
@@ -136,21 +93,13 @@ def chat_with_friend(request):
     }
     return render(request, "chatTemplate.html", context)
 
-
-def login(request):
-    try:
-        return render(request, "login.html")
-    except Exception as e:
-        return HttpResponse(f"Error en login: {str(e)}")
-
-
 def profile(request, id_usuario = None):
     try:
-        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
+        logged_user = request.user
         
         save_post(request, logged_user)
 
-        notificaciones = get_notifications()
+        notificaciones = get_notifications(logged_user)
        
         profile_user = (
             get_object_or_404(Usuario, id=id_usuario)
@@ -179,11 +128,12 @@ def profile(request, id_usuario = None):
 
 def post(request, id_publicacion):
     try:
-        notificaciones = get_notifications()
-        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
+        logged_user = request.user
         post = (
             get_object_or_404(Publicacion, id = id_publicacion)
         )
+        
+        notificaciones = get_notifications(logged_user)
 
         if request.method == "POST":
             comment_content = request.POST["comment"]

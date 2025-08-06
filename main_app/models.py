@@ -44,7 +44,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     libro_favorito = models.CharField(max_length=100, blank=True)
     musica_favorita = models.TextField(blank=True)
     videojuegos_favoritos = models.TextField(blank=True)
-    password_hash = models.TextField()
     configuracion = models.JSONField(null=True, blank=True)
     fecha_registro = models.DateTimeField(default=timezone.now)
 
@@ -130,7 +129,8 @@ class Mensaje(models.Model):
 
 
 class Notificacion(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='notificaciones_recibidas')
+    actor = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True, related_name='notificaciones_emitidas')
     tipo = models.CharField(max_length=50)
     contenido = models.TextField()
     leida = models.BooleanField(default=False)

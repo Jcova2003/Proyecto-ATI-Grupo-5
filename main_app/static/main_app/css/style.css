@@ -104,8 +104,11 @@ footer {
   margin-right: 1rem;
   text-decoration: none;
   white-space: nowrap;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
+}
+
+#navbar-brand img {
+  height: 40px;
+  width: auto;
 }
 
 .search-friends {
@@ -226,6 +229,11 @@ textarea.search-bar {
   color: var(--grey-800);
   font-size: clamp(var(--H5-mobile), 2.5vw, var(--H5-desktop));
   font-weight: bold;
+  cursor: pointer;
+}
+
+.larger-name:hover {
+  text-decoration: underline;
 }
 
 .tiny-info {
@@ -427,6 +435,11 @@ input[type="file"] {
   height: auto;
   width: 52px;
   align-self: baseline;
+  transition: 0.25s ease-in-out
+}
+
+.feed .user-info:hover .profile-picture {
+  transform: scale(1.1);
 }
 
 .comment .user-info .profile-picture {
@@ -1128,7 +1141,7 @@ input[type="file"] {
 }
 
 .profile-content .btn-edit-profile{
-  width: 50%;
+  width: 100%;
 }
 
 .button-container {
@@ -1183,5 +1196,11 @@ input[type="file"] {
   .container {
     max-width: 95%;
   }
+}
+
+
+.logout-form,
+.logout-form button {
+  width: 100%;
 }
 
