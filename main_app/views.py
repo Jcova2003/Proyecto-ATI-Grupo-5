@@ -107,6 +107,9 @@ def profile(request, id_usuario = None):
             else logged_user
         )
 
+        if profile_user == logged_user and id_usuario is not None:
+            return redirect("my_profile")
+
         posts = build_wall_queryset(profile_user, logged_user)
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
