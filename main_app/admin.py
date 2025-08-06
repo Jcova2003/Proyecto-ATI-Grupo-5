@@ -18,7 +18,6 @@ class UsuarioAdmin(admin.ModelAdmin):
         "libro_favorito",
         "musica_favorita",
         "videojuegos_favoritos",
-        "password",
         "is_active",
         "is_staff",
         "is_superuser"

@@ -35,10 +35,14 @@
             <span class="material-icons icon">edit</span>
             {% trans "Editar perfil" %}
           </button>
-          <button class="btn-edit-profile btn-primary">
-            <span class="material-icons icon">logout</span>
-            {% trans "Cerrar sesión" %}
-          </button>
+          
+          <form class="logout-form" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-edit-profile btn-primary">
+              <span class="material-icons icon">logout</span>
+              {% trans "Cerrar sesión" %}
+            </button>
+          </form>
         
         {% else %}
         

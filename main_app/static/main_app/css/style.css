@@ -1106,7 +1106,7 @@ input[type="file"] {
 }
 
 .profile-content .btn-edit-profile{
-  width: 50%;
+  width: 100%;
 }
 
 .button-container {
@@ -1161,5 +1161,11 @@ input[type="file"] {
   .container {
     max-width: 95%;
   }
+}
+
+
+.logout-form,
+.logout-form button {
+  width: 100%;
 }
 
