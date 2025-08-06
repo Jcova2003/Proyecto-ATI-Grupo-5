@@ -57,4 +57,21 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Menú de notificación clickeado');
         });
     });
+
+    // Código para manejar "Ver más / Ver menos"
+    const verMasLink = document.getElementById('verMasLink');
+    const moreNotifications = document.getElementById('moreNotifications');
+
+    if (verMasLink && moreNotifications) {
+        verMasLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (moreNotifications.style.display === 'none') {
+                moreNotifications.style.display = 'block';
+                verMasLink.textContent = 'Ver menos...';
+            } else {
+                moreNotifications.style.display = 'none';
+                verMasLink.textContent = 'Ver más...';
+            }
+        });
+    }
 });

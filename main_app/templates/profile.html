@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Inicio - {{ block.super }}{% endblock %}
+
+{% block extra_css %}
+    <script src="{% static 'main_app/js/post.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="center profile-content">
+    <div class="user-profile-wrapper">
+        <div class="user-profile-container">
+       
+          <img class="profile-picture" src="{{ user.pfp_url }}">
+        
+        <div class="user-profile-info">
+          <label class="profile-card-name">{{ user.nombre|safe }}</label>
+          <a class="tiny-info">
+            {{ numFriends }} 
+            {% if numFriends == 1 %} 
+              {% trans "amigo" %} 
+            {% else %} 
+              {% trans "amigos" %} 
+            {% endif %}
+          </a>
+          <p class="profile-desc">{{ user.descripcion|safe }}</p>
+        </div>
+      </div>
+      
+      <div class="button-container">
+        {% if request.resolver_match.url_name == 'my_profile'%}
+          <button class="btn-edit-profile">
+            <span class="material-icons icon">edit</span>
+            {% trans "Editar perfil" %}
+          </button>
+          <button class="btn-edit-profile btn-primary">
+            <span class="material-icons icon">logout</span>
+            {% trans "Cerrar sesión" %}
+          </button>
+        
+        {% else %}
+        
+          {% if isMyFriend %}
+            <button class="btn-edit-profile remove-friend">
+                <span class="material-icons icon">delete</span>
+                {% trans "Eliminar amigo" %}
+            </button>  
+
+          {% else %}
+      
+            <button class="btn-edit-profile add-friend">
+                <span class="material-icons icon">person_add</span>
+                {% trans "Agregar amigo" %}
+            </button>        
+          
+          {% endif %}
+
+        <button class="btn-edit-profile btn-primary">
+          <span class="material-icons icon">chat</span>
+          {% trans "Chatear" %}
+        </button>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if request.resolver_match.url_name == 'my_profile'%}
+      {% include 'postFormTemplate.html' %}
+    {% else %}
+      <!-- Bloque de agregar amigo y chatear -->
+    {% endif %}
+
+    <h4 class="profile-feed-title">
+      {% if request.resolver_match.url_name == 'my_profile'%}
+        {% trans "Mi muro" %}
+      {% else %}
+        {% trans "Muro" %}
+      {% endif %}
+      
+    </h4>
+    <div class="wall">
+      {% include 'postTemplate.html' %}
+    </div>
+</div>
+
+<style>
+
+</style>
+{% endblock %}
+
+{% block notifications_popup %}
+{% include 'notification_popup.html' %}
+{% endblock %}

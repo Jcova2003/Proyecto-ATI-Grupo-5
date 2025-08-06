@@ -2,6 +2,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("Proyecto ATI cargado correctamente");
+  var searchPerson = document.getElementById("search-person");
+  var searchFriends = document.querySelector(".search-friends");
+  const mediaQueryList = window.matchMedia("(max-width: 992px)");
 
   // Efecto smooth scroll para enlaces internos
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -17,36 +20,36 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Efecto hover para las cards
-  const cards = document.querySelectorAll(".feature-card");
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", function () {
-      this.style.transform = "translateY(-5px)";
-    });
-
-    card.addEventListener("mouseleave", function () {
-      this.style.transform = "translateY(0)";
-    });
+  document.querySelectorAll('.back-link').forEach((anchor) => {
+   anchor.href = document.referrer;
   });
 
-  // Efecto de typing para el título (opcional)
-  const title = document.querySelector(".hero-section h1");
-  if (title) {
-    const text = title.textContent;
-    title.textContent = "";
-    let i = 0;
+  searchPerson.addEventListener("click", function() {
+    if (mediaQueryList.matches) {
+      var searchBar = searchFriends.querySelector(".search-bar");
 
-    function typeWriter() {
-      if (i < text.length) {
-        title.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
-      }
+      document.getElementById("navbar-brand").style.display = "none";
+      document.querySelector(".nav-chat").style.display = "none";
+      searchFriends.style.width = "100%";
+      searchBar.style.display = "unset";
+      document.querySelector(".center").style.display = "none";
+      
+      document.querySelector(".my-friends").style.display = "unset";
     }
+  });
 
-    // Descomenta la siguiente línea si quieres el efecto typing:
-    // typeWriter();
-  }
+
+  window.addEventListener('click', function(e){   
+        if (!searchFriends.contains(e.target)){
+          searchFriends.style = "";
+          document.getElementById("navbar-brand").style = "";
+          document.querySelector(".nav-chat").style = "";
+          searchFriends.querySelector(".search-bar").style = "";
+          document.querySelector(".center").style = "";
+          document.querySelector(".my-friends").style = "";
+        }
+    });
+
 });
 
 // Función para mostrar notificaciones (opcional)
