@@ -45,7 +45,7 @@ def logout_view(request):
 @login_required(login_url='login')
 def home(request):
     try:
-        usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
+        usuario = request.user
         
         if request.method == "POST":
             contenido = request.POST['post-text']
@@ -100,7 +100,7 @@ def chat_with_friend(request):
 
 def profile(request, id_usuario = None):
     try:
-        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
+        logged_user = request.user
         
         if request.method == "POST":
             contenido = request.POST['post-text']
