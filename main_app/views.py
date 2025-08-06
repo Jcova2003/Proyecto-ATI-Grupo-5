@@ -76,7 +76,7 @@ def home(request):
 
 def notifications(request):
     try:
-        usuario = Usuario.objects.get(email="helenaTorres@gmail.com")  # O usar request.user si tienes auth
+        usuario = request.user # O usar request.user si tienes auth
         count = int(request.GET.get("count", 5))
         all_notifications = get_notifications(usuario)[:count]
 
@@ -138,7 +138,7 @@ def profile(request, id_usuario = None):
 
 def post(request, id_publicacion):
     try:
-        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
+        logged_user = request.user
         post = (
             get_object_or_404(Publicacion, id = id_publicacion)
         )
