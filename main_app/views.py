@@ -161,6 +161,7 @@ def profile(request, id_usuario = None):
         posts = build_wall_queryset(profile_user, logged_user)
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
+        isMyFriend = any(friend.usuario.id == profile_user.id for friend in friendList)
         numFriends = len(build_friend_list(profile_user))
 
         return render(request, 'profile.html', {
@@ -169,7 +170,8 @@ def profile(request, id_usuario = None):
             'posts': postList,
             'friendList': friendList,
             'numFriends': numFriends,
-            'logged_user': logged_user
+            'logged_user': logged_user,
+            'isMyFriend': isMyFriend
         })
 
     except Exception as e:

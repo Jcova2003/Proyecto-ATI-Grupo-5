@@ -31,9 +31,35 @@
       
       <div class="button-container">
         {% if request.resolver_match.url_name == 'my_profile'%}
-        <button class="btn-edit-profile">
-          <span class="material-icons icon">edit</span>
-          {% trans "Editar perfil" %}
+          <button class="btn-edit-profile">
+            <span class="material-icons icon">edit</span>
+            {% trans "Editar perfil" %}
+          </button>
+          <button class="btn-edit-profile btn-primary">
+            <span class="material-icons icon">logout</span>
+            {% trans "Cerrar sesión" %}
+          </button>
+        
+        {% else %}
+        
+          {% if isMyFriend %}
+            <button class="btn-edit-profile remove-friend">
+                <span class="material-icons icon">delete</span>
+                {% trans "Eliminar amigo" %}
+            </button>  
+
+          {% else %}
+      
+            <button class="btn-edit-profile add-friend">
+                <span class="material-icons icon">person_add</span>
+                {% trans "Agregar amigo" %}
+            </button>        
+          
+          {% endif %}
+
+        <button class="btn-edit-profile btn-primary">
+          <span class="material-icons icon">chat</span>
+          {% trans "Chatear" %}
         </button>
         {% endif %}
       </div>
