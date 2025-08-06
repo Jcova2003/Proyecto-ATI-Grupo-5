@@ -182,7 +182,16 @@ def post(request, id_publicacion):
         post = (
             get_object_or_404(Publicacion, id = id_publicacion)
         )
-        # post = Publicacion.objects.get(id = 1)
+
+        if request.method == "POST":
+            comment_content = request.POST["comment"]
+            new_comment = Comentario(
+                publicacion=post,
+                usuario=logged_user,
+                contenido=comment_content
+            )
+            new_comment.save()
+            
         friendList = build_friend_list(logged_user)
         comments = Comentario.objects.filter(publicacion = post)
 

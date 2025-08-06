@@ -42,9 +42,12 @@
         </div>
 
         <label class="comment-section">{% trans "Comentarios" %}</label>
-        <div id="post-write-bar">
-            <textarea class="search-bar" id="post-bar" type="text" placeholder="{% trans "Escribir Comentario" %}" name="post-text"></textarea>
-        </div>
+        <form id="comment-write-bar" method="POST"> {% csrf_token %}
+            <textarea class="search-bar" id="comment-bar" type="text" placeholder="{% trans "Escribir Comentario" %}" name="comment"></textarea>
+            <button class="btn-send" type="submit">
+                <span class="material-icons icon">send</span>
+            </button>
+        </form>
 
         {% include 'commentsTemplate.html' %}
     </div>
