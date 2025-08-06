@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion, Comentario
+from .models import Publicacion, Comentario, Notificacion
 from .utils import get_notifications, build_post_list, build_friend_list
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -22,7 +22,7 @@ def home(request):
             new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
             new_post.save()
 
-        notificaciones = get_notifications()
+        notificaciones = get_notifications(usuario)
         posts = Publicacion.objects.all()
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
@@ -44,93 +44,18 @@ def home(request):
 
 def notifications(request):
     try:
-        # This is sample data - in a real app, you would fetch this from a database
-        all_notifications = [
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-        ]
-        count = int(request.GET.get("count", 5))  # Mostrar 5 por defecto
-        notifications = all_notifications[:count]
+        usuario = Usuario.objects.get(email="helenaTorres@gmail.com")  # O usar request.user si tienes auth
+        count = int(request.GET.get("count", 5))
+        all_notifications = get_notifications(usuario)[:count]
+
         return render(
             request,
             "notificationsTemplate.html",
-            {"notifications": notifications, "count": count},
+            {"notifications": all_notifications, "count": count},
         )
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
+
 
 
 def chat_with_friend(request):
@@ -160,7 +85,7 @@ def profile(request, id_usuario = None):
             new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
             new_post.save()
 
-        notificaciones = get_notifications()
+        notificaciones = get_notifications(logged_user)
        
         profile_user = (
             get_object_or_404(Usuario, id=id_usuario)
@@ -187,7 +112,7 @@ def profile(request, id_usuario = None):
 
 def post(request, id_publicacion):
     try:
-        notificaciones = get_notifications()
+        notificaciones = get_notifications(logged_user)
         logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
         post = (
             get_object_or_404(Publicacion, id = id_publicacion)

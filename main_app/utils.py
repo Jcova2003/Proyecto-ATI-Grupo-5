@@ -1,21 +1,28 @@
 # main_app/utils.py
 from collections import namedtuple
 from datetime import datetime, timezone
-from .models import Usuario, Comentario
+from .models import Usuario, Comentario, Notificacion
 
-def get_notifications():
-    return [
-        {
-            "usuario": "Emanuel Delgado",
-            "mensaje": "le ha dado like a tu publicación.",
-            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-        },
-        {
-            "usuario": "Isabel Cárdenas",
-            "mensaje": "ha comentado en tu publicación.",
-            "avatar_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQytc93VfA29gwZ4w1ySdWjx1CSJBM6qGG3BA&s"
-        },
-    ]
+def get_notifications(usuario):
+    notificaciones = Notificacion.objects.filter(usuario=usuario).order_by("-fecha")[:10]
+    result = []
+
+    for notif in notificaciones:
+        actor = notif.actor if notif.actor else notif.usuario
+
+        # Construir la URL manualmente
+        avatar_path = actor.foto  # Esto será 'img/12345678.png'
+        avatar_url = f"/static/media/{avatar_path}" if avatar_path else "https://via.placeholder.com/150"
+
+        result.append({
+            "usuario": actor.nombre,
+            "avatar_url": avatar_url,
+            "mensaje": notif.contenido
+        })
+
+    return result
+
+
 
 def build_post_list(posts_queryset):
     Post = namedtuple("Post", "id usuario contenido multimedia privacidad fecha_creacion reacciones comentarios")

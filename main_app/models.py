@@ -130,7 +130,8 @@ class Mensaje(models.Model):
 
 
 class Notificacion(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='notificaciones_recibidas')
+    actor = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True, related_name='notificaciones_emitidas')
     tipo = models.CharField(max_length=50)
     contenido = models.TextField()
     leida = models.BooleanField(default=False)
