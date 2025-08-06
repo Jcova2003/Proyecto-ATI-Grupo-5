@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion, Comentario, Notificacion
-from .utils import get_notifications, build_post_list, build_friend_list
+from .utils import get_notifications, build_post_list, build_friend_list, save_post, build_feed_queryset, build_wall_queryset
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -47,15 +47,10 @@ def home(request):
     try:
         usuario = request.user
         
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
-
-            new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
-            new_post.save()
+        save_post(request, usuario)
 
         notificaciones = get_notifications(usuario)
-        posts = Publicacion.objects.all()
+        posts = build_feed_queryset(usuario)
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
 
@@ -102,12 +97,7 @@ def profile(request, id_usuario = None):
     try:
         logged_user = request.user
         
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
-
-            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
-            new_post.save()
+        save_post(request, logged_user)
 
         notificaciones = get_notifications(logged_user)
        
@@ -117,7 +107,7 @@ def profile(request, id_usuario = None):
             else logged_user
         )
 
-        posts = Publicacion.objects.filter(usuario=profile_user).order_by('-fecha_creacion')
+        posts = build_wall_queryset(profile_user, logged_user)
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
         isMyFriend = any(friend.usuario.id == profile_user.id for friend in friendList)
@@ -144,6 +134,16 @@ def post(request, id_publicacion):
         )
         
         notificaciones = get_notifications(logged_user)
+
+        if request.method == "POST":
+            comment_content = request.POST["comment"]
+            new_comment = Comentario(
+                publicacion=post,
+                usuario=logged_user,
+                contenido=comment_content
+            )
+            new_comment.save()
+            
         friendList = build_friend_list(logged_user)
         comments = Comentario.objects.filter(publicacion = post)
 
