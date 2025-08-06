@@ -138,12 +138,12 @@ def profile(request, id_usuario = None):
 
 def post(request, id_publicacion):
     try:
-        notificaciones = get_notifications(logged_user)
         logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
         post = (
             get_object_or_404(Publicacion, id = id_publicacion)
         )
-        # post = Publicacion.objects.get(id = 1)
+        
+        notificaciones = get_notifications(logged_user)
         friendList = build_friend_list(logged_user)
         comments = Comentario.objects.filter(publicacion = post)
 
