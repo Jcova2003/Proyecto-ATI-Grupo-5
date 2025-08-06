@@ -45,21 +45,22 @@
           </form>
         
         {% else %}
-        
+        <form method="post" id="friend-action"> {% csrf_token %}
           {% if isMyFriend %}
-            <button class="btn-edit-profile remove-friend">
+            <button class="btn-edit-profile remove-friend" id="remove-friend-btn" name="remove">
                 <span class="material-icons icon">delete</span>
                 {% trans "Eliminar amigo" %}
             </button>  
 
           {% else %}
       
-            <button class="btn-edit-profile add-friend">
+            <button class="btn-edit-profile add-friend" id="add-friend-btn" name="add">
                 <span class="material-icons icon">person_add</span>
                 {% trans "Agregar amigo" %}
             </button>        
           
           {% endif %}
+        </form>
 
         <button class="btn-edit-profile btn-primary">
           <span class="material-icons icon">chat</span>

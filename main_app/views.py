@@ -1,9 +1,10 @@
 # main_app/views.py
+from time import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion, Comentario, Notificacion
+from .models import Publicacion, Comentario, Notificacion, SolicitudAmistad
 from .utils import get_notifications, build_post_list, build_friend_list, save_post, build_feed_queryset, build_wall_queryset
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -99,6 +100,7 @@ def profile(request, id_usuario = None):
         
         save_post(request, logged_user)
 
+
         notificaciones = get_notifications(logged_user)
        
         profile_user = (
@@ -109,6 +111,33 @@ def profile(request, id_usuario = None):
 
         if profile_user == logged_user and id_usuario is not None:
             return redirect("my_profile")
+        
+        if request.method == "POST" :
+            if "add" in request.POST:
+                friendRequest = SolicitudAmistad.objects.filter(
+                    de_usuario=logged_user, para_usuario=profile_user
+                ).first()
+                if friendRequest:
+                    friendRequest.estado = "aceptada"
+                    friendRequest.fecha = timezone.now()
+                else:
+                    friendRequest = SolicitudAmistad(
+                        de_usuario=logged_user,
+                        para_usuario=profile_user,
+                        estado="aceptada"
+                    )
+            
+            elif "remove" in request.POST:
+                friendRequest = SolicitudAmistad.objects.filter(
+                    de_usuario=logged_user, para_usuario=profile_user
+                ).first()
+                if friendRequest:
+                    friendRequest.estado = "rechazada"
+                    friendRequest.fecha = timezone.now()
+            
+            friendRequest.save()
+            
+                
 
         posts = build_wall_queryset(profile_user, logged_user)
         postList = build_post_list(posts)

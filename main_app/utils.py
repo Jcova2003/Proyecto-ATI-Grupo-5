@@ -100,7 +100,7 @@ def time_format(time):
     return f"{anios}y"
 
 def save_post(request, usuario):
-    if request.method == "POST":
+    if request.method == "POST" and "post" in request.POST:
         contenido = request.POST['post-text']
         multimedia = request.POST['post-mlt']
         visibilidad = request.POST['visibility']
