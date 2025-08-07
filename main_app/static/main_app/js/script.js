@@ -34,12 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
       searchBar.style.display = "unset";
       document.querySelector(".center").style.display = "none";
       
-      document.querySelector(".my-friends").style.display = "unset";
+      document.querySelector(".my-friends").style.display = "flex";
     }
   });
 
-
-  window.addEventListener('click', function(e){   
+  var friendsClose =document.querySelector('.my-friends .back-link');
+  if (friendsClose){
+    friendsClose.href = "";
+    friendsClose.addEventListener('click', function(e){   
         if (!searchFriends.contains(e.target)){
           searchFriends.style = "";
           document.getElementById("navbar-brand").style = "";
@@ -49,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
           document.querySelector(".my-friends").style = "";
         }
     });
+  }
 
 });
 

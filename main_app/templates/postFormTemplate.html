@@ -16,9 +16,17 @@
             </label>
             <input id="multimedia-upload" type="file" name="post-mlt"> 
         </div>
+        <span class = "error" id ="content-error">{% trans "Debes añadir un texto o una imagen." %}</span>
+        <div class="post-visibility-options">
+            <input type="radio" id="public" name="visibility" value="publico">
+            <label for="public">{% trans "Público" %}</label>
+            <input type="radio" id="private" name="visibility" value="privado">
+            <label for="private">{% trans "Privado" %}</label>
+        </div>
+        <span class = "error" id ="visibility-error">{% trans "Debes seleccionar una visibilidad." %}</span>
         <div class="createPost-btns-bar">
             <button class="btn-edit-profile" id="save-draft-btn">{% trans "Guardar Borrador" %}</button>
-            <button type="submit" class="btn-edit-profile" id="post-btn">{% trans "Publicar" %}</button>
+            <button type="submit" class="btn-edit-profile" id="post-btn" name="post">{% trans "Publicar" %}</button>
         </div>
     </div>
 </form>

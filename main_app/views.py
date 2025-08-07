@@ -1,31 +1,64 @@
 # main_app/views.py
+from django.utils import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
-from .models import Publicacion, Comentario
-from .utils import get_notifications, build_post_list, build_friend_list
+from .models import Publicacion, Comentario, Notificacion, SolicitudAmistad
+from .utils import get_notifications, build_post_list, build_friend_list, action_notification
+from .utils import save_post, build_feed_queryset, build_wall_queryset, find_friend_request, crear_notificacion
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.utils.translation import gettext as _
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("home")
 
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        if not email or not password:
+            messages.error(request, _("Todos los campos son obligatorios."))
+            return render(request, "login.html")
+
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)  
+            return redirect("home")
+        else:
+            messages.error(request, _("Correo o contraseña incorrectos."))
+
+    return render(request, "login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url='login')
 def home(request):
     try:
-        usuario = Usuario.objects.get(email="helenaTorres@gmail.com")
+        usuario = request.user
         
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
+        save_post(request, usuario)
+        action_notification(request)
 
-            new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia)
-            new_post.save()
-
-        notificaciones = get_notifications()
-        posts = Publicacion.objects.all()
+        notificaciones = get_notifications(usuario)
+        posts = build_feed_queryset(usuario)
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
+
+        
 
         return render(
             request,
@@ -41,126 +74,86 @@ def home(request):
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
 
-
 def notifications(request):
     try:
-        # This is sample data - in a real app, you would fetch this from a database
-        all_notifications = [
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://i.pinimg.com/736x/82/47/0b/82470b4ed44c3edacfcd4201e2297050.jpg",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Sofia Marcano",
-                "user_image": "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_640.png",
-                "action": "le ha dado like a tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-            {
-                "user_name": "Lisangely Goncalves",
-                "user_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-                "action": "ha comentado en tu publicación.",
-            },
-        ]
-        count = int(request.GET.get("count", 5))  # Mostrar 5 por defecto
-        notifications = all_notifications[:count]
+        usuario = request.user # O usar request.user si tienes auth
+        count = int(request.GET.get("count", 5))
+        all_notifications = get_notifications(usuario)[:count]
+        print("Processing POST request in notifications")
+        
+
         return render(
             request,
             "notificationsTemplate.html",
-            {"notifications": notifications, "count": count},
+            {"notifications": all_notifications, "count": count},
         )
     except Exception as e:
         return HttpResponse(f"Error en notifications: {str(e)}")
 
 
+
+
+# views.py
+def chats_view(request):
+    logged_user = request.user
+    action_notification(request)
+    friendList = build_friend_list(logged_user)
+    users = Usuario.objects.all()
+    users_data = []
+
+    for user in users:
+        users_data.append({
+            "id": user.id,  # Add this line!
+            "name": user.nombre or user.email,
+            "avatar": user.foto.url if user.foto else "/static/img/default_profile.png",
+            "last_message": "¡Hola! Este es un mensaje de prueba.",
+            "last_time": "hace 1 min",
+        })
+
+    return render (
+            request,
+            "chatsTemplate.html",
+            {
+                "users": users_data,
+                "friendList": friendList,
+                "notificaciones": get_notifications(logged_user),
+            },
+        )
+
 def chat_with_friend(request):
-    # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
-    context = {
-        "friend_name": "Belén Cruz",
-        # Puedes agregar más datos que necesites pasar a la plantilla
-    }
-    return render(request, "chatTemplate.html", context)
-
-
-def login(request):
-    try:
-        return render(request, "login.html")
-    except Exception as e:
-        return HttpResponse(f"Error en login: {str(e)}")
-
+    logged_user = request.user
+    friendList = build_friend_list(request.user)
+    friend_id = request.GET.get("friend_id")
+    friend = None
+    if friend_id:
+        try:
+            friend = Usuario.objects.get(id=friend_id)
+        except Usuario.DoesNotExist:
+            pass
+    if not friend:
+        return render(request, "chatTemplate.html", {
+            "friend_name": "Usuario no encontrado",
+            "friend_first_name": "Usuario",
+            "friend_avatar": "/static/img/default_profile.png",
+        })
+    full_name = friend.nombre or friend.email
+    first_name = full_name.split()[0] if full_name else ""
+    return render(request, "chatTemplate.html", {
+        "friend_name": full_name,
+        "friend_avatar": friend.foto.url if friend.foto else "/static/img/default_profile.png",
+        "friend_first_name": first_name,
+        "friendList": friendList,
+        "notificaciones": get_notifications(logged_user),
+    })
 
 def profile(request, id_usuario = None):
     try:
-        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com") 
+        logged_user = request.user
         
-        if request.method == "POST":
-            contenido = request.POST['post-text']
-            multimedia = request.POST['post-mlt']
+        save_post(request, logged_user)
+        action_notification(request)
 
-            new_post = Publicacion(usuario = logged_user, contenido = contenido, multimedia = multimedia)
-            new_post.save()
-
-        notificaciones = get_notifications()
+        notificaciones = get_notifications(logged_user)
        
         profile_user = (
             get_object_or_404(Usuario, id=id_usuario)
@@ -168,9 +161,44 @@ def profile(request, id_usuario = None):
             else logged_user
         )
 
-        posts = Publicacion.objects.filter(usuario=profile_user).order_by('-fecha_creacion')
+        if profile_user == logged_user and id_usuario is not None:
+            return redirect("my_profile")
+        
+        if request.method == "POST" :
+            friendRequest = find_friend_request(logged_user, profile_user)
+            if "add" in request.POST:
+                if friendRequest:
+                    friendRequest.estado = "pendiente"
+                    # friendRequest.fecha = timezone.now
+                    friendRequest.save()
+                else:
+                    friendRequest = SolicitudAmistad(
+                        de_usuario=logged_user,
+                        para_usuario=profile_user,
+                    )
+                    friendRequest.save()
+                notif = Notificacion(
+                    usuario=profile_user,
+                    actor=logged_user,
+                    tipo="amistad",
+                    contenido=f"te ha enviado una solicitud de amistad."
+                )
+                notif.save()
+            
+            elif "remove" in request.POST:
+                if friendRequest:
+                    friendRequest.estado = "rechazada"
+                    # friendRequest.fecha = timezone.now
+                    friendRequest.save()
+                
+            
+            
+                
+
+        posts = build_wall_queryset(profile_user, logged_user)
         postList = build_post_list(posts)
         friendList = build_friend_list(logged_user)
+        isMyFriend = any(friend.usuario.id == profile_user.id for friend in friendList)
         numFriends = len(build_friend_list(profile_user))
 
         return render(request, 'profile.html', {
@@ -179,20 +207,89 @@ def profile(request, id_usuario = None):
             'posts': postList,
             'friendList': friendList,
             'numFriends': numFriends,
-            'logged_user': logged_user
+            'logged_user': logged_user,
+            'isMyFriend': isMyFriend
         })
 
     except Exception as e:
         return HttpResponse(f"Error en profile: {str(e)}")
+    
+@login_required
+def editProfile(request):
+    user = request.user
+    action_notification(request)
+    notificaciones = get_notifications(user)
+    friendList = build_friend_list(user)
+
+    try:
+        if request.method == 'POST':
+            nombre = request.POST.get("nombre")
+            email = request.POST.get("email")
+            password1 = request.POST.get("password1")
+            password2 = request.POST.get("password2")
+            descripcion = request.POST.get("descripcion")
+            foto = request.FILES.get('foto', None)
+            
+            if Usuario.objects.filter(email=email).exclude(pk=user.pk).exists():
+                messages.error(request, _("El correo electrónico ya está registrado por otro usuario."))
+                return redirect('edit_profile')
+    
+            if password1 and password1 != password2:
+                messages.error(request, _("Las contraseñas no coinciden."))
+                return redirect('edit_profile')
+
+            user.nombre = nombre
+            user.email = email
+            user.descripcion = descripcion
+
+            if password1:
+                user.set_password(password1)
+                update_session_auth_hash(request, user)
+
+            if foto:
+                user.foto = foto
+
+            user.save()
+            messages.success(request, _("Perfil actualizado correctamente."))
+            return redirect('edit_profile')  
+
+        return render(request, 'editProfile.html', {
+            'notificaciones': notificaciones,
+            'friendList': friendList,
+            'user': user,  
+        })
+
+    except Exception as e:
+        return HttpResponse(f"Error en edit-profile: {str(e)}")
 
 def post(request, id_publicacion):
     try:
-        notificaciones = get_notifications()
-        logged_user = Usuario.objects.get(email="helenaTorres@gmail.com")
+        logged_user = request.user
         post = (
             get_object_or_404(Publicacion, id = id_publicacion)
         )
-        # post = Publicacion.objects.get(id = 1)
+        
+        action_notification(request)
+
+        notificaciones = get_notifications(logged_user)
+
+        if request.method == "POST" and "comment" in request.POST:
+            comment_content = request.POST["comment"]
+            new_comment = Comentario(
+                publicacion=post,
+                usuario=logged_user,
+                contenido=comment_content
+            )
+            new_comment.save()
+            
+            if post.usuario != logged_user:
+                crear_notificacion(
+                    usuario_destino=post.usuario,
+                    actor=logged_user,
+                    tipo="comentario",
+                    contenido=f"comentó tu publicación."
+                )
+            
         friendList = build_friend_list(logged_user)
         comments = Comentario.objects.filter(publicacion = post)
 
@@ -224,16 +321,16 @@ def register(request):
         password2 = request.POST.get("password2")
 
         if not nombre or not email or not password1 or not password2:
-            messages.error(request, "Todos los campos son obligatorios.")
+            messages.error(request, _("Todos los campos son obligatorios."))
             return render(request, "register.html")
 
         if password1 != password2:
-            messages.error(request, "Las contraseñas no coinciden.")
+            messages.error(request, _("Las contraseñas no coinciden."))
             return render(request, "register.html")
 
         # Check if email already exists
         if Usuario.objects.filter(email=email).exists():
-            messages.error(request, "El correo ya está registrado.")
+            messages.error(request, _("El correo electrónico ya está registrado por otro usuario."))
             return render(request, "register.html")
 
         try:
@@ -241,7 +338,7 @@ def register(request):
             user = Usuario.objects.create_user(
                 email=email, password=password1, nombre=nombre
             )
-            messages.success(request, "Registro exitoso. Ahora puedes iniciar sesión.")
+            messages.success(request, _("Registro exitoso. Ahora puedes iniciar sesión."))
             return redirect("login")
 
         except Exception as e:

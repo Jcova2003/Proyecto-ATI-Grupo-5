@@ -2,6 +2,10 @@
 
 
 <div class="my-friends atigram-card"> 
+    <a href="{% url 'home' %}" class="back-link">
+      <span class="material-icons-outlined icon">arrow_back</span>
+      {% trans "Volver" %}
+    </a>
     <label class="larger-name">{% trans "Mis amigos" %}</label>
     {% if friendList %}
         {% for friend in friendList %}

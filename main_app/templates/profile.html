@@ -31,9 +31,42 @@
       
       <div class="button-container">
         {% if request.resolver_match.url_name == 'my_profile'%}
+        <a href="{% url 'edit_profile' %}"> 
         <button class="btn-edit-profile">
-          <span class="material-icons icon">edit</span>
-          {% trans "Editar perfil" %}
+            <span class="material-icons icon">edit</span>
+            {% trans "Editar perfil" %}
+          </button>
+        </a>
+
+          <form class="logout-form" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-edit-profile btn-primary">
+              <span class="material-icons icon">logout</span>
+              {% trans "Cerrar sesión" %}
+            </button>
+          </form>
+        
+        {% else %}
+        <form method="post" id="friend-action"> {% csrf_token %}
+          {% if isMyFriend %}
+            <button class="btn-edit-profile remove-friend" id="remove-friend-btn" name="remove">
+                <span class="material-icons icon">delete</span>
+                {% trans "Eliminar amigo" %}
+            </button>  
+
+          {% else %}
+      
+            <button class="btn-edit-profile add-friend" id="add-friend-btn" name="add">
+                <span class="material-icons icon">person_add</span>
+                {% trans "Agregar amigo" %}
+            </button>        
+          
+          {% endif %}
+        </form>
+
+        <button class="btn-edit-profile btn-primary">
+          <span class="material-icons icon">chat</span>
+          {% trans "Chatear" %}
         </button>
         {% endif %}
       </div>
