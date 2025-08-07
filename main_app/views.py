@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion, Comentario, Notificacion, SolicitudAmistad
 from .utils import get_notifications, build_post_list, build_friend_list, action_notification
-from .utils import save_post, build_feed_queryset, build_wall_queryset, find_friend_request
+from .utils import save_post, build_feed_queryset, build_wall_queryset, find_friend_request, crear_notificacion
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -271,7 +271,7 @@ def post(request, id_publicacion):
 
         notificaciones = get_notifications(logged_user)
 
-        if request.method == "POST":
+        if request.method == "POST" and "comment" in request.POST:
             comment_content = request.POST["comment"]
             new_comment = Comentario(
                 publicacion=post,
@@ -279,6 +279,14 @@ def post(request, id_publicacion):
                 contenido=comment_content
             )
             new_comment.save()
+            
+            if post.usuario != logged_user:
+                crear_notificacion(
+                    usuario_destino=post.usuario,
+                    actor=logged_user,
+                    tipo="comentario",
+                    contenido=f"{logged_user.nombre} comentó tu publicación."
+                )
             
         friendList = build_friend_list(logged_user)
         comments = Comentario.objects.filter(publicacion = post)

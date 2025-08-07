@@ -24,7 +24,15 @@ def get_notifications(usuario):
 
     return result
 
-
+def crear_notificacion(usuario_destino, actor, tipo, contenido):
+    Notificacion.objects.create(
+        usuario=usuario_destino,
+        actor=actor,
+        tipo=tipo,
+        contenido=contenido,
+        leida=False,
+        enviada_por_correo=False
+    )
 
 def get_friends(usuario):
     return Usuario.objects.filter(
