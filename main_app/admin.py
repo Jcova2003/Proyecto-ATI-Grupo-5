@@ -2,6 +2,10 @@ from django.contrib import admin
 from django.db import transaction, connection
 from .models import Usuario, Publicacion, Notificacion, Comentario
 
+# Cambia los textos del admin
+admin.site.site_header = "ATIgram Administration"
+admin.site.site_title = "ATIgram Admin"
+admin.site.index_title = "Panel de administración de ATIgram"
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
@@ -24,7 +28,6 @@ class UsuarioAdmin(admin.ModelAdmin):
     )
 
     def changeform_view(self, request, object_id=None, form_url="", extra_context=None):
-        # Override the entire form view to disable FK checks
         if request.method == "POST":
             with connection.cursor() as cursor:
                 cursor.execute("PRAGMA foreign_keys=OFF;")
@@ -37,7 +40,6 @@ class UsuarioAdmin(admin.ModelAdmin):
         return super().changeform_view(request, object_id, form_url, extra_context)
 
     def delete_view(self, request, object_id, extra_context=None):
-        # Override the delete view to disable FK checks
         if request.method == "POST":
             with connection.cursor() as cursor:
                 cursor.execute("PRAGMA foreign_keys=OFF;")
@@ -66,7 +68,6 @@ class PublicacionAdmin(admin.ModelAdmin):
         return super().changeform_view(request, object_id, form_url, extra_context)
 
     def delete_view(self, request, object_id, extra_context=None):
-        # Override the delete view to disable FK checks for Publicacion deletion
         if request.method == "POST":
             with connection.cursor() as cursor:
                 cursor.execute("PRAGMA foreign_keys=OFF;")
