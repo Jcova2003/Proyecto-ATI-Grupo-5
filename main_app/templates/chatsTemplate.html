@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title %}Chats - {{ block.super }}{% endblock %} {% block content %}
+<div class="chats-list-container">
+  <!-- To go to home -->
+  <a href="/" class="back-button">
+      <span class="material-icons-outlined icon">arrow_back</span>
+      {% trans "Volver" %}
+  </a>
+  <h2 class="chats-title">{% trans "Chats" %}</h2>
+  <div class="chats-list">
+    {% comment %} Simulate a list of users. In a real app, you'd pass this from
+    the view. Here, we hardcode a few for demo. {% endcomment %} 
+    {% for user in users %}
+    <a href="{% url 'chat_with_friend' %}?friend_id={{ user.id }}" class="chat-list-item">
+      <img src="{{ user.avatar }}" alt="Avatar" class="chat-list-avatar" />
+      <div class="chat-list-info">
+        <div class="chat-list-name">{{ user.name }}</div>
+        <div class="chat-list-lastmsg">{{ user.last_message }}</div>
+      </div>
+      <span class="chat-list-time">{{ user.last_time }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+    .back-button {
+    color: var(--green-700);
+    text-decoration: none;
+    font-size: 18px;
+}
+  .chats-list-container {
+    width: 100%;
+  }
+  .chats-title {
+    font-size: 2rem;
+    color: var(--green-700, #2575fc);
+    margin-bottom:0;
+  }
+  .chats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .chat-list-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+  .chat-list-item:hover {
+    background: #f7faff;
+  }
+  .chat-list-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+    border: 2px solid #e0e0e0;
+  }
+  .chat-list-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .chat-list-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #222;
+  }
+  .chat-list-lastmsg {
+    font-size: 0.95rem;
+    color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+  }
+  .chat-list-time {
+    font-size: 0.85rem;
+    color: #bbb;
+    margin-left: 10px;
+  }
+</style>
+{% endblock %}
