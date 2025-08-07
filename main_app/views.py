@@ -88,8 +88,11 @@ def notifications(request):
 
 # views.py
 def chats_view(request):
+    logged_user = request.user
+    friendList = build_friend_list(logged_user)
     users = Usuario.objects.all()
     users_data = []
+
     for user in users:
         users_data.append({
             "id": user.id,  # Add this line!
@@ -98,9 +101,20 @@ def chats_view(request):
             "last_message": "¡Hola! Este es un mensaje de prueba.",
             "last_time": "hace 1 min",
         })
-    return render(request, "chatsTemplate.html", {"users": users_data})
+
+    return render (
+            request,
+            "chatsTemplate.html",
+            {
+                "users": users_data,
+                "friendList": friendList,
+                "notificaciones": get_notifications(logged_user),
+            },
+        )
 
 def chat_with_friend(request):
+    logged_user = request.user
+    friendList = build_friend_list(request.user)
     friend_id = request.GET.get("friend_id")
     friend = None
     if friend_id:
@@ -118,8 +132,10 @@ def chat_with_friend(request):
     first_name = full_name.split()[0] if full_name else ""
     return render(request, "chatTemplate.html", {
         "friend_name": full_name,
-        "friend_first_name": first_name,
         "friend_avatar": friend.foto.url if friend.foto else "/static/img/default_profile.png",
+        "friend_first_name": first_name,
+        "friendList": friendList,
+        "notificaciones": get_notifications(logged_user),
     })
 
 def profile(request, id_usuario = None):

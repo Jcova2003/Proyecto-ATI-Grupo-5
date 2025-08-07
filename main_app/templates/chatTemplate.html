@@ -21,26 +21,28 @@
   <div class="chat-messages">
     <div class="message-cluster">
       <img src="{{ friend_avatar }}" alt="Avatar" class="message-avatar" />
-      <div class="message received">Hola!!</div>
-    </div>
-    <div class="message sent">Hola {{ friend_first_name }}, ¿Cómo estás?</div>
-    <div class="message-cluster">
-      <img src="{{ friend_avatar }}" alt="Avatar" class="message-avatar" />
       <div class="messages">
-        <div class="message received">Quería preguntarte cómo vas con las pantallas</div>
-        <div class="message received">Recuerda que tenemos que mandarlas hoy apurateeeeeeeeeee</div>
-      </div>
-    </div>
-    <div class="message sent">Ya las estoy mandando!</div>
-    <div class="message-cluster">
-      <img src="{{ friend_avatar }}" alt="Avatar" class="message-avatar" />
-      <div class="messages">
-        <div class="message received">TEST MENSAJE MUY LARGO</div>
+        <div class="message received"> ¡Holaaa! 😄</div>
         <div class="message received">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mauris non sapien iaculis pharetra. Sed volutpat nulla sed porttitor malesuada. Nullam eget varius felis. Class aptent taciti sociosqu ad litora torquent per conubia nostrais...
+          ¿Cómo vas con lo de las pantallas? ¿Todo bien?
         </div>
       </div>
     </div>
+   
+    <div class="message sent">¡Hola {{ friend_first_name }}! Todo bien, avanzando.</div>
+    <div class="message sent">Justo ahora estoy ajustando los últimos detalles del diseño.</div>
+    
+    <div class="message-cluster">
+      <img src="{{ friend_avatar }}" alt="Avatar" class="message-avatar" />
+      <div class="messages">
+        <div class="message received">Ufff qué bueno, me tenías con el alma en un hilo 😂</div>
+        <div class="message received">
+          Hoy sí tenemos que mandarlo sí o sí, no hay prórroga esta vez.
+        </div>
+      </div>
+    </div>
+
+    <div class="message sent"> En unos minutos te lo mando para revisión 😊</div>
   </div>
   <form class="chat-input-form">
     <input type="text" placeholder="{% trans "Mensaje" %}" class="chat-input" autocomplete="off" />

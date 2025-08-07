@@ -828,6 +828,11 @@ input[type="file"] {
   color: var(--green-600);
 }
 
+.login-body .login-h3 {
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -1277,7 +1282,7 @@ input[type="file"] {
 }
 
 .message-container {
-  margin: 1rem auto;
+  margin: 0.5rem auto;
   width: 100%;
 }
 
@@ -1285,7 +1290,6 @@ input[type="file"] {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-size: clamp(var(--p-mobile), 2vw, var(--p-desktop));
-  margin-bottom: 2rem;
   text-align: center;
 }
 
