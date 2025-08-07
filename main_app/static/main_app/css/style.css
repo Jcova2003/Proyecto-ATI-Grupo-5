@@ -1151,6 +1151,10 @@ input[type="file"] {
   margin: 1em 0;
 }
 
+#friend-action {
+  width: 100%;
+}
+
 .wall {
   display: flex;
   flex-direction: column;

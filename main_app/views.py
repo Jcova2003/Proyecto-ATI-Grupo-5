@@ -1,5 +1,5 @@
 # main_app/views.py
-from time import timezone
+from django.utils import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -114,28 +114,38 @@ def profile(request, id_usuario = None):
         
         if request.method == "POST" :
             if "add" in request.POST:
-                friendRequest = SolicitudAmistad.objects.filter(
+                friendRequest_to = SolicitudAmistad.objects.filter(
                     de_usuario=logged_user, para_usuario=profile_user
-                ).first()
+                )
+                friendRequest_from = SolicitudAmistad.objects.filter(
+                    de_usuario=profile_user, para_usuario=logged_user
+                )
+                friendRequest = friendRequest_to.union(friendRequest_from).first()
                 if friendRequest:
                     friendRequest.estado = "aceptada"
-                    friendRequest.fecha = timezone.now()
+                    # friendRequest.fecha = timezone.now
+                    friendRequest.save()
                 else:
                     friendRequest = SolicitudAmistad(
                         de_usuario=logged_user,
                         para_usuario=profile_user,
                         estado="aceptada"
                     )
+                    friendRequest.save()
             
             elif "remove" in request.POST:
-                friendRequest = SolicitudAmistad.objects.filter(
+                friendRequest_to = SolicitudAmistad.objects.filter(
                     de_usuario=logged_user, para_usuario=profile_user
-                ).first()
+                )
+                friendRequest_from = SolicitudAmistad.objects.filter(
+                    de_usuario=profile_user, para_usuario=logged_user
+                )
+                friendRequest = friendRequest_to.union(friendRequest_from).first()
                 if friendRequest:
                     friendRequest.estado = "rechazada"
-                    friendRequest.fecha = timezone.now()
+                    # friendRequest.fecha = timezone.now
+                    friendRequest.save()
             
-            friendRequest.save()
             
                 
 
