@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ATIgram</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
 
     <!-- Tu CSS personalizado -->
     <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}" />
@@ -16,6 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+
   </head>
 
   <body class="login-body">
@@ -63,6 +65,11 @@
         <a href="/login">{% trans "¿Ya tienes cuenta? Inicia sesión." %}</a>
       </div>
     </form>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add("loaded");
+      });
+    </script>
   </body>
 </html>
 {% endblock %}
