@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Inicio - {{ block.super }}{% endblock %}
+
+{% block extra_css %}
+<script src="{% static 'main_app/js/drag_and_drop.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="center profile-content">
+
+
+  <a href="{% url 'home' %}" class="back-link">
+    <span class="material-icons-outlined icon">arrow_back</span>
+    {% trans "Volver" %}
+  </a>
+
+  
+  <h3 class="login-h3">{% trans 'Editar Perfil' %}</h3>
+  {% include 'alertsTemplate.html' %}
+  <form class="edit_profile_form" action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="input-group">
+      <input type="text" name="nombre" placeholder="Nombre" value="{{ user.nombre|safe }}" required />
+      <input type="email" name="email" placeholder="Email" value="{{ user.email|safe }}" required />
+      <input type="password" name="password1" placeholder="{% trans 'Contraseña' %}" />
+      <input type="password" name="password2" placeholder="{% trans 'Confirmar Contraseña' %}" />
+    </div>
+
+    <textarea class="descripcion" name="descripcion" placeholder="{% trans 'Descripcion' %}">{{ user.descripcion|safe }}</textarea>
+
+   <div class="upload-box" id="drop-area">
+      <input type="file" name="foto" id="foto" accept="image/*" hidden />
+
+      <label for="foto" id="file-label">
+        <span class="material-icons icon">upload_file</span>
+        <p><strong>Arrastra tu nueva foto de perfil</strong> o <span class="text-link">Navega</span></p>
+      </label>
+
+      <div id="preview">
+        {% if user.pfp_url %}
+          <img src="{{ user.pfp_url }}" alt="Profile Picture" class="profile-picture-preview" />
+        {% endif %}
+      </div>
+</div>
+
+<div class="form-actions">
+  <button type="submit" class="primary-btn">Publicar</button>
+</div>
+</form>
+</div>
+{% endblock %}
+
+{% block notifications_popup %}
+{% include 'notification_popup.html' %}
+{% endblock %}

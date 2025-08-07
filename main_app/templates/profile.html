@@ -31,11 +31,13 @@
       
       <div class="button-container">
         {% if request.resolver_match.url_name == 'my_profile'%}
-          <button class="btn-edit-profile">
+        <a href="{% url 'edit_profile' %}"> 
+        <button class="btn-edit-profile">
             <span class="material-icons icon">edit</span>
             {% trans "Editar perfil" %}
           </button>
-          
+        </a>
+
           <form class="logout-form" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="btn-edit-profile btn-primary">

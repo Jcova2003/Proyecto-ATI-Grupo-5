@@ -15,6 +15,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -125,6 +126,53 @@ def profile(request, id_usuario = None):
 
     except Exception as e:
         return HttpResponse(f"Error en profile: {str(e)}")
+    
+@login_required
+def editProfile(request):
+    user = request.user
+    notificaciones = get_notifications(user)
+    friendList = build_friend_list(user)
+
+    try:
+        if request.method == 'POST':
+            nombre = request.POST.get("nombre")
+            email = request.POST.get("email")
+            password1 = request.POST.get("password1")
+            password2 = request.POST.get("password2")
+            descripcion = request.POST.get("descripcion")
+            foto = request.FILES.get('foto', None)
+            
+            if Usuario.objects.filter(email=email).exclude(pk=user.pk).exists():
+                messages.error(request, "El correo electrónico ya está registrado por otro usuario.")
+                return redirect('edit_profile')
+    
+            if password1 and password1 != password2:
+                messages.error(request, "Las contraseñas no coinciden.")
+                return redirect('edit_profile')
+
+            user.nombre = nombre
+            user.email = email
+            user.descripcion = descripcion
+
+            if password1:
+                user.set_password(password1)
+                update_session_auth_hash(request, user)
+
+            if foto:
+                user.foto = foto
+
+            user.save()
+            messages.success(request, "Perfil actualizado correctamente.")
+            return redirect('edit_profile')  
+
+        return render(request, 'editProfile.html', {
+            'notificaciones': notificaciones,
+            'friendList': friendList,
+            'user': user,  
+        })
+
+    except Exception as e:
+        return HttpResponse(f"Error en edit-profile: {str(e)}")
 
 def post(request, id_publicacion):
     try:
