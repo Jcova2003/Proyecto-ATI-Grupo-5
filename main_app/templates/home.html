@@ -18,10 +18,12 @@
         </a>
         <p class="profile-desc">{{ user.descripcion|safe }}</p>
         <div class="button-container">
+            <a href="{% url 'edit_profile' %}">
             <button class="btn-edit-profile">
                 <span class="material-icons icon">edit</span>
                   {% trans "Editar perfil" %}
              </button>
+            </a>
             <form class="logout-form" action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button class="btn-edit-profile btn-primary">
