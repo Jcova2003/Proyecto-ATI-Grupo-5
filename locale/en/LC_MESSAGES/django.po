@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-18 03:06+0000\n"
+"POT-Creation-Date: 2025-08-07 00:58+0000\n"
 "PO-Revision-Date: 2025-07-18 15:00-0500\n"
 "Last-Translator: You <your@email.com>\n"
 "Language-Team: Spanish <es@translate.org>\n"
@@ -17,91 +17,137 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main_app/templates/base.html:31
+#: main_app/templates/base.html:34
 msgid "Buscar amigos"
 msgstr "Search friends"
 
-#: main_app/templates/base.html:37 main_app/templates/base.html:61
+#: main_app/templates/base.html:40 main_app/templates/base.html:64
 msgid "Inicio"
 msgstr "Home"
 
-#: main_app/templates/base.html:43 main_app/templates/base.html:65
+#: main_app/templates/base.html:46 main_app/templates/base.html:68
 msgid "Mi perfil"
 msgstr "My profile"
 
-#: main_app/templates/base.html:49
+#: main_app/templates/base.html:52
 msgid "Notificaciones"
 msgstr "Notifications"
 
-#: main_app/templates/base.html:69
+#: main_app/templates/base.html:72
 msgid "Menciones"
 msgstr "Mentions"
 
-#: main_app/templates/base.html:77
-msgid "Mis amigos"
-msgstr "My friends"
-
-#: main_app/templates/base.html:82 main_app/templates/base.html:89
-msgid "Activo ahora"
-msgstr "Active now"
-
-#: main_app/templates/base.html:96 main_app/templates/chatTemplate.html:17
-msgid "Activo hace 10mins"
-msgstr "Active 10 minutes ago"
-
 #: main_app/templates/chatTemplate.html:11
+#: main_app/templates/detailedPostTemplate.html:13
+#: main_app/templates/editProfile.html:17
 msgid "Volver"
 msgstr "Back"
+
+#: main_app/templates/chatTemplate.html:17
+msgid "Activo hace 10mins"
+msgstr "Active 10 minutes ago"
 
 #: main_app/templates/chatTemplate.html:46
 msgid "Mensaje"
 msgstr "Message"
 
-#: main_app/templates/home.html:16
+#: main_app/templates/commentsTemplate.html:15
+#: main_app/templates/detailedPostTemplate.html:31
+#: main_app/templates/postTemplate.html:21
+msgid "Ver más"
+msgstr "See more..."
+
+#: main_app/templates/commentsTemplate.html:24
+msgid "Responder"
+msgstr "Answer"
+
+#: main_app/templates/commentsTemplate.html:35
+msgid "¡Sé el primero en dar tu opinión!"
+msgstr "Be the first to give your opinion!"
+
+#: main_app/templates/detailedPostTemplate.html:20
+#: main_app/templates/postTemplate.html:10
+msgid "Publicado hace"
+msgstr "Publish"
+
+#: main_app/templates/detailedPostTemplate.html:44
+msgid "Comentarios"
+msgstr "Comments"
+
+#: main_app/templates/detailedPostTemplate.html:46
+msgid "Escribir Comentario"
+msgstr "Write Comment"
+
+#: main_app/templates/editProfile.html:21
+msgid "Editar Perfil"
+msgstr "Edit profile"
+
+#: main_app/templates/editProfile.html:29 main_app/templates/login.html:32
+#: main_app/templates/register.html:48
+msgid "Contraseña"
+msgstr "Password"
+
+#: main_app/templates/editProfile.html:30 main_app/templates/register.html:54
+msgid "Confirmar Contraseña"
+msgstr "Confirm Password"
+
+#: main_app/templates/editProfile.html:33
+msgid "Descripcion"
+msgstr "Description"
+
+#: main_app/templates/editProfile.html:40
+msgid "Arrastra tu nueva foto de perfil o Navega"
+msgstr "Drag and drop your new profile picture or Browse"
+
+#: main_app/templates/friendListTemplate.html:5
+msgid "Mis amigos"
+msgstr "My friends"
+
+#: main_app/templates/friendListTemplate.html:14
+msgid "Activo ahora"
+msgstr "Active now"
+
+#: main_app/templates/friendListTemplate.html:16
+msgid "Activo hace"
+msgstr "Active now"
+
+#: main_app/templates/friendListTemplate.html:23
+msgid "Conecta con otros usuarios!"
+msgstr "Connect with other users!"
+
+#: main_app/templates/home.html:14 main_app/templates/profile.html:23
+msgid "amigo"
+msgstr "friends"
+
+#: main_app/templates/home.html:16 main_app/templates/profile.html:25
 msgid "amigos"
 msgstr "friends"
 
-#: main_app/templates/home.html:20
+#: main_app/templates/home.html:24 main_app/templates/profile.html:37
 msgid "Editar perfil"
 msgstr "Edit profile"
 
-#: main_app/templates/home.html:30
-msgid "¿Qué estas pensando?"
-msgstr "What's on your mind?"
-
-#: main_app/templates/home.html:36
-msgid "Añadir Multimedia"
-msgstr "Add Media"
-
-#: main_app/templates/home.html:41
-msgid "Guardar Borrador"
-msgstr "Save Draft"
-
-#: main_app/templates/home.html:42
-msgid "Publicar"
-msgstr "Publish"
+#: main_app/templates/home.html:31 main_app/templates/profile.html:45
+msgid "Cerrar sesión"
+msgstr "Logout"
 
 #: main_app/templates/login.html:27
 msgid "Inicia Sesión"
 msgstr "Log In"
 
-#: main_app/templates/login.html:30 main_app/templates/register.html:32
-msgid "Usuario"
-msgstr "User"
+#: main_app/templates/login.html:31
+msgid "Correo electrónico"
+msgstr "Email"
 
-#: main_app/templates/login.html:31 main_app/templates/register.html:34
-msgid "Contraseña"
-msgstr "Password"
-
-#: main_app/templates/login.html:35
+#: main_app/templates/login.html:36
 msgid "¿Olvidaste tu contraseña?"
 msgstr "Forgot your password?"
 
-#: main_app/templates/login.html:38
+#: main_app/templates/login.html:39
 msgid "Iniciar sesión"
 msgstr "Log In"
 
-#: main_app/templates/login.html:41
+#: main_app/templates/login.html:42
 msgid "¿No tienes cuenta? Regístrate aquí."
 msgstr "Don't have an account? Register here."
 
@@ -110,11 +156,11 @@ msgstr "Don't have an account? Register here."
 msgid "Mis Notificaciones"
 msgstr "My Notifications"
 
-#: main_app/templates/notification_popup.html:22
+#: main_app/templates/notification_popup.html:39
 msgid "No hay notificaciones disponibles."
 msgstr "No notifications available."
 
-#: main_app/templates/notification_popup.html:26
+#: main_app/templates/notification_popup.html:45
 #: main_app/templates/notificationsTemplate.html:29
 msgid "Ver más..."
 msgstr "See more..."
@@ -123,30 +169,111 @@ msgstr "See more..."
 msgid "No tienes notificaciones."
 msgstr "You have no notifications."
 
-#: main_app/templates/register.html:28
+#: main_app/templates/postFormTemplate.html:9
+msgid "¿Qué estas pensando?"
+msgstr "What's on your mind?"
+
+#: main_app/templates/postFormTemplate.html:15
+msgid "Añadir Multimedia"
+msgstr "Add Media"
+
+#: main_app/templates/postFormTemplate.html:19
+msgid "Debes añadir un texto o una imagen."
+msgstr "You must add text or an image."
+
+#: main_app/templates/postFormTemplate.html:22
+msgid "Público"
+msgstr "Public"
+
+#: main_app/templates/postFormTemplate.html:24
+msgid "Privado"
+msgstr "Private"
+
+#: main_app/templates/postFormTemplate.html:26
+msgid "Debes seleccionar una visibilidad."
+msgstr "You must select a visibility."
+
+#: main_app/templates/postFormTemplate.html:28
+msgid "Guardar Borrador"
+msgstr "Save Draft"
+
+#: main_app/templates/postFormTemplate.html:29
+msgid "Publicar"
+msgstr "Publish"
+
+#: main_app/templates/postTemplate.html:36
+msgid "No hay publicaciones disponibles."
+msgstr "No notifications available."
+
+#: main_app/templates/profile.html:54
+msgid "Eliminar amigo"
+msgstr "Delete friend"
+
+#: main_app/templates/profile.html:61
+msgid "Agregar amigo"
+msgstr "Add friend"
+
+#: main_app/templates/profile.html:68
+msgid "Chatear"
+msgstr "Chat"
+
+#: main_app/templates/profile.html:82
+msgid "Mi muro"
+msgstr "My Feed"
+
+#: main_app/templates/profile.html:84
+msgid "Muro"
+msgstr "Feed"
+
+#: main_app/templates/register.html:30
 msgid "Registrate"
 msgstr "Register"
 
-#: main_app/templates/register.html:33
-msgid "Apellido"
-msgstr "Last Name"
-
-#: main_app/templates/register.html:35
-msgid "Confirmar Contraseña"
-msgstr "Confirm Password"
-
 #: main_app/templates/register.html:36
+msgid "Nombre"
+msgstr "Name"
+
+#: main_app/templates/register.html:42
 msgid "Correo"
 msgstr "Email"
 
-#: main_app/templates/register.html:37
-msgid "Teléfono"
-msgstr "Phone"
-
-#: main_app/templates/register.html:40
+#: main_app/templates/register.html:60
 msgid "Registrarme"
 msgstr "Register"
 
-#: main_app/templates/register.html:43
+#: main_app/templates/register.html:63
 msgid "¿Ya tienes cuenta? Inicia sesión."
 msgstr "Already have an account? Log in."
+
+#: main_app/views.py:29 main_app/views.py:226
+msgid "Todos los campos son obligatorios."
+msgstr "All fields are required."
+
+#: main_app/views.py:38
+msgid "Correo o contraseña incorrectos."
+msgstr "Incorrect email or password."
+
+#: main_app/views.py:146 main_app/views.py:235
+msgid "El correo electrónico ya está registrado por otro usuario."
+msgstr "The email address is already registered by another user."
+
+#: main_app/views.py:150 main_app/views.py:230
+msgid "Las contraseñas no coinciden."
+msgstr "The passwords do not match."
+
+#: main_app/views.py:165
+msgid "Perfil actualizado correctamente."
+msgstr "Profile updated successfully."
+
+#: main_app/views.py:243
+msgid "Registro exitoso. Ahora puedes iniciar sesión."
+msgstr "Registration successful. You can now log in."
+
+#~ msgid "Usuario"
+#~ msgstr "User"
+
+#~ msgid "Apellido"
+#~ msgstr "Last Name"
+
+#~ msgid "Teléfono"
+#~ msgstr "Phone"
