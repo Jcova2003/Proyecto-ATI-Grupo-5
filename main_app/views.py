@@ -96,6 +96,7 @@ def notifications(request):
 # views.py
 def chats_view(request):
     logged_user = request.user
+    action_notification(request)
     friendList = build_friend_list(logged_user)
     users = Usuario.objects.all()
     users_data = []
@@ -216,6 +217,7 @@ def profile(request, id_usuario = None):
 @login_required
 def editProfile(request):
     user = request.user
+    action_notification(request)
     notificaciones = get_notifications(user)
     friendList = build_friend_list(user)
 
@@ -285,7 +287,7 @@ def post(request, id_publicacion):
                     usuario_destino=post.usuario,
                     actor=logged_user,
                     tipo="comentario",
-                    contenido=f"{logged_user.nombre} comentó tu publicación."
+                    contenido=f"comentó tu publicación."
                 )
             
         friendList = build_friend_list(logged_user)
