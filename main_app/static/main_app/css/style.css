@@ -433,6 +433,7 @@ input[type="file"] {
 
 .comment {
   display: flex;
+  justify-content: space-between;
 }
 
 .comment-content-wrapper {
