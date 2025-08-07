@@ -132,6 +132,13 @@ def profile(request, id_usuario = None):
                         estado="aceptada"
                     )
                     friendRequest.save()
+                notif = Notificacion(
+                    usuario=profile_user,
+                    actor=logged_user,
+                    tipo="amistad",
+                    contenido=f"te ha enviado una solicitud de amistad."
+                )
+                notif.save()
             
             elif "remove" in request.POST:
                 friendRequest_to = SolicitudAmistad.objects.filter(
@@ -145,6 +152,7 @@ def profile(request, id_usuario = None):
                     friendRequest.estado = "rechazada"
                     # friendRequest.fecha = timezone.now
                     friendRequest.save()
+                
             
             
                 
