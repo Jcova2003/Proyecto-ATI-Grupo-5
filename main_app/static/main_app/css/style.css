@@ -198,6 +198,7 @@ textarea.search-bar {
   /* mask: linear-gradient(transparent, black, black); */
   backdrop-filter: blur(3px);
   height: 65px;
+  z-index: 1001;
 }
 
 .mobile-navbar .nav-link {
@@ -567,8 +568,8 @@ input[type="file"] {
   color: white;
 }
 
-.notifications-link.active .icon {
-  filter: brightness(0) invert(1);
+.mobile-navbar .notifications-link.active {
+  color: var(--green-800);
 }
 
 .notifications-popup {
@@ -584,13 +585,16 @@ input[type="file"] {
   overflow: hidden;
 }
 
+.notifications-popup .back-link {
+  display: none;
+}
+
 .popup-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
   padding: 20px;
-  background-color: var(--green-100);
   color: var(--green-950);
   border-radius: 12px 0;
 }
@@ -604,7 +608,6 @@ input[type="file"] {
 .popup-content {
   max-height: min(600px, 80vh);
   overflow-y: auto;
-  background-color: var(--green-100);
   padding: 0 20px;
 }
 
@@ -770,32 +773,6 @@ input[type="file"] {
 .btn-reject:hover {
   background-color: var(--grey-400);
 }
-
-/* Responsive popup*/
-@media (max-width: 768px) {
-  .notifications-popup {
-    width: 100vw !important;
-    height: 100vh !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: auto !important;
-    bottom: 0 !important;
-    border-radius: 0 !important;
-    max-height: 100vh !important;
-  }
-
-  .popup-content {
-    padding: 16px;
-    max-height: calc(100vh - 120px); /* Para que el contenido no pase el popup (ajusta según header/footer) */
-    overflow-y: auto;
-  }
-
-  .popup-header, .notification-footer {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
 
 /* Responsive design */
 @media (max-width: 992px) {
@@ -1008,30 +985,6 @@ input[type="file"] {
   overflow: hidden;
 }
 
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 20px;
-  background-color: var(--green-100);
-  color: var(--green-950);
-  border-radius: 12px 0;
-}
-
-.popup-header h5 {
-  margin: 0;
-  font-weight: 600;
-  font-size: var(--H5-desktop);
-}
-
-.popup-content {
-  max-height: min(600px, 80vh);
-  overflow-y: auto;
-  background-color: var(--green-100);
-  padding: 0 20px;
-}
-
 .notification-item {
   display: flex;
   flex-direction: row;
@@ -1127,15 +1080,6 @@ input[type="file"] {
 .notification-footer a:hover {
   color: var(--green-950);
   text-decoration: underline;
-}
-
-.popup-content::-webkit-scrollbar {
-  width: 4px;
-}
-
-.popup-content::-webkit-scrollbar-thumb {
-  background-color: rgba(16, 188, 162, 0.2);
-  border-radius: 2px;
 }
 
 .close-popup {
@@ -1356,3 +1300,42 @@ input[type="file"] {
   color: var(--error);
 }
 
+/* Responsive popup*/
+@media (max-width: 992px) {
+  .navbar {
+    z-index: 1001;
+  }
+  .notifications-popup {
+    padding-top: 6rem;
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    border-radius: 0 !important;
+    max-height: 100vh !important;
+    z-index: 1000;
+    background-color: var(--green-50);
+  }
+
+  .close-popup {
+    display: none;
+  }
+
+  .notifications-popup .back-link {
+    margin-left: 1rem;
+    display: unset;
+  }
+
+  .popup-content {
+    padding: 16px;
+    max-height: calc(100vh - 120px); /* Para que el contenido no pase el popup (ajusta según header/footer) */
+    overflow-y: auto;
+  }
+
+  .popup-header, .notification-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

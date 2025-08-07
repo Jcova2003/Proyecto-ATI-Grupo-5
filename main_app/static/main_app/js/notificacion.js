@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const notificationsLink = document.querySelector('.notifications-link');
     const popup = document.getElementById('notificationsPopup');
+    const notificationsLinkMobile = document.querySelector('.mobile-navbar .notifications-link');
 
     const closeBtn = popup.querySelector('.close-popup');
     closeBtn.addEventListener('click', function () {
@@ -15,25 +16,33 @@ document.addEventListener('DOMContentLoaded', function () {
         notificationsLink.classList.toggle('active', !isVisible);
 
         if (!isVisible) {
-            if (window.innerWidth > 768) {
-                const linkRect = notificationsLink.getBoundingClientRect();
-                const popupWidth = popup.offsetWidth;
-                const popupLeft = linkRect.left + linkRect.width / 2 - popupWidth / 2;
+            const linkRect = notificationsLink.getBoundingClientRect();
+            const popupWidth = popup.offsetWidth;
+            const popupLeft = linkRect.left + linkRect.width / 2 - popupWidth / 2;
 
-                popup.style.top = `${linkRect.bottom + window.scrollY}px`;
-                popup.style.left = `${popupLeft}px`;
-                popup.style.right = 'auto';
-            } else {
-                popup.style.top = '0';
-                popup.style.left = '0';
-                popup.style.right = 'auto';
-                popup.style.bottom = '0';
-            }
+            popup.style.top = `${linkRect.bottom + window.scrollY}px`;
+            popup.style.left = `${popupLeft}px`;
+            popup.style.right = 'auto';
+            
+        }
+    });
+
+    notificationsLinkMobile.addEventListener('click', function (e) {
+        e.preventDefault();
+        const isVisible = popup.style.display === 'block';
+        popup.style.display = isVisible ? 'none' : 'block';
+        notificationsLink.classList.toggle('active', !isVisible);
+
+        if (!isVisible) {
+            popup.style.top = '0';
+            popup.style.left = '0';
+            popup.style.right = 'auto';
+            popup.style.bottom = '0';
         }
     });
 
     window.addEventListener('click', function (e) {
-        if (!popup.contains(e.target) && e.target !== notificationsLink && !notificationsLink.contains(e.target)) {
+        if (!popup.contains(e.target) && e.target !== notificationsLink && !notificationsLink.contains(e.target) && !notificationsLinkMobile.contains(e.target)) {
             popup.style.display = 'none';
             notificationsLink.classList.remove('active');
         }
