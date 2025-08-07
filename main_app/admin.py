@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import transaction, connection
-from .models import Usuario, Publicacion, LenguajeProgramacion, Notificacion, Comentario
+from .models import Usuario, Publicacion, Notificacion, Comentario
 
 
 @admin.register(Usuario)
@@ -46,11 +46,6 @@ class UsuarioAdmin(admin.ModelAdmin):
                 finally:
                     cursor.execute("PRAGMA foreign_keys=ON;")
         return super().delete_view(request, object_id, extra_context)
-
-
-@admin.register(LenguajeProgramacion)
-class LenguajeProgramacionAdmin(admin.ModelAdmin):
-    list_display = ("nombre",)
 
 
 @admin.register(Publicacion)
