@@ -737,17 +737,65 @@ input[type="file"] {
   transform: scale(1.1);
 }
 
+.friend-request-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.friend-request-actions button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-accept {
+  background-color: var(--green-600);
+  color: white;
+}
+
+.btn-reject {
+  background-color: var(--grey-300);
+  color: var(--green-950);
+}
+
+.btn-accept:hover {
+  background-color: var(--green-700);
+}
+
+.btn-reject:hover {
+  background-color: var(--grey-400);
+}
+
 /* Responsive popup*/
 @media (max-width: 768px) {
   .notifications-popup {
-    width: 92vw;
-    right: 4vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    border-radius: 0 !important;
+    max-height: 100vh !important;
   }
 
   .popup-content {
-    padding: 0 16px;
+    padding: 16px;
+    max-height: calc(100vh - 120px); /* Para que el contenido no pase el popup (ajusta según header/footer) */
+    overflow-y: auto;
+  }
+
+  .popup-header, .notification-footer {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
+
 
 /* Responsive design */
 @media (max-width: 992px) {
@@ -1166,6 +1214,10 @@ input[type="file"] {
   justify-content: space-between;
   gap: 1rem;
   margin: 1em 0;
+}
+
+#friend-action {
+  width: 100%;
 }
 
 .wall {

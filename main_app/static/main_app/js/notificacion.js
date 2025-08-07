@@ -15,13 +15,20 @@ document.addEventListener('DOMContentLoaded', function () {
         notificationsLink.classList.toggle('active', !isVisible);
 
         if (!isVisible) {
-            const linkRect = notificationsLink.getBoundingClientRect();
-            const popupWidth = popup.offsetWidth;
-            const popupLeft = linkRect.left + linkRect.width / 2 - popupWidth / 2;
+            if (window.innerWidth > 768) {
+                const linkRect = notificationsLink.getBoundingClientRect();
+                const popupWidth = popup.offsetWidth;
+                const popupLeft = linkRect.left + linkRect.width / 2 - popupWidth / 2;
 
-            popup.style.top = `${linkRect.bottom + window.scrollY}px`;
-            popup.style.left = `${popupLeft}px`;
-            popup.style.right = 'auto';
+                popup.style.top = `${linkRect.bottom + window.scrollY}px`;
+                popup.style.left = `${popupLeft}px`;
+                popup.style.right = 'auto';
+            } else {
+                popup.style.top = '0';
+                popup.style.left = '0';
+                popup.style.right = 'auto';
+                popup.style.bottom = '0';
+            }
         }
     });
 
@@ -41,14 +48,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const iconImg = document.createElement('img');
         iconImg.alt = 'Tipo de notificación';
 
+        const isFriendRequest = text.includes('solicitud de amistad') || text.includes('friend request');
+
         if (text.includes('like') || text.includes('gusta')) {
             iconImg.src = document.body.dataset.likeIcon;
         } else if (text.includes('coment') || text.includes('comment')) {
             iconImg.src = document.body.dataset.commentIcon;
+        } else if (isFriendRequest) {
+            iconImg.src = document.body.dataset.friendRequestIcon;
         }
 
         iconContainer.appendChild(iconImg);
     });
+
 
     // Manejar menú clickeable de cada notificación
     document.querySelectorAll('.notification-menu').forEach(menu => {
