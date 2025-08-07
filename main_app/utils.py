@@ -1,10 +1,10 @@
 # main_app/utils.py
 from collections import namedtuple
 from datetime import datetime, timezone
-from .models import Usuario, Comentario, Publicacion, Notificacion
+from .models import Usuario, Comentario, Publicacion, Notificacion, SolicitudAmistad
 
 def get_notifications(usuario):
-    notificaciones = Notificacion.objects.filter(usuario=usuario).order_by("-fecha")[:10]
+    notificaciones = Notificacion.objects.filter(usuario=usuario, leida = False).order_by("-fecha")[:10]
     result = []
 
     for notif in notificaciones:
@@ -17,7 +17,9 @@ def get_notifications(usuario):
         result.append({
             "usuario": actor.nombre,
             "avatar_url": avatar_url,
-            "mensaje": notif.contenido
+            "mensaje": notif.contenido,
+            "tipo": notif.tipo,
+            "id": notif.id
         })
 
     return result
@@ -112,3 +114,29 @@ def save_post(request, usuario):
 
         new_post = Publicacion(usuario = usuario, contenido = contenido, multimedia = multimedia, privacidad = visibilidad)
         new_post.save()
+
+def action_notification(request):
+    if request.method == "POST":
+            if "accept" in request.POST:
+                id = request.POST["accept"]
+                notif = Notificacion.objects.get(id=id)
+                notif.leida = "True"
+                notif.save()
+                friendRequest = find_friend_request(notif.actor, notif.usuario)
+                if friendRequest:
+                    friendRequest.estado = "aceptada"
+                    friendRequest.save()
+            elif "reject" in request.POST:
+                id = request.POST["reject"]
+                notif = Notificacion.objects.get(id=id)
+                notif.leida = "True"
+                notif.save()
+                friendRequest = find_friend_request(notif.actor, notif.usuario)
+                if friendRequest:
+                    friendRequest.estado = "rechazada"
+                    friendRequest.save()
+
+def find_friend_request(user1, user2):
+    friendRequest_to = SolicitudAmistad.objects.filter(de_usuario=user1, para_usuario=user2)
+    friendRequest_from = SolicitudAmistad.objects.filter(de_usuario=user2, para_usuario=user1)
+    return friendRequest_to.union(friendRequest_from).first()

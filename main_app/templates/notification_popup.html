@@ -16,6 +16,13 @@
                         <p><strong>{{ noti.usuario }}</strong> {{ noti.mensaje }}</p>
                     </div>
                     <div class="notification-menu">⋮</div>
+                    
+                    {% if noti.tipo == "amistad" %}
+                        <form class="friend-request-actions" method="POST"> {% csrf_token %}
+                            <button class="btn-accept" type="submit" name="accept" value="{{ noti.id }}">{% trans "Aceptar" %}</button>
+                            <button class="btn-reject" type="submit" name="reject" value="{{ noti.id }}">{% trans "Rechazar" %}</button>
+                        </form>
+                    {% endif %}
                 </div>
             {% endfor %}
 
@@ -32,6 +39,12 @@
                             </div>
                             <div class="notification-menu">⋮</div>
                         </div>
+                        {% if noti.tipo == "amistad" %}
+                            <form class="friend-request-actions" method="POST">
+                                <button class="btn-accept" type="submit" name="accept" value="{{ noti.id }}">{% trans "Aceptar" %}</button>
+                                <button class="btn-reject" type="submit" name="reject" value="{{ noti.id }}">{% trans "Rechazar" %}</button>
+                            </form>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}

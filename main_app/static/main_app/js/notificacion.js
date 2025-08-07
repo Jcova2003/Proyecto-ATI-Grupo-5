@@ -59,35 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         iconContainer.appendChild(iconImg);
-
-        // Si es solicitud de amistad, agregar botones Aceptar y Rechazar
-        if (isFriendRequest) {
-            const actionContainer = document.createElement('div');
-            actionContainer.classList.add('friend-request-actions');
-
-            const acceptBtn = document.createElement('button');
-            acceptBtn.textContent = 'Aceptar';
-            acceptBtn.classList.add('btn-accept');
-            acceptBtn.addEventListener('click', () => {
-                const id = item.dataset.id;
-                console.log(`Aceptar solicitud ${id}`);
-                item.remove(); // puedes cambiar por fetch si quieres manejarlo por backend
-            });
-
-            const rejectBtn = document.createElement('button');
-            rejectBtn.textContent = 'Rechazar';
-            rejectBtn.classList.add('btn-reject');
-            rejectBtn.addEventListener('click', () => {
-                const id = item.dataset.id;
-                console.log(`Rechazar solicitud ${id}`);
-                item.remove();
-            });
-
-            actionContainer.appendChild(acceptBtn);
-            actionContainer.appendChild(rejectBtn);
-
-            item.appendChild(actionContainer);
-        }
     });
 
 

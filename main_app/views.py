@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Usuario
 from .models import Publicacion, Comentario, Notificacion, SolicitudAmistad
-from .utils import get_notifications, build_post_list, build_friend_list, save_post, build_feed_queryset, build_wall_queryset
+from .utils import get_notifications, build_post_list, build_friend_list, action_notification
+from .utils import save_post, build_feed_queryset, build_wall_queryset, find_friend_request
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
@@ -49,11 +50,14 @@ def home(request):
         usuario = request.user
         
         save_post(request, usuario)
+        action_notification(request)
 
         notificaciones = get_notifications(usuario)
         posts = build_feed_queryset(usuario)
         postList =  build_post_list(posts)
         friendList = build_friend_list(usuario)
+
+        
 
         return render(
             request,
@@ -75,6 +79,8 @@ def notifications(request):
         usuario = request.user # O usar request.user si tienes auth
         count = int(request.GET.get("count", 5))
         all_notifications = get_notifications(usuario)[:count]
+        print("Processing POST request in notifications")
+        
 
         return render(
             request,
@@ -87,6 +93,7 @@ def notifications(request):
 
 
 def chat_with_friend(request):
+    action_notification(request)
     # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
     context = {
         "friend_name": "Belén Cruz",
@@ -99,7 +106,7 @@ def profile(request, id_usuario = None):
         logged_user = request.user
         
         save_post(request, logged_user)
-
+        action_notification(request)
 
         notificaciones = get_notifications(logged_user)
        
@@ -113,23 +120,16 @@ def profile(request, id_usuario = None):
             return redirect("my_profile")
         
         if request.method == "POST" :
+            friendRequest = find_friend_request(logged_user, profile_user)
             if "add" in request.POST:
-                friendRequest_to = SolicitudAmistad.objects.filter(
-                    de_usuario=logged_user, para_usuario=profile_user
-                )
-                friendRequest_from = SolicitudAmistad.objects.filter(
-                    de_usuario=profile_user, para_usuario=logged_user
-                )
-                friendRequest = friendRequest_to.union(friendRequest_from).first()
                 if friendRequest:
-                    friendRequest.estado = "aceptada"
+                    friendRequest.estado = "pendiente"
                     # friendRequest.fecha = timezone.now
                     friendRequest.save()
                 else:
                     friendRequest = SolicitudAmistad(
                         de_usuario=logged_user,
                         para_usuario=profile_user,
-                        estado="aceptada"
                     )
                     friendRequest.save()
                 notif = Notificacion(
@@ -141,13 +141,6 @@ def profile(request, id_usuario = None):
                 notif.save()
             
             elif "remove" in request.POST:
-                friendRequest_to = SolicitudAmistad.objects.filter(
-                    de_usuario=logged_user, para_usuario=profile_user
-                )
-                friendRequest_from = SolicitudAmistad.objects.filter(
-                    de_usuario=profile_user, para_usuario=logged_user
-                )
-                friendRequest = friendRequest_to.union(friendRequest_from).first()
                 if friendRequest:
                     friendRequest.estado = "rechazada"
                     # friendRequest.fecha = timezone.now
@@ -183,6 +176,8 @@ def post(request, id_publicacion):
             get_object_or_404(Publicacion, id = id_publicacion)
         )
         
+        action_notification(request)
+
         notificaciones = get_notifications(logged_user)
 
         if request.method == "POST":
