@@ -2,9 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const notificationsLink = document.querySelector('.notifications-link');
     const popup = document.getElementById('notificationsPopup');
     const notificationsLinkMobile = document.querySelector('.mobile-navbar .notifications-link');
-
+    const returnBtn = popup.querySelector('.back-link');
     const closeBtn = popup.querySelector('.close-popup');
     closeBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+        notificationsLink.classList.remove('active');
+    });
+
+    returnBtn.href = "";
+    returnBtn.addEventListener('click', function () {
         popup.style.display = 'none';
         notificationsLink.classList.remove('active');
     });

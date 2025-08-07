@@ -585,7 +585,7 @@ input[type="file"] {
   overflow: hidden;
 }
 
-.notifications-popup .back-link {
+.notifications-popup .back-link, .my-friends .back-link {
   display: none;
 }
 
@@ -795,6 +795,7 @@ input[type="file"] {
 
   .my-friends {
     background-color: transparent;
+    gap:1rem;
   }
 
   .mobile-navbar {
@@ -1325,6 +1326,10 @@ input[type="file"] {
 
   .notifications-popup .back-link {
     margin-left: 1rem;
+    display: unset;
+  }
+
+  .my-friends .back-link {
     display: unset;
   }
 
