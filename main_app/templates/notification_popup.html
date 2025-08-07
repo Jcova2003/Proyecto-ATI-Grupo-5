@@ -1,5 +1,9 @@
 {% load i18n %}
 <div class="notifications-popup" id="notificationsPopup">
+    <a href="{% url 'home' %}" class="back-link">
+      <span class="material-icons-outlined icon">arrow_back</span>
+      {% trans "Volver" %}
+    </a>
     <div class="popup-header">
         <h5>{% trans "Mis Notificaciones" %}</h5>
         <button class="close-popup">&times;</button>
