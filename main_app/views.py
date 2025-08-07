@@ -68,7 +68,6 @@ def home(request):
     except Exception as e:
         return HttpResponse(f"Error en home: {str(e)}")
 
-
 def notifications(request):
     try:
         usuario = request.user # O usar request.user si tienes auth
@@ -85,13 +84,42 @@ def notifications(request):
 
 
 
+
+# views.py
+def chats_view(request):
+    users = Usuario.objects.all()
+    users_data = []
+    for user in users:
+        users_data.append({
+            "id": user.id,  # Add this line!
+            "name": user.nombre or user.email,
+            "avatar": user.foto.url if user.foto else "/static/img/default_profile.png",
+            "last_message": "¡Hola! Este es un mensaje de prueba.",
+            "last_time": "hace 1 min",
+        })
+    return render(request, "chatsTemplate.html", {"users": users_data})
+
 def chat_with_friend(request):
-    # Aquí puedes agregar lógica para obtener datos del amigo o mensajes
-    context = {
-        "friend_name": "Belén Cruz",
-        # Puedes agregar más datos que necesites pasar a la plantilla
-    }
-    return render(request, "chatTemplate.html", context)
+    friend_id = request.GET.get("friend_id")
+    friend = None
+    if friend_id:
+        try:
+            friend = Usuario.objects.get(id=friend_id)
+        except Usuario.DoesNotExist:
+            pass
+    if not friend:
+        return render(request, "chatTemplate.html", {
+            "friend_name": "Usuario no encontrado",
+            "friend_first_name": "Usuario",
+            "friend_avatar": "/static/img/default_profile.png",
+        })
+    full_name = friend.nombre or friend.email
+    first_name = full_name.split()[0] if full_name else ""
+    return render(request, "chatTemplate.html", {
+        "friend_name": full_name,
+        "friend_first_name": first_name,
+        "friend_avatar": friend.foto.url if friend.foto else "/static/img/default_profile.png",
+    })
 
 def profile(request, id_usuario = None):
     try:

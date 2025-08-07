@@ -16,6 +16,81 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      body.login-body {
+        opacity: 0;
+        transform: translateY(60px) scale(0.98);
+        transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+        background-size: 400% 400%;
+        {% comment %} animation: gradientBG 8s ease-in-out infinite; {% endcomment %}
+      }
+      {% comment %} @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      } {% endcomment %}
+      body.login-body.loaded {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .welcome-icon,
+      .login-h3 {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+        transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .login-form {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      body.login-body.loaded .welcome-icon {
+        opacity: 1;
+        transform: translateY(0) scale(1.15) rotate(-8deg);
+        transition-delay: 0.2s;
+        animation: iconPop 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s
+          forwards;
+      }
+      @keyframes iconPop {
+        0% {
+          transform: translateY(60px) scale(0.95) rotate(0);
+        }
+        60% {
+          transform: translateY(-10px) scale(1.2) rotate(-8deg);
+        }
+        100% {
+          transform: translateY(0) scale(1.15) rotate(-8deg);
+        }
+      }
+      body.login-body.loaded .login-h3 {
+        opacity: 1;
+        transform: translateY(0) scale(1.05);
+        transition-delay: 0.6s;
+        animation: bounceIn 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.6s
+          forwards;
+      }
+      @keyframes bounceIn {
+        0% {
+          transform: translateY(60px) scale(0.95);
+        }
+        60% {
+          transform: translateY(-10px) scale(1.08);
+        }
+        100% {
+          transform: translateY(0) scale(1);
+        }
+      }
+    </style>
   </head>
 
   <body class="login-body">
@@ -63,6 +138,11 @@
         <a href="/login">{% trans "¿Ya tienes cuenta? Inicia sesión." %}</a>
       </div>
     </form>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add("loaded");
+      });
+    </script>
   </body>
 </html>
 {% endblock %}
