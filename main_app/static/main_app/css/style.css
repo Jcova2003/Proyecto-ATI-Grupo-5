@@ -726,6 +726,40 @@ input[type="file"] {
   transform: scale(1.1); 
 }
 
+.friend-request-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.friend-request-actions button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-accept {
+  background-color: var(--green-600);
+  color: white;
+}
+
+.btn-reject {
+  background-color: var(--grey-300);
+  color: var(--green-950);
+}
+
+.btn-accept:hover {
+  background-color: var(--green-700);
+}
+
+.btn-reject:hover {
+  background-color: var(--grey-400);
+}
+
 
 /* Responsive popup*/
 @media (max-width: 768px) {
@@ -1306,3 +1340,4 @@ input[type="file"] {
   background-color: #FFD8D8;
   color: var(--error);
 }
+

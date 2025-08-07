@@ -7,7 +7,7 @@
     <div class="popup-content">
         {% if notificaciones %}
             {% for noti in notificaciones|slice:":7" %}
-                <div class="notification-item">
+                <div class="notification-item" data-id="{{ noti.id }}">
                     <div class="user-avatar-container">
                         <img src="{{ noti.avatar_url }}" alt="Usuario" class="user-avatar">
                         <div class="notification-icon"></div>
@@ -22,7 +22,7 @@
             {% if notificaciones|length > 7 %}
                 <div id="moreNotifications" style="display:none;">
                     {% for noti in notificaciones|slice:"7:" %}
-                        <div class="notification-item">
+                        <div class="notification-item" data-id="{{ noti.id }}">
                             <div class="user-avatar-container">
                                 <img src="{{ noti.avatar_url }}" alt="Usuario" class="user-avatar">
                                 <div class="notification-icon"></div>

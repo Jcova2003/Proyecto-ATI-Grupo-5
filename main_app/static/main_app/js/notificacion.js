@@ -48,16 +48,48 @@ document.addEventListener('DOMContentLoaded', function () {
         const iconImg = document.createElement('img');
         iconImg.alt = 'Tipo de notificación';
 
+        const isFriendRequest = text.includes('solicitud de amistad') || text.includes('friend request');
+
         if (text.includes('like') || text.includes('gusta')) {
             iconImg.src = document.body.dataset.likeIcon;
         } else if (text.includes('coment') || text.includes('comment')) {
             iconImg.src = document.body.dataset.commentIcon;
-        } else if (text.includes('solicitud de amistad') || text.includes('friend request')) {
-            iconImg.src = document.body.dataset.friendRequestIcon;  
+        } else if (isFriendRequest) {
+            iconImg.src = document.body.dataset.friendRequestIcon;
         }
 
         iconContainer.appendChild(iconImg);
+
+        // Si es solicitud de amistad, agregar botones Aceptar y Rechazar
+        if (isFriendRequest) {
+            const actionContainer = document.createElement('div');
+            actionContainer.classList.add('friend-request-actions');
+
+            const acceptBtn = document.createElement('button');
+            acceptBtn.textContent = 'Aceptar';
+            acceptBtn.classList.add('btn-accept');
+            acceptBtn.addEventListener('click', () => {
+                const id = item.dataset.id;
+                console.log(`Aceptar solicitud ${id}`);
+                item.remove(); // puedes cambiar por fetch si quieres manejarlo por backend
+            });
+
+            const rejectBtn = document.createElement('button');
+            rejectBtn.textContent = 'Rechazar';
+            rejectBtn.classList.add('btn-reject');
+            rejectBtn.addEventListener('click', () => {
+                const id = item.dataset.id;
+                console.log(`Rechazar solicitud ${id}`);
+                item.remove();
+            });
+
+            actionContainer.appendChild(acceptBtn);
+            actionContainer.appendChild(rejectBtn);
+
+            item.appendChild(actionContainer);
+        }
     });
+
 
     // Manejar menú clickeable de cada notificación
     document.querySelectorAll('.notification-menu').forEach(menu => {
